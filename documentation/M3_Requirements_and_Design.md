@@ -155,35 +155,53 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 2. ...
 
 
-## 4. Designs Specification
+## 4. Design Specification
 ### **4.1. Main Components**
-1. **[WRITE_NAME_HERE]**
-    - **Purpose**: ...
-    - **Interfaces**: 
-        1. ...
-            - **Purpose**: ...
-        2. ...
-2. ...
+1. **Marketplace Service**
+    - **Purpose**: Handles product listings, pricing, and search functionality.
+    - **Interfaces**:
+        - `POST /listings` - Creates a new product listing.
+        - `GET /listings/{id}` - Retrieves details of a specific listing.
+        - `PUT /listings/{id}` - Updates an existing listing.
+        - `DELETE /listings/{id}` - Removes a listing from the marketplace.
+        - `GET /listings/search?query={query}` - Searches for listings using keywords.
 
+2. **Storage Management Service**
+    - **Purpose**: Manages warehouse storage and assigns storage locations for stored items.
+    - **Interfaces**:
+        - `POST /storage/request` - Requests storage space for an item.
+        - `GET /storage/status/{itemId}` - Retrieves storage status of an item.
+        - `DELETE /storage/{itemId}` - Removes an item from storage after sale or withdrawal.
 
-### **4.2. Databases**
-1. **[WRITE_NAME_HERE]**
-    - **Purpose**: ...
-2. ...
+3. **User Service**
+    - **Purpose**: Manages authentication, profiles, and permissions.
+    - **Interfaces**:
+        - `POST /users/register` - Creates a new user account.
+        - `POST /users/login` - Authenticates a user and returns a token.
+        - `GET /users/{id}` - Retrieves user profile information.
+        - `PUT /users/{id}` - Updates user profile details.
+        - `DELETE /users/{id}` - Deletes a user account.
 
+4. **Recommendation Engine**
+    - **Purpose**: Provides price suggestions and personalized recommendations.
+    - **Interfaces**:
+        - `GET /recommendations/{userId}` - Fetches personalized item recommendations.
+        - `POST /price-suggestions` - Suggests a price for a new listing.
+        - `GET /price-comparison/{itemId}` - Retrieves price comparisons from external sources.
 
-### **4.3. External Modules**
-1. **[WRITE_NAME_HERE]** 
-    - **Purpose**: ...
-2. ...
-
+5. **Chat Service**
+    - **Purpose**: Manages buyer-seller chat functionality.
+    - **Interfaces**:
+        - `POST /chat/start` - Initiates a chat between a buyer and seller.
+        - `GET /chat/{chatId}` - Retrieves chat history.
+        - `POST /chat/{chatId}/message` - Sends a new message.
 
 ### **4.4. Frameworks**
-1. **[WRITE_NAME_HERE]**
-    - **Purpose**: ...
-    - **Reason**: ...
-2. ...
-
+- **Cloud Provider**: AWS
+- **Backend Framework**: Node.js with Express.js
+- **Frontend Framework**: Native Kotlin for Android
+- **Databases**: MongoDB (Atlas) for chat, MySQL (AWS RDS) for listings & user data
+- **Other Tools**: Docker, Kubernetes, Redis, Firebase Auth, AWS API Gateway
 
 ### **4.5. Dependencies Diagram**
 
