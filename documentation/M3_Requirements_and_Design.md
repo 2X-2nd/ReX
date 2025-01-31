@@ -221,11 +221,11 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 ```mermaid
 graph TD;
     %% Define Components
-    Frontend -->|"POST /listings\nGET /listings/{id}\nPUT /listings/{id}\nDELETE /listings/{id}\nGET /listings/search?query={query}"| MarketplaceService;
-    Frontend -->|"POST /users/register\nPOST /users/login\nGET /users/{id}\nPUT /users/{id}\nDELETE /users/{id}"| UserService;
-    Frontend -->|"POST /chat/start\nGET /chat/{chatId}\nPOST /chat/{chatId}/message"| ChatService;
+    Frontend -->|"POST /listings<br \>GET /listings/{id}<br \>PUT /listings/{id}<br \>DELETE /listings/{id}<br \>GET /listings/search?query={query}"| MarketplaceService;
+    Frontend -->|"POST /users/register<br \>POST /users/login<br \>GET /users/{id}<br \>PUT /users/{id}<br \>DELETE /users/{id}"| UserService;
+    Frontend -->|"POST /chat/start<br \>GET /chat/{chatId}<br \>POST /chat/{chatId}/message"| ChatService;
 
-    MarketplaceService -->|"GET /recommendations/{userId}\nPOST /price-suggestions\nGET /price-comparison/{itemId}"| RecommendationEngine;
+    MarketplaceService -->|"GET /recommendations/{userId}<br \>POST /price-suggestions<br \>GET /price-comparison/{itemId}"| RecommendationEngine;
     
     MarketplaceService -->|"Store & Retrieve Listings"| MySQL;
     MarketplaceService -->|"Fetch Prices"| eBayAPI;
@@ -239,10 +239,10 @@ graph TD;
     ChatService -->|"Store & Retrieve Messages"| MongoDB;
 
     %% Bidirectional Arrows for DB Interactions
-    MySQL -->|"Used by\nMarketplace, Storage, User"| MarketplaceService;
-    MySQL -->|"Used by\nStorage Management"| StorageManagementService;
-    MySQL -->|"Used by\nUser Service"| UserService;
-    MongoDB -->|"Used by\nChat Service"| ChatService;
+    MySQL -->|"Used by<br \>Marketplace, Storage, User"| MarketplaceService;
+    MySQL -->|"Used by<br \>Storage Management"| StorageManagementService;
+    MySQL -->|"Used by<br \>User Service"| UserService;
+    MongoDB -->|"Used by<br \>Chat Service"| ChatService;
 
 
 ```
