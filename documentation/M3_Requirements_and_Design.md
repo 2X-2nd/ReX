@@ -204,9 +204,6 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 - **Other Tools**: Docker, Kubernetes, Redis, Firebase Auth, AWS API Gateway
 
 ### **4.5. Dependencies Diagram**
-### **4.5. Dependencies Diagram**
-### **4.5. Dependencies Diagram**
-### **4.5. Dependencies Diagram**
 ```mermaid
 graph TD;
     %% Define Components
@@ -467,17 +464,34 @@ sequenceDiagram
 
 
 ### **4.8. Main Project Complexity Design**
-**[WRITE_NAME_HERE]**
-- **Description**: ...
-- **Why complex?**: ...
+#### **AI-Enhanced Price Recommendation Engine**
+- **Description**: The price recommendation engine analyzes historical pricing data, fetches real-time prices from external sources (eBay, Amazon), and integrates AI (ChatGPT API) to improve search accuracy by correcting user input, suggesting related products, and enhancing query relevance.
+- **Why complex?**: 
+  - **Multi-source data processing**: Merging internal price data with external APIs.
+  - **AI-driven query refinement**: Handling ambiguous product names, typos, and missing details.
+  - **Computational efficiency**: Managing API rate limits, caching results, and filtering outliers.
 - **Design**:
-    - **Input**: ...
-    - **Output**: ...
-    - **Main computational logic**: ...
-    - **Pseudo-code**: ...
+    - **Input**: Item title, description, category, condition (from user input).
+    - **Output**: Suggested competitive price, AI-refined query, price breakdown.
+    - **Main computational logic**:
+        1. Use **ChatGPT API** to refine user input and correct errors.
+        2. Fetch **historical price data** from the internal database (MySQL).
+        3. Query **eBay & Amazon APIs** using the AI-enhanced search term.
+        4. Filter **outliers** and compute a **weighted average price**.
+        5. Return the **final price suggestion** with AI-processed insights.
+    - **Pseudo-code**:
+        ```python
+        def recommend_price(item_details):
+            refined_query = call_chatgpt_api(item_details["title"], item_details["category"])
+            historical_prices = query_database(refined_query, item_details["condition"])
+            ebay_prices = fetch_ebay_prices(refined_query, item_details["category"])
+            amazon_prices = fetch_amazon_prices(refined_query, item_details["category"])
+            all_prices = historical_prices + ebay_prices + amazon_prices
+            filtered_prices = remove_outliers(all_prices)
+            suggested_price = weighted_average(filtered_prices, weights={"historical": 0.5, "ebay": 0.25, "amazon": 0.25})
+            return {"suggested_price": suggested_price, "refined_query": refined_query}
         ```
 
-        ```
 
 
 ## 5. Contributions
