@@ -25,44 +25,46 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
 1. **[Register and Login]** 
     - **Overview**:
-        1. User registration
-        2. User login
+        1. Google-based User Registration
+        2. Google-based User Login
 
     - **Detailed Flow for Each Independent Scenario**: 
-        1. **[User Registration]**:
-            - **Description**: Users create an account by providing their email, password, and other required details.
+        1. **[Google-based User Registration]**:
+            - **Description**: Users register through their Google accounts. Upon successful registration, they can set preferences for personalized recommendations.
             - **Primary actor(s)**: Sellers, Buyers
             - **Main success scenario**:
-                1. User opens the app and selects the "Register" option.
-                2. User enters their details (e.g., email, password) and submits.
-                3. The system verifies the details and creates the account successfully.
-                4. The system verifies the details and creates the account successfully.
+                1. User opens the app and selects the "Sign in with Google" option.
+                2. The system initiates Google OAuth authentication.
+                3. Google verifies the user credentials and provides user data (e.g., email, name).
+                4. The app creates a new account in the system or fetches an existing account based on the Google ID.
+                5. The user sets preferences (e.g., categories of interest) for product recommendations.
 
             - **Failure scenario(s)**:
-                - 1a. User inputs invalid data (e.g., weak password, already registered email).
-                    - 1a1. System displays an error message indicating the issue.
-                    - 1a2. User is prompted to correct the error and try again.
+                - 1a. Google authentication fails due to network issues.
+                    - 1a1. System displays an error message indicating authentication failure.
+                    - 1a2. User retries the authentication process after resolving the issue.
 
-                - 1b. System is down during registration.
-                    - 1b1. User receives a message indicating temporary unavailability.
-                    - 1b2. User is asked to try again later.
-                
-        2. **[User Login]**:
-            - **Description**: Returning users log in to access their accounts.
+                - 1b. Google account does not return necessary data.
+                    - 1b1. System notifies the user of the incomplete data.
+                    - 1b2. User retries with a valid Google account.
+
+        2. **[Google-based User Login]**:
+            - **Description**: Returning users log in using their Google accounts, and their preferences are retained for personalized recommendations.
             - **Primary actor(s)**: Sellers, Buyers
             - **Main success scenario**:
-                1. User selects the "Login" option.
-                2. User inputs their email and password.
-                3. The system verifies credentials and grants access to the account.
+                1. User selects the "Sign in with Google" option on the login screen.
+                2. The system verifies the user’s Google account and fetches the corresponding system account.
+                3. The app grants the user access to their dashboard with personalized product recommendations.
 
             - **Failure scenario(s)**:
-                - 2a. Incorrect email or password entered
-                    - 2a1. System displays an error message indicating invalid credentials.
-                    - 2a2. User retries with the correct credentials.
+                - 2a. Google account authentication fails due to incorrect credentials.
+                    - 2a1. System displays an error message indicating authentication failure.
+                    - 2a2. User retries with correct credentials.
 
-                - 2b. System is unavailable.
-                    - 2b1. User receives a message indicating temporary downtime.
+                - 2b. The system cannot connect to Google's authentication service.
+                    - 2b1. System displays a message about Google service downtime.
                     - 2b2. User is advised to try again later.
+
 
 2. **[List an Item for Sale]** 
     - **Overview**:
