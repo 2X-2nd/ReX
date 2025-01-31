@@ -204,11 +204,259 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 - **Other Tools**: Docker, Kubernetes, Redis, Firebase Auth, AWS API Gateway
 
 ### **4.5. Dependencies Diagram**
+### **4.5. Dependencies Diagram**
+### **4.5. Dependencies Diagram**
+### **4.5. Dependencies Diagram**
+```mermaid
+graph TD;
+    %% Define Components
+    Frontend -->|"POST /listings\nGET /listings/{id}\nPUT /listings/{id}\nDELETE /listings/{id}\nGET /listings/search?query={query}"| MarketplaceService;
+    Frontend -->|"POST /users/register\nPOST /users/login\nGET /users/{id}\nPUT /users/{id}\nDELETE /users/{id}"| UserService;
+    Frontend -->|"POST /chat/start\nGET /chat/{chatId}\nPOST /chat/{chatId}/message"| ChatService;
+
+    MarketplaceService -->|"GET /recommendations/{userId}\nPOST /price-suggestions\nGET /price-comparison/{itemId}"| RecommendationEngine;
+    
+    MarketplaceService -->|"Store & Retrieve Listings"| MySQL;
+    MarketplaceService -->|"Fetch Prices"| eBayAPI;
+    MarketplaceService -->|"Fetch Prices"| AmazonAPI;
+
+    StorageManagementService -->|"Store & Retrieve Storage Info"| MySQL;
+
+    UserService -->|"Store & Retrieve User Data"| MySQL;
+    UserService -->|"Authenticate Users"| FirebaseAuth;
+
+    ChatService -->|"Store & Retrieve Messages"| MongoDB;
+
+    %% Bidirectional Arrows for DB Interactions
+    MySQL -->|"Used by\nMarketplace, Storage, User"| MarketplaceService;
+    MySQL -->|"Used by\nStorage Management"| StorageManagementService;
+    MySQL -->|"Used by\nUser Service"| UserService;
+    MongoDB -->|"Used by\nChat Service"| ChatService;
+
+
+```
+
 
 
 ### **4.6. Functional Requirements Sequence Diagram**
-1. [**[WRITE_NAME_HERE]**](#fr1)\
-[SEQUENCE_DIAGRAM_HERE]
+
+#### **User Registration**
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant UserService
+    participant MySQL
+
+    User->>+Frontend: Opens Registration Page
+    Frontend->>+UserService: POST /users/register {email, password}
+    activate UserService
+    
+    UserService->>+MySQL: Store user credentials
+    activate MySQL
+    
+    alt Registration Successful
+        MySQL-->>UserService: Success Acknowledgement
+        UserService-->>Frontend: Registration Success
+        Frontend-->>User: Display Success Message
+
+    else Invalid Data (Weak Password / Email Exists)
+        MySQL-->>UserService: Reject Request (Invalid Data)
+        UserService-->>Frontend: Error Response (Invalid Data)
+        Frontend-->>User: Display Error Message
+    
+    else System Failure
+        UserService-->>Frontend: Error Response (Service Unavailable)
+        Frontend-->>User: Display Error Message (Try Again Later)
+    end
+
+    deactivate MySQL
+    deactivate UserService
+
+```
+#### **User Login**
+```mermaid
+sequenceDiagram
+    participant User
+    participant Frontend
+    participant UserService
+    participant MySQL
+
+    User->>+Frontend: Opens Login Page
+    Frontend->>+UserService: POST /users/login {email, password}
+    activate UserService
+
+    UserService->>+MySQL: Verify user credentials
+    activate MySQL
+    
+    alt Login Successful
+        MySQL-->>UserService: Credentials Valid
+        UserService-->>Frontend: Login Success + Auth Token
+        Frontend-->>User: Grant Access
+
+    else Incorrect Email/Password
+        MySQL-->>UserService: Authentication Failed
+        UserService-->>Frontend: Error (Invalid Credentials)
+        Frontend-->>User: Display Error Message
+
+    else System Failure
+        UserService-->>Frontend: Error Response (Service Unavailable)
+        Frontend-->>User: Display Error Message (Try Again Later)
+    end
+
+    deactivate MySQL
+    deactivate UserService
+```
+
+#### **Listing an Item for Sale**
+```mermaid
+sequenceDiagram
+    participant Seller
+    participant Frontend
+    participant MarketplaceService
+    participant MySQL
+
+    Seller->>+Frontend: Opens "List Item" Page
+    Frontend->>+MarketplaceService: POST /listings {title, description, price, images}
+    activate MarketplaceService
+
+    MarketplaceService->>+MySQL: Store listing details
+    activate MySQL
+    
+    alt Listing Successful
+        MySQL-->>MarketplaceService: Listing Saved
+        MarketplaceService-->>Frontend: Listing Confirmed
+        Frontend-->>Seller: Display Success Message
+
+    else Invalid Input (Missing Fields)
+        MySQL-->>MarketplaceService: Reject Request (Invalid Data)
+        MarketplaceService-->>Frontend: Error (Missing/Invalid Fields)
+        Frontend-->>Seller: Prompt for Corrections
+
+    else System Failure
+        MarketplaceService-->>Frontend: Error Response (Service Unavailable)
+        Frontend-->>Seller: Display Error Message (Try Again Later)
+    end
+
+    deactivate MySQL
+    deactivate MarketplaceService
+```
+#### **Price Recommendation**
+```mermaid
+sequenceDiagram
+    participant Seller
+    participant Frontend
+    participant MarketplaceService
+    participant RecommendationEngine
+    participant eBayAPI
+    participant AmazonAPI
+
+    Seller->>+Frontend: Clicks "Get Price Recommendation"
+    Frontend->>+MarketplaceService: POST /price-suggestions {item details}
+    activate MarketplaceService
+
+    MarketplaceService->>+RecommendationEngine: Analyze Market Data
+    activate RecommendationEngine
+
+    RecommendationEngine->>+eBayAPI: Fetch similar item prices
+    RecommendationEngine->>+AmazonAPI: Fetch new item prices
+    eBayAPI-->>RecommendationEngine: Return Used Item Prices
+    AmazonAPI-->>RecommendationEngine: Return New Item Prices
+
+    alt Price Suggestion Available
+        RecommendationEngine-->>MarketplaceService: Suggested Price
+        MarketplaceService-->>Frontend: Display Recommended Price
+        Frontend-->>Seller: Show Price Suggestion
+
+    else No Price Data Available
+        RecommendationEngine-->>MarketplaceService: No Recommendation Found
+        MarketplaceService-->>Frontend: Error Message (No Pricing Data)
+        Frontend-->>Seller: Notify About Missing Data
+
+    else System Failure
+        MarketplaceService-->>Frontend: Error Response (Service Unavailable)
+        Frontend-->>Seller: Display Error Message (Try Again Later)
+    end
+
+    deactivate eBayAPI
+    deactivate AmazonAPI
+    deactivate RecommendationEngine
+    deactivate MarketplaceService
+```
+
+#### **Finding Nearby Storage Facility **
+```mermaid
+sequenceDiagram
+    participant Seller
+    participant Frontend
+    participant StorageManagementService
+    participant MySQL
+    participant GoogleMapsAPI
+
+    Seller->>+Frontend: Clicks "Find Storage"
+    Frontend->>+StorageManagementService: GET /storage/request {location}
+    activate StorageManagementService
+
+    StorageManagementService->>+GoogleMapsAPI: Retrieve Nearby Warehouses
+    activate GoogleMapsAPI
+
+    alt Warehouses Found
+        GoogleMapsAPI-->>StorageManagementService: List of Available Warehouses
+        StorageManagementService-->>Frontend: Display Warehouse Options
+        Frontend-->>Seller: Show Available Storage
+
+    else No Warehouses Available
+        GoogleMapsAPI-->>StorageManagementService: No Results Found
+        StorageManagementService-->>Frontend: Display Error Message
+        Frontend-->>Seller: Notify Seller About Unavailability
+
+    else System Failure
+        StorageManagementService-->>Frontend: Error Response (Service Unavailable)
+        Frontend-->>Seller: Display Error Message (Try Again Later)
+    end
+
+    deactivate GoogleMapsAPI
+    deactivate StorageManagementService
+
+
+```
+
+#### **Drop-off Scehduleing **
+```mermaid
+sequenceDiagram
+    participant Seller
+    participant Frontend
+    participant StorageManagementService
+    participant MySQL
+
+    Seller->>+Frontend: Selects Warehouse & Time
+    Frontend->>+StorageManagementService: POST /storage/request {warehouseId, time}
+    activate StorageManagementService
+
+    StorageManagementService->>+MySQL: Store Storage Request
+    activate MySQL
+    
+    alt Booking Successful
+        MySQL-->>StorageManagementService: Booking Confirmed
+        StorageManagementService-->>Frontend: Confirmation Message
+        Frontend-->>Seller: Display Success Message
+
+    else Time Slot Unavailable
+        MySQL-->>StorageManagementService: Reject Request (Slot Unavailable)
+        StorageManagementService-->>Frontend: Error Message (Choose Another Time)
+        Frontend-->>Seller: Prompt for New Time Slot
+
+    else System Failure
+        StorageManagementService-->>Frontend: Error Response (Service Unavailable)
+        Frontend-->>Seller: Display Error Message (Try Again Later)
+    end
+
+    deactivate MySQL
+    deactivate StorageManagementService
+
+
+```
+
 2. ...
 
 
