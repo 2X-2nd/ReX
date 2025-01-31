@@ -151,10 +151,22 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 ### **3.5. Non-Functional Requirements**
 <a name="nfr1"></a>
 
-1. **[WRITE_NAME_HERE]**
-    - **Description**: ...
-    - **Justification**: ...
-2. ...
+1. **[System Performance]**
+   - **Description**: The system should support multiple users simultaneously and ensure that most pages load within 2 seconds.
+   - **Justification**: Providing a smooth user experience ensures that the system remains usable even during peak times.
+
+<a name="nfr2"></a>
+
+2. **[Data Security]**
+   - **Description**: The system should safeguard users' personal information (e.g., login details, order data) against unauthorized access or breaches.
+   - **Justification**: Protecting user data builds trust and ensures users feel safe while using the platform.
+
+<a name="nfr3"></a>
+
+3. **[System Availability]**
+   - **Description**: The system should minimize downtime, with no more than 1 hour of unavailability per month.
+   - **Justification**: Ensuring high availability allows users to access critical functionalities like placing orders or logging in at any time.
+
 
 
 ## 4. Design Specification
