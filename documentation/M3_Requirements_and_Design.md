@@ -17,8 +17,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 1. **[BUYERS]**: Buyers are users looking to purchase second-hand items. They can browse listings, communicate with sellers, and choose pickup or delivery options.
 2. **[SELLERS]**: Sellers are users who wish to list unwanted items for sale. They can deposit their items in partner warehouses, post product details, and manage their listings.
 3. **[Administrator]**：The administrator ensures the smooth operation of the platform, including monitoring listings, managing warehouses, and handling user disputes.
-
-
+4. 
 
 ### **3.3. Functional Requirements**
 <a name="fr1"></a>
@@ -142,8 +141,6 @@ Buyers benefit from a personalized recommendation system and real-time chat func
                 - **2b1.** Seller receives a notification about the issue.
                 - **2b2.** Seller retries later or contacts support.
 
-
-
 ### **3.4. Screen Mockups**
 
 
@@ -166,7 +163,6 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 3. **[System Availability]**
    - **Description**: The system should minimize downtime, with no more than 1 hour of unavailability per month.
    - **Justification**: Ensuring high availability allows users to access critical functionalities like placing orders or logging in at any time.
-
 
 
 ## 4. Design Specification
@@ -243,11 +239,7 @@ graph TD;
     MySQL -->|"Used by<br \>Storage Management"| StorageManagementService;
     MySQL -->|"Used by<br \>User Service"| UserService;
     MongoDB -->|"Used by<br \>Chat Service"| ChatService;
-
-
 ```
-
-
 
 ### **4.6. Functional Requirements Sequence Diagram**
 
@@ -283,8 +275,8 @@ sequenceDiagram
 
     deactivate MySQL
     deactivate UserService
-
 ```
+
 #### **User Login**
 ```mermaid
 sequenceDiagram
@@ -352,6 +344,7 @@ sequenceDiagram
     deactivate MySQL
     deactivate MarketplaceService
 ```
+
 #### **Price Recommendation**
 ```mermaid
 sequenceDiagram
@@ -395,7 +388,7 @@ sequenceDiagram
     deactivate MarketplaceService
 ```
 
-#### **Finding Nearby Storage Facility **
+#### **Finding Nearby Storage Facility**
 ```mermaid
 sequenceDiagram
     participant Seller
@@ -428,11 +421,9 @@ sequenceDiagram
 
     deactivate GoogleMapsAPI
     deactivate StorageManagementService
-
-
 ```
 
-#### **Drop-off Scehduleing **
+#### **Drop-off Scehduleing**
 ```mermaid
 sequenceDiagram
     participant Seller
@@ -464,12 +455,7 @@ sequenceDiagram
 
     deactivate MySQL
     deactivate StorageManagementService
-
-
 ```
-
-2. ...
-
 
 ### **3.5. Non-Functional Requirements**
 <a name="nfr1"></a>
@@ -493,7 +479,6 @@ sequenceDiagram
    - **Implementation**:
      - Monitor system health with **AWS CloudWatch and alerts**.
      - Perform **zero-downtime deployments** using rolling updates.
-
 
 
 ### **4.8. Main Project Complexity Design**
@@ -528,8 +513,7 @@ sequenceDiagram
 
 
 ## 5. Contributions
-- **[Tianrui Chu]**: Wrote the **Design Specification** section, including defining the system’s architecture, main components, databases, external APIs, and frameworks. Designed the **dependencies diagram** to illustrate interactions between microservices and external systems. Developed detailed **functional requirement sequence diagrams** using Mermaid to visualize system workflows. Spent around 5 hourse on this assignment.
+- **[Tianrui Chu]**: Wrote the **Design Specification** section, including defining the system’s architecture, main components, databases, external APIs, and frameworks. Designed the **dependencies diagram** to illustrate interactions between microservices and external systems. Developed detailed **functional requirement sequence diagrams** using Mermaid to visualize system workflows. Spent around 5 hours on this assignment.
 - ...
 - ...
 - ...
-
