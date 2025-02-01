@@ -4,20 +4,20 @@
 <!-- Leave blank for M3 -->
 
 ## 2. Project Description
-We intend to design a second-hand marketplace app for people looking to buy or sell unwanted items locally. When you need to make space, whether because you are looking to relocate or declutter, our storing service will take your items off your hands immediately. Sellers can deposit their items in nearby partner warehouses, where they are securely stored until sold. This ensures valuable items are not wasted and allows users to focus on their next steps without stress.  
+2X is a local second-hand marketplace for buying and selling pre-owned items. When relocating or decluttering, sellers can instantly offload their items to partner warehouses, where they’re securely stored until sold. This prevents waste, preserves value, and lets sellers move forward stress-free.
 
-The app integrates Google Maps API to locate storage facilities near the seller's current position, making it easy to choose the most convenient option. Once stored, items are listed on our platform with detailed descriptions and photos. Additionally, our app offers a price recommendation and comparison feature. It analyzes our database of similar second-hand items and their past transaction prices to suggest a fair and competitive price for sellers. Furthermore, the app compares the recommended price with the market price of similar new items from other platforms, highlighting how much buyers can save by purchasing through our platform. This innovative approach not only ensures competitive pricing for sellers but also maximizes buyer satisfaction by demonstrating the cost-effectiveness of purchasing second-hand items through our app.  
+The app integrates Google Maps API to help users find the nearest storage facilities, making it easy to choose the most convenient option. Once stored, items are listed with detailed descriptions and photos on the platform. Additionally, our app integrates a price recommendation and comparison feature. It analyzes the prices of similar second-hand items in our database and the past transaction prices to suggest a fair and competitive price for sellers.Furthermore, the app compares the listing price with the market price of similar new items from other platforms (e.g. eBay, Amazon), showcasing potential savings for buyers. This innovative feature ensures sellers get the best value while enhancing buyer satisfaction by highlighting the cost-effectiveness of second-hand purchases.
 
-Buyers benefit from a personalized recommendation system and real-time chat functionality, ensuring smooth communication and a tailored shopping experience. Whether buyers prefer self-pickup from the warehouse or delivery, the app simplifies the entire process, making second-hand trading faster, more efficient, and ultimately more rewarding for all users.  
+Buyers benefit from a personalized recommendation system and real-time chat functionality for seamless communication and a customized shopping experience. Whether buyers prefer self-pickup from the warehouse or delivery, the app simplifies the entire process, making second-hand trading faster, more efficient, and ultimately more rewarding for all users.
+
 ## 3. Requirements Specification
 ### **3.1. Use-Case Diagram**
 ![Use Case Diagram](images/Use_Case_Diagram.jpg)
 
 ### **3.2. Actors Description**
 1. **[BUYERS]**: Buyers are users looking to purchase second-hand items. They can browse listings, communicate with sellers, and choose pickup or delivery options.
-2. **[SELLERS]**: Sellers are users who wish to list unwanted items for sale. They can deposit their items in partner warehouses, post product details, and manage their listings.
-3. **[Administrator]**：The administrator ensures the smooth operation of the platform, including monitoring listings, managing warehouses, and handling user disputes.
-4. 
+2. **[SELLERS]**: Sellers are users who wish to list unwanted items for sale. They can deposit their items in partner warehouses, post product listings, and manage their listings.
+3. **[Administrator]**：The administrator ensures the smooth operation of the platform, including monitoring listings and handling user disputes.
 
 ### **3.3. Functional Requirements**
 <a name="fr1"></a>
@@ -29,7 +29,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
     - **Detailed Flow for Each Independent Scenario**: 
         1. **[Google-based User Registration]**:
-            - **Description**: Users register through their Google accounts. Upon successful registration, they can set preferences for personalized recommendations.
+            - **Description**: Users register with their Google accounts. Upon successful registration, they can set preferences for personalized recommendations.
             - **Primary actor(s)**: Sellers, Buyers
             - **Main success scenario**:
                 1. User opens the app and selects the "Sign in with Google" option.
@@ -105,41 +105,40 @@ Buyers benefit from a personalized recommendation system and real-time chat func
                     - 2b1. System displays a message about unavailability of competitor price data.
                     - 2b2. Seller proceeds with the recommended price based on internal data.
 3. **[Locate Storage Facilities]**
+   - **Overview**:
+       1. Find nearby warehouses
+       2. Schedule item drop-off
 
-- **Overview**:
-    1. Find nearby warehouses
-    2. Schedule item drop-off
+   - **Detailed Flow for Each Independent Scenario**:
 
-- **Detailed Flow for Each Independent Scenario**:
+       1. **[Find Nearby Warehouses]**:
+           - **Description**: Sellers locate storage facilities near their current location using the Google Maps API.
+           - **Primary actor(s)**: Sellers
+           - **Main success scenario**:
+               1. Seller selects the "Find Storage" option.
+               2. System uses the seller's location to list nearby warehouses.
+               3. Seller selects a preferred facility.
+           - **Failure scenario(s)**:
+               - **1a.** Location permissions are denied.
+                   - **1a1.** System prompts the user to enable location services.
+                   - **1a2.** Seller enables location services and retries.
+               - **1b.** No warehouses available nearby.
+                   - **1b1.** System displays a message stating unavailability of storage options.
+                   - **1b2.** Seller can retry later or contact support.
 
-    1. **[Find Nearby Warehouses]**:
-        - **Description**: Sellers locate storage facilities near their current location using the Google Maps API.
-        - **Primary actor(s)**: Sellers
-        - **Main success scenario**:
-            1. Seller selects the "Find Storage" option.
-            2. System uses the seller's location to list nearby warehouses.
-            3. Seller selects a preferred facility.
-        - **Failure scenario(s)**:
-            - **1a.** Location permissions are denied.
-                - **1a1.** System prompts the user to enable location services.
-                - **1a2.** Seller enables location services and retries.
-            - **1b.** No warehouses available nearby.
-                - **1b1.** System displays a message stating unavailability of storage options.
-                - **1b2.** Seller can retry later or contact support.
-
-    2. **[Schedule Item Drop-Off]**:
-        - **Description**: Sellers schedule a time to deposit items at a selected warehouse.
-        - **Primary actor(s)**: Sellers
-        - **Main success scenario**:
-            1. Seller selects a warehouse and chooses a convenient drop-off time.
-            2. System confirms the booking and sends a confirmation message.
-        - **Failure scenario(s)**:
-            - **2a.** Selected time slot is unavailable.
-                - **2a1.** System suggests alternative time slots.
-                - **2a2.** Seller selects a new time and proceeds.
-            - **2b.** System fails to confirm the booking due to server issues.
-                - **2b1.** Seller receives a notification about the issue.
-                - **2b2.** Seller retries later or contacts support.
+       2. **[Schedule Item Drop-Off]**:
+           - **Description**: Sellers schedule a time to deposit items at a selected warehouse.
+           - **Primary actor(s)**: Sellers
+           - **Main success scenario**:
+               1. Seller selects a warehouse and chooses a convenient drop-off time.
+               2. System confirms the booking and sends a confirmation message.
+           - **Failure scenario(s)**:
+               - **2a.** Selected time slot is unavailable.
+                   - **2a1.** System suggests alternative time slots.
+                   - **2a2.** Seller selects a new time and proceeds.
+               - **2b.** System fails to confirm the booking due to server issues.
+                   - **2b1.** Seller receives a notification about the issue.
+                   - **2b2.** Seller retries later or contacts support.
 
 ### **3.4. Screen Mockups**
 ![Screen Mockup Diagram](images/mockup.png)
@@ -515,5 +514,5 @@ sequenceDiagram
 ## 5. Contributions
 - **[Tianrui Chu]**: Wrote the **Design Specification** section, including defining the system’s architecture, main components, databases, external APIs, and frameworks. Designed the **dependencies diagram** to illustrate interactions between microservices and external systems. Developed detailed **functional requirement sequence diagrams** using Mermaid to visualize system workflows. Spent around 5 hours on this assignment.
 - **[Yichen Li]**: Contributed in Section 2 and 3. Draw and design the screen mockup. Spent around 4 hours on this assignment.
-- ...
-- ...
+- **[Leyang Gao]**: I contributed to the project by helping to conceptualize the core idea of the second-hand marketplace platform, including its operational model and unique warehouse storage feature. I also participated in defining the functional and non-functional requirements in the M3 document and assisted in creating the PowerPoint presentation. 
+- **[Dingxi Yang]**: Contributed on the use case diagram and helped proofread and format the documentation. Assisted on polishing PowerPoint presentation. Spent around 4 hours on this assignment.
