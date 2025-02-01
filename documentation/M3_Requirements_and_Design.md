@@ -142,7 +142,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
                 - **2b2.** Seller retries later or contacts support.
 
 ### **3.4. Screen Mockups**
-
+![Screen Mockup Diagram](images/mockup.png)
 
 
 ### **3.5. Non-Functional Requirements**
@@ -514,6 +514,6 @@ sequenceDiagram
 
 ## 5. Contributions
 - **[Tianrui Chu]**: Wrote the **Design Specification** section, including defining the system’s architecture, main components, databases, external APIs, and frameworks. Designed the **dependencies diagram** to illustrate interactions between microservices and external systems. Developed detailed **functional requirement sequence diagrams** using Mermaid to visualize system workflows. Spent around 5 hours on this assignment.
-- ...
+- **[Yichen Li]**: Contributed in Section 2 and 3. Draw and design the screen mockup. Spent around 4 hours on this assignment.
 - ...
 - ...
