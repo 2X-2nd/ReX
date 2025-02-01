@@ -471,10 +471,29 @@ sequenceDiagram
 2. ...
 
 
-### **4.7. Non-Functional Requirements Design**
-1. [**[WRITE_NAME_HERE]**](#nfr1)
-    - **Validation**: ...
-2. ...
+### **3.5. Non-Functional Requirements**
+<a name="nfr1"></a>
+
+1. **[System Performance]**
+   - **Implementation**:
+     - Use **caching (Redis)** to reduce database queries.
+     - Optimize **database indexing and queries** for fast retrieval.
+     - Deploy on **AWS with auto-scaling** to handle peak loads.
+
+<a name="nfr2"></a>
+
+2. **[Data Security]**
+   - **Implementation**:
+     - Use **Firebase Authentication** for secure login and access control.
+     - Encrypt **sensitive user data** (bcrypt for passwords, database encryption).
+
+<a name="nfr3"></a>
+
+3. **[System Availability]**
+   - **Implementation**:
+     - Monitor system health with **AWS CloudWatch and alerts**.
+     - Perform **zero-downtime deployments** using rolling updates.
+
 
 
 ### **4.8. Main Project Complexity Design**
@@ -509,7 +528,7 @@ sequenceDiagram
 
 
 ## 5. Contributions
-- ...
+- **[Tianrui Chu]**: Wrote the **Design Specification** section, including defining the system’s architecture, main components, databases, external APIs, and frameworks. Designed the **dependencies diagram** to illustrate interactions between microservices and external systems. Developed detailed **functional requirement sequence diagrams** using Mermaid to visualize system workflows. Spent around 5 hourse on this assignment.
 - ...
 - ...
 - ...
