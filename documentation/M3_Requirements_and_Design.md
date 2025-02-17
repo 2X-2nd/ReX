@@ -168,12 +168,215 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 ### **4.1. Main Components**
 1. **Marketplace Service**
     - **Purpose**: Handles product listings, pricing, and search functionality.
+    - **Database Schema**:
+        - **`listings` Table**:
+            ```sql
+            CREATE TABLE listings (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                title VARCHAR(255) NOT NULL,  -- Max 255 characters
+                description TEXT,  -- No strict limit
+                price DECIMAL(10,2) NOT NULL,  -- Up to 10 digits, 2 decimal places
+                seller_id INT NOT NULL,  -- Foreign key linking to users
+                latitude DECIMAL(10,6) NULL,  -- Optional geolocation data
+                longitude DECIMAL(10,6) NULL,  -- Optional geolocation data
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            ```
+        - **`listing_images` Table**:
+            ```sql
+            CREATE TABLE listing_images (
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                listing_id INT NOT NULL,
+                image_url VARCHAR(500) NOT NULL,  -- Max 500 characters
+                FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE
+            );
+            ```
+
     - **Interfaces**:
-        - `POST /listings` - Creates a new product listing.
-        - `GET /listings/{id}` - Retrieves details of a specific listing.
-        - `PUT /listings/{id}` - Updates an existing listing.
-        - `DELETE /listings/{id}` - Removes a listing from the marketplace.
-        - `GET /listings/search?query={query}` - Searches for listings using keywords.
+
+        #### **1️⃣ POST /listings** - Creates a new product listing.
+        - **Request Body (JSON):**
+            ```json
+            {
+                "title": "Laptop",
+                "description": "Used Dell laptop, great condition",
+                "price": 499.99,
+                "seller_id": 123,
+                "latitude": 49.2827,
+                "longitude": -123.1207,
+                "images": [
+                    "https://example.com/image1.jpg",
+                    "https://example.com/image2.jpg"
+                ]
+            }
+            ```
+        - **Response:**
+            - **Success (201 Created)**:
+                ```json
+                {
+                    "id": 1,
+                    "message": "Listing created successfully"
+                }
+                ```
+            - **Failure (400 Bad Request, missing fields):**
+                ```json
+                {
+                    "error": "Missing required fields"
+                }
+                ```
+        - **Input Limits:**
+            - `title`: Max **255** characters.
+            - `description`: No strict limit.
+            - `price`: Max **99999999.99**.
+            - `seller_id`: Must be an **existing user ID**.
+            - `latitude` / `longitude`: Optional, must be valid geolocation coordinates.
+            - `images`: Each URL max **500** characters, up to **10 images** per listing.
+
+        ---
+
+        #### **2️⃣ GET /listings?id={id}** - Retrieves details of a specific listing.
+        - **Response:**
+            - **Success (200 OK)**:
+                ```json
+                {
+                    "id": 1,
+                    "title": "Laptop",
+                    "description": "Used Dell laptop, great condition",
+                    "price": 499.99,
+                    "seller_id": 123,
+                    "latitude": 49.2827,
+                    "longitude": -123.1207,
+                    "created_at": "2025-02-16T00:17:28Z",
+                    "images": [
+                        "https://example.com/image1.jpg",
+                        "https://example.com/image2.jpg"
+                    ]
+                }
+                ```
+            - **Failure (404 Not Found):**
+                ```json
+                {
+                    "error": "Listing not found"
+                }
+                ```
+
+        ---
+
+        #### **3️⃣ PUT /listings/{id}** - Updates an existing listing.
+        - **Request Body (Only fields to update):**
+            ```json
+            {
+                "title": "Updated Laptop Title",
+                "price": 450.00,
+                "latitude": 49.2800,
+                "longitude": -123.1200,
+                "images": [
+                    "https://example.com/new_image.jpg"
+                ]
+            }
+            ```
+        - **Response:**
+            - **Success (200 OK)**:
+                ```json
+                {
+                    "message": "Listing updated successfully"
+                }
+                ```
+            - **Failure (400 Bad Request / 404 Not Found):**
+                ```json
+                {
+                    "error": "Invalid update request or listing not found"
+                }
+                ```
+        - **Update Rules:**
+            - `title`: Optional, Max **255** characters.
+            - `description`: Optional.
+            - `price`: Optional, must be **greater than 0**.
+            - `latitude` / `longitude`: Optional.
+            - `images`: Optional, **replaces all previous images**.
+            - **Only listing owners (seller_id match) can edit a listing**.
+
+        ---
+
+        #### **4️⃣ DELETE /listings/{id}** - Removes a listing from the marketplace.
+        - **Response:**
+            - **Success (200 OK):**
+                ```json
+                {
+                    "message": "Listing deleted successfully"
+                }
+                ```
+            - **Failure (404 Not Found):**
+                ```json
+                {
+                    "error": "Listing not found"
+                }
+                ```
+        - **Effect of Deletion:**
+            - **Cascading delete**: All associated images in `listing_images` table are **automatically removed**.
+
+        ---
+
+        #### **5️⃣ GET /listings?query={query}** - Searches for listings using keywords.
+        - **Query Parameters:**
+            - `query`: Searches in `title` and `description` (case-insensitive).
+            - `min_price`: Optional, filters listings with **price >= min_price**.
+            - `max_price`: Optional, filters listings with **price <= max_price**.
+            - `latitude`, `longitude`, `radius`: Filters results **within radius (km)** from given coordinates.
+
+        - **Example Queries:**
+            - **Basic search by keyword (`query`)**
+                ```
+                http://localhost:5000/listings?query=Bike
+                ```
+            - **Search with price filter**
+                ```
+                http://localhost:5000/listings?query=Bike&min_price=100&max_price=300
+                ```
+            - **Search within 10km of a location**
+                ```
+                http://localhost:5000/listings?latitude=49.2827&longitude=-123.1207&radius=10
+                ```
+
+        - **Response:**
+            - **Success (200 OK, Matching Listings):**
+                ```json
+                {
+                    "results": [
+                        {
+                            "id": 1,
+                            "title": "Mountain Bike",
+                            "description": "High-quality bike, barely used.",
+                            "price": 299.99,
+                            "latitude": 49.2827,
+                            "longitude": -123.1207,
+                            "image": "https://example.com/bike1.jpg"
+                        },
+                        {
+                            "id": 2,
+                            "title": "Road Bicycle",
+                            "description": "Lightweight and fast!",
+                            "price": 599.99,
+                            "latitude": 49.3000,
+                            "longitude": -123.1150,
+                            "image": "https://example.com/bike2.jpg"
+                        }
+                    ]
+                }
+                ```
+            - **Failure (404 Not Found):**
+                ```json
+                {
+                    "error": "No listings match your search"
+                }
+                ```
+        - **Search Rules:**
+            - `query`: Max **255** characters.
+            - `min_price` / `max_price`: Must be **positive numbers**.
+            - `latitude` / `longitude`: Must be valid geographic coordinates.
+            - If no listings match, return `404`.
+
+
 
 2. **Storage Management Service**
     - **Purpose**: Manages warehouse storage and assigns storage locations for stored items.
