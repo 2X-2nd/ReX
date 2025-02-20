@@ -12,12 +12,11 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
 ## 3. Requirements Specification
 ### **3.1. Use-Case Diagram**
-![Use Case Diagram](images/Use_Case_Diagram.jpg)
+![Use Case Diagram](images/Use_Case_Diagram.png)
 
 ### **3.2. Actors Description**
-1. **[BUYERS]**: Buyers are users looking to purchase second-hand items. They can browse listings, communicate with sellers, and choose pickup or delivery options.
-2. **[SELLERS]**: Sellers are users who wish to list unwanted items for sale. They can deposit their items in partner warehouses, post product listings, and manage their listings.
-3. **[Administrator]**：The administrator ensures the smooth operation of the platform, including monitoring listings and handling user disputes.
+1. **[User]**: User is the people uses the app. They can act as a buyer who wants to purchase second-hand items, browse listings and chat with sellers. They can also act as a seller when they wants to list unwanted items for sale. They can deposit their items in partner warehouses, post product listings, and manage their listings.
+2. **[Administrator]**：The administrator ensures the smooth operation of the platform, including monitoring listings and handling user disputes.
 
 ### **3.3. Functional Requirements**
 <a name="fr1"></a>
@@ -30,7 +29,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
     - **Detailed Flow for Each Independent Scenario**: 
         1. **[Google-based User Registration]**:
             - **Description**: Users register with their Google accounts. Upon successful registration, they can set preferences for personalized recommendations.
-            - **Primary actor(s)**: Sellers, Buyers
+            - **Primary actor(s)**: User
             - **Main success scenario**:
                 1. User opens the app and selects the "Sign in with Google" option.
                 2. The system initiates Google OAuth authentication.
@@ -39,17 +38,17 @@ Buyers benefit from a personalized recommendation system and real-time chat func
                 5. The user sets preferences (e.g., categories of interest) for product recommendations.
 
             - **Failure scenario(s)**:
-                - 1a. Google authentication fails due to network issues.
-                    - 1a1. System displays an error message indicating authentication failure.
-                    - 1a2. User retries the authentication process after resolving the issue.
+                - 3a. Google authentication fails due to network issues.
+                    - 3a1. System displays an error message indicating authentication failure.
+                    - 3a2. User retries the authentication process after resolving the issue.
 
-                - 1b. Google account does not return necessary data.
-                    - 1b1. System notifies the user of the incomplete data.
-                    - 1b2. User retries with a valid Google account.
+                - 3b. Google account does not return necessary data.
+                    - 3b1. System notifies the user of the incomplete data.
+                    - 3b2. User retries with a valid Google account.
 
         2. **[Google-based User Login]**:
             - **Description**: Returning users log in using their Google accounts, and their preferences are retained for personalized recommendations.
-            - **Primary actor(s)**: Sellers, Buyers
+            - **Primary actor(s)**: User
             - **Main success scenario**:
                 1. User selects the "Sign in with Google" option on the login screen.
                 2. The system verifies the user’s Google account and fetches the corresponding system account.
@@ -65,46 +64,46 @@ Buyers benefit from a personalized recommendation system and real-time chat func
                     - 2b2. User is advised to try again later.
 
 
-2. **[List an Item for Sale]** 
+2. **[Post Listings]** 
     - **Overview**:
         1. Upload item details
         2. Price recommendation
 
     - **Detailed Flow for Each Independent Scenario**: 
         1. **[User Registration]**:
-            - **Description**: Sellers can upload item photos, descriptions, and set prices.
-            - **Primary actor(s)**: Sellers
+            - **Description**: User can upload item photos, descriptions, and set prices.
+            - **Primary actor(s)**: User
             - **Main success scenario**:
-                1. Seller selects the "List Item" option.
-                2. Seller uploads photos and fills in item details (e.g., description).
+                1. User selects the "List Item" option.
+                2. User uploads photos and fills in item details (e.g., description).
                 3. The system verifies the details and accepts the listing.
 
             - **Failure scenario(s)**:
-                - 1a. Seller uploads incomplete or invalid details.
-                    - 1a1. System displays an error message highlighting missing/invalid fields.
-                    - 1a2. Seller corrects the errors and resubmits the details.
-                - 1b. System is down during registration.
-                    - 1b1. User receives a message indicating temporary unavailability.
-                    - 1b2. User is asked to try again later.
+                - 2a. User uploads incomplete or invalid details.
+                    - 2a1. System displays an error message highlighting missing/invalid fields.
+                    - 2a2. User corrects the errors and resubmits the details.
+                - 3a. System is down during registration.
+                    - 3a1. User receives a message indicating temporary unavailability.
+                    - 3a2. User is asked to try again later.
                 
         2. **[Price Recommendation]**:
             - **Description**: The system suggests a competitive price based on database analysis and comparison with new item prices on other platforms.
-            - **Primary actor(s)**: Sellers
+            - **Primary actor(s)**: User
             - **Main success scenario**:
-                1. Seller enters item details and clicks "Get Price Recommendation".
+                1. User enters item details and clicks "Get Price Recommendation".
                 2. System analyzes the database and provides a price suggestion.
                 3. System also compares the price to new item prices and displays the difference.
-                4. Seller accepts the recommendation or sets a custom price.
+                4. User accepts the recommendation or sets a custom price.
 
             - **Failure scenario(s)**:
                 - 2a. Price recommendation fails due to missing database data.
-                    - 2a1. System notifies the seller about the issue.
-                    - 2a2. Seller can proceed without the recommendation.
+                    - 2a1. System notifies the user about the issue.
+                    - 2a2. User can proceed without the recommendation.
 
                 - 2b. System cannot fetch competitor prices.
                     - 2b1. System displays a message about unavailability of competitor price data.
-                    - 2b2. Seller proceeds with the recommended price based on internal data.
-3. **[Locate Storage Facilities]**
+                    - 2b2. User proceeds with the recommended price based on internal data.
+3. **[Store Item in Storage Facility]**
    - **Overview**:
        1. Find nearby warehouses
        2. Schedule item drop-off
@@ -112,33 +111,33 @@ Buyers benefit from a personalized recommendation system and real-time chat func
    - **Detailed Flow for Each Independent Scenario**:
 
        1. **[Find Nearby Warehouses]**:
-           - **Description**: Sellers locate storage facilities near their current location using the Google Maps API.
-           - **Primary actor(s)**: Sellers
+           - **Description**: User locate storage facilities near their current location using the Google Maps API.
+           - **Primary actor(s)**: User
            - **Main success scenario**:
-               1. Seller selects the "Find Storage" option.
-               2. System uses the seller's location to list nearby warehouses.
-               3. Seller selects a preferred facility.
+               1. User selects the "Find Storage" option.
+               2. System uses user's location to find nearby warehouses.
+               3. User selects a preferred facility.
            - **Failure scenario(s)**:
-               - **1a.** Location permissions are denied.
-                   - **1a1.** System prompts the user to enable location services.
-                   - **1a2.** Seller enables location services and retries.
-               - **1b.** No warehouses available nearby.
-                   - **1b1.** System displays a message stating unavailability of storage options.
-                   - **1b2.** Seller can retry later or contact support.
+               - 1a. Location permissions are denied.
+                   - 1a1. System prompts the user to enable location services.
+                   - 1a2. User enables location services and retries.
+               - 1b. No warehouses available nearby.
+                   - 1b1. System displays a message stating unavailability of storage options.
+                   - 1b2. User can retry later or contact support.
 
        2. **[Schedule Item Drop-Off]**:
-           - **Description**: Sellers schedule a time to deposit items at a selected warehouse.
-           - **Primary actor(s)**: Sellers
+           - **Description**: User schedule a time to deposit items at a selected warehouse.
+           - **Primary actor(s)**: User
            - **Main success scenario**:
-               1. Seller selects a warehouse and chooses a convenient drop-off time.
+               1. User selects a warehouse and chooses a convenient drop-off time.
                2. System confirms the booking and sends a confirmation message.
            - **Failure scenario(s)**:
-               - **2a.** Selected time slot is unavailable.
-                   - **2a1.** System suggests alternative time slots.
-                   - **2a2.** Seller selects a new time and proceeds.
-               - **2b.** System fails to confirm the booking due to server issues.
-                   - **2b1.** Seller receives a notification about the issue.
-                   - **2b2.** Seller retries later or contacts support.
+               - 2a. Selected time slot is unavailable.
+                   - 2a1. System suggests alternative time slots.
+                   - 2a2. User selects a new time and proceeds.
+               - 2b. System fails to confirm the booking due to server issues.
+                   - 2b1. User receives a notification about the issue.
+                   - 2b2. User retries later or contacts support.
 
 ### **3.4. Screen Mockups**
 ![Screen Mockup Diagram](images/mockup.png)
@@ -148,8 +147,8 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 <a name="nfr1"></a>
 
 1. **[System Performance]**
-   - **Description**: The system should support multiple users simultaneously and ensure that most pages load within 2 seconds.
-   - **Justification**: Providing a smooth user experience ensures that the system remains usable even during peak times.
+   - **Description**: The system should support multiple users simultaneously and ensure startup within 5 seconds and most pages load within 2 seconds.
+   - **Justification**: According to Android vitals at the Android developer page, code startup should take less than 5 seconds, warm startup should take less than 1 seconds and hot startup should take less than 1.5 seconds.
 
 <a name="nfr2"></a>
 
