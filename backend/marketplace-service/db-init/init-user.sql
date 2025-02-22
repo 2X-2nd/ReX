@@ -1,0 +1,3 @@
+CREATE USER IF NOT EXISTS 'app_user'@'%' IDENTIFIED BY 'ReXrootDB';
+GRANT ALL PRIVILEGES ON marketplace.* TO 'app_user'@'%';
+FLUSH PRIVILEGES;

@@ -1,0 +1,53 @@
+services:
+  # MySQL Database Service
+  db:
+    image: mysql:8.0
+    container_name: listings_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ReXrootDB
+      MYSQL_DATABASE: marketplace
+      MYSQL_USER: app_user
+      MYSQL_PASSWORD: ReXrootDB
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initdb.d
+    networks:
+      - marketplace_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
+
+  # Node.js Application Service
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+      args:
+        - PORT=${PORT}
+    container_name: marketplace_app
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      PORT: ${PORT}
+    ports:
+      - "${PORT}:${PORT}"
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - marketplace_network
+    restart: always
+
+volumes:
+  mysql_data:
+
+networks:
+  marketplace_network:
+    driver: bridge
