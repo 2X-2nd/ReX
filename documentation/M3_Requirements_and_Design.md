@@ -385,13 +385,103 @@ Buyers benefit from a personalized recommendation system and real-time chat func
         - `DELETE /storage/{itemId}` - Removes an item from storage after sale or withdrawal.
 
 3. **User Service**
-    - **Purpose**: Manages authentication, profiles, and permissions.
-    - **Interfaces**:
-        - `POST /users/register` - Creates a new user account.
-        - `POST /users/login` - Authenticates a user and returns a token.
-        - `GET /users/{id}` - Retrieves user profile information.
-        - `PUT /users/{id}` - Updates user profile details.
-        - `DELETE /users/{id}` - Deletes a user account.
+
+## 1️⃣ Purpose
+The User Service manages user profiles, preferences, and geolocation. It does not handle authentication, as this is managed by Google OAuth.
+
+## 2️⃣ API Endpoints
+
+### **2.1. POST /users/register** - Registers a new user
+- **Request Body (JSON):**
+    ```json
+    {
+        "google_id": "103217936482731253672",
+        "email": "user@example.com",
+        "username": "john_doe",
+        "preferences": ["electronics", "furniture"],
+        "latitude": 49.2827,
+        "longitude": -123.1207
+    }
+    ```
+- **Response:**
+    - **Success (201 Created):**
+        ```json
+        {
+            "message": "User registered successfully",
+            "user_id": "103217936482731253672"
+        }
+        ```
+---
+
+### **2.2. GET /users/{id}** - Retrieves user profile
+- **Request Example:**
+    ```http
+    GET /users/103217936482731253672
+    ```
+- **Response:**
+    - **Success (200 OK):**
+        ```json
+        {
+            "google_id": "103217936482731253672",
+            "email": "user@example.com",
+            "username": "john_doe",
+            "preferences": ["electronics", "furniture"],
+            "latitude": 49.2827,
+            "longitude": -123.1207
+        }
+        ```
+---
+
+### **2.3. PUT /users/{id}** - Updates user details
+- **Request Body (JSON):**
+    ```json
+    {
+        "username": "johndoe_new",
+        "preferences": ["books", "gaming"],
+        "latitude": 49.2900,
+        "longitude": -123.1000
+    }
+    ```
+- **Response:**
+    - **Success (200 OK):**
+        ```json
+        {
+            "message": "User updated successfully"
+        }
+        ```
+---
+
+### **2.4. DELETE /users/{id}** - Deletes a user account
+- **Request Example:**
+    ```http
+    DELETE /users/103217936482731253672
+    ```
+- **Response:**
+    - **Success (200 OK):**
+        ```json
+        {
+            "message": "User deleted successfully"
+        }
+        ```
+---
+
+## 3️⃣ Database Schema
+The service maintains a single table where each row represents a user. It includes:
+- **Google ID** as the primary key.
+- **Email** (unique for each user).
+- **Optional username** (if set).
+- **Preferences** (stored as JSON).
+- **Geolocation** (latitude and longitude for location-based features).
+
+---
+
+## 4️⃣ Notes
+- Authentication is fully handled by Google OAuth.
+- Passwords are **not stored** in this service.
+- Preferences allow users to personalize their recommendations.
+- Location data enables nearby service suggestions.
+
+
 
 4. **Recommendation Engine**
     - **Purpose**: Provides price suggestions and personalized recommendations.
