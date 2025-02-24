@@ -28,7 +28,7 @@ jobs:
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
-            cd /home/ubuntu/ReX
+            cd /home/ubuntu/ReX/backend/marketplace-service
 
             # Write secrets into .env
             cat > .env <<EOF
