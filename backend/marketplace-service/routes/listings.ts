@@ -368,7 +368,7 @@ app.delete('/listings/:id', (req: { params: { id: any; }; }, res: { status: (arg
 
 
 // **Start the Microservice**
-const PORT = process.env.SERVICE_PORT || 5000;
+const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`🚀 Listings microservice running on port ${PORT}`)
 })
