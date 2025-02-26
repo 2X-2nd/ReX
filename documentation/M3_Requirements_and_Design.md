@@ -389,7 +389,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 ## 1️⃣ Purpose
 The User Service manages user profiles, preferences, and geolocation. It does not handle authentication, as this is managed by Google OAuth.
 
-## 2️⃣ API Endpoints
+## 2️⃣ API Endpoints "http://3.138.121.192:8080/users"
 
 ### **2.1. POST /users/register** - Registers a new user
 - **Request Body (JSON):**
