@@ -7,8 +7,14 @@ CREATE TABLE listings (
     description TEXT,
     price DECIMAL(10,2) NOT NULL,
     seller_id INT NOT NULL,
-    images VARCHAR(255),
     latitude DECIMAL(9,6),
     longitude DECIMAL(9,6),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+CREATE TABLE listing_images (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    listing_id INT NOT NULL,
+    image_url TEXT NOT NULL,
+    FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE
 );
