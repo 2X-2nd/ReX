@@ -70,7 +70,7 @@ app.get('/listings', (req: { query: { id: any } }, res: { status: (arg0: number)
 
         db.query(sql, [id], (err: any, results: string | any[]) => {
             if (err) return res.status(500).json({ error: "Database error" });
-            if (results.length === 0``) return res.status(404).json({ error: "Listing not found" });
+            if (results.length === 0) return res.status(404).json({ error: "Listing not found" });
 
             const listing = results[0];
 
