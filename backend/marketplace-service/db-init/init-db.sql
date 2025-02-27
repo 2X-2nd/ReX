@@ -18,3 +18,5 @@ CREATE TABLE listing_images (
     image_url TEXT NOT NULL,
     FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE
 );
+
+SHOW databases;
