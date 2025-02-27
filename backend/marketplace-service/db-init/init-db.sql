@@ -1,7 +1,6 @@
 CREATE DATABASE IF NOT EXISTS marketplace;
 USE marketplace;
-
-CREATE TABLE listings (
+CREATE TABLE listings IF NOT EXISTS(
     id INT AUTO_INCREMENT PRIMARY KEY,
     title VARCHAR(255) NOT NULL,
     description TEXT,
@@ -11,12 +10,10 @@ CREATE TABLE listings (
     longitude DECIMAL(9,6),
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
-
-CREATE TABLE listing_images (
+CREATE TABLE listing_images IF NOT EXISTS(
     id INT AUTO_INCREMENT PRIMARY KEY,
     listing_id INT NOT NULL,
     image_url TEXT NOT NULL,
     FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE
 );
-
 SHOW databases;
