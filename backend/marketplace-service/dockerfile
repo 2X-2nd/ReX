@@ -10,6 +10,8 @@ RUN npm ci
 
 COPY . .
 
+RUN chmod +x node_modules/.bin/ts-node
+
 EXPOSE ${PORT}
 
 CMD ["npm", "start"]
