@@ -88,7 +88,7 @@ app.get('/listings', (req: { query: { id: any } }, res: { status: (arg0: number)
         const sql = `SELECT l.*, (SELECT image_url FROM listing_images WHERE listing_id = l.id LIMIT 1) AS image FROM listings l`;
 
         db.query(sql, (err: any, results: any) => {
-            if (err) return res.status(500).json({ error: "Database error" });
+            if (err) return res.status(500).json({ error: "Something wrong" });
             res.status(200).json({ results });
         });
     }
