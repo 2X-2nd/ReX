@@ -482,13 +482,100 @@ The service maintains a single table where each row represents a user. It includ
 - Location data enables nearby service suggestions.
 
 
-
 4. **Recommendation Engine**
     - **Purpose**: Provides price suggestions and personalized recommendations.
     - **Interfaces**:
-        - `GET /recommendations/{userId}` - Fetches personalized item recommendations.
-        - `POST /price-suggestions` - Suggests a price for a new listing.
-        - `GET /price-comparison/{itemId}` - Retrieves price comparisons from external sources.
+
+        #### **1️⃣ GET /recommendations/{userId}** - Fetches personalized item recommendations.
+        - **Description**: Retrieves relevant listings based on the user's saved preferences.
+        - **Process**:
+            1. Queries the **User Service** to get the user's preferences.
+            2. Uses the retrieved keywords to search the **Listings Service**.
+            3. Returns a list of relevant listings.
+        - **Response Example**:
+            ```json
+            {
+                "userId": "103217936482731253672",
+                "recommended_items": [
+                    {
+                        "name": "Mountain Bike",
+                        "price": 299.99,
+                        "url": "https://example.com/listing/123"
+                    },
+                    {
+                        "name": "Road Bicycle",
+                        "price": 350.00,
+                        "url": "https://example.com/listing/456"
+                    }
+                ]
+            }
+            ```
+        
+        ---
+
+        #### **2️⃣ POST /price-suggestions** - Suggests a price for a new listing.
+        - **Description**: Provides a price recommendation based on internal listings and external data sources.
+        - **Request Body (JSON)**:
+            ```json
+            {
+                "keyword": "bike"
+            }
+            ```
+        - **Process**:
+            1. Queries the **Listings Service** for similar second-hand items.
+            2. Fetches price data from **eBay API** and **Amazon API**.
+            3. Computes an aggregated **best price** recommendation.
+        - **Response Example**:
+            ```json
+            {
+                "best_price": 320.00,
+                "similar_items": [
+                    {
+                        "name": "Used Mountain Bike",
+                        "price": 299.99,
+                        "url": "https://example.com/listing/123"
+                    },
+                    {
+                        "name": "New Bike (Amazon)",
+                        "price": 500.00,
+                        "url": "https://amazon.com/example-bike"
+                    }
+                ]
+            }
+            ```
+
+        ---
+
+        #### **3️⃣ GET /price-comparison/{itemId}** - Retrieves price comparisons from external sources.
+        - **Description**: Compares the price of a given listing to similar items and provides a pricing insight.
+        - **Process**:
+            1. Retrieves the item details from the **Listings Service**.
+            2. Fetches similar listings and new item prices from **eBay API** and **Amazon API**.
+            3. Computes the **market price** and determines if the item is underpriced, fair, or overpriced.
+        - **Response Example**:
+            ```json
+            {
+                "original_item": {
+                    "name": "Used Gaming Laptop",
+                    "price": 800.00,
+                    "url": "https://example.com/listing/12345"
+                },
+                "similar_items": [
+                    {
+                        "name": "Refurbished Gaming Laptop",
+                        "price": 750.00,
+                        "url": "https://example.com/listing/67890"
+                    },
+                    {
+                        "name": "New Gaming Laptop (Amazon)",
+                        "price": 1200.00,
+                        "url": "https://amazon.com/gaming-laptop"
+                    }
+                ],
+                "message": "This item is priced below market value, it's a bargain!"
+            }
+            ```
+
 
 5. **Chat Service**
     - **Purpose**: Manages buyer-seller chat functionality.
