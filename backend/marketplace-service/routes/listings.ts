@@ -208,10 +208,27 @@ app.delete('/listings/:id', (req: { params: { id: any; }; }, res: { status: (arg
     })
 })
 
+// Search listings by keyword
+app.get('/listings/search', (req: { query: { query: any } }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string; results?: any }): void; new(): any } } }) => {
+    const { query } = req.query;
+    if (!query) {
+        return res.status(400).json({ error: "Query parameter is required" });
+    }
 
+    const searchSql = `SELECT * FROM listings WHERE title LIKE ? OR description LIKE ?`;
+    const searchValue = `%${query}%`;
+
+    db.query(searchSql, [searchValue, searchValue], (err: any, results: any) => {
+        if (err) {
+            console.error("Error searching listings:", err);
+            return res.status(500).json({ error: "Database error" });
+        }
+        res.status(200).json({ results });
+    });
+});
 
 // **Start the Microservice**
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
     console.log(`🚀 Listings microservice running on port ${PORT}`)
 })
