@@ -6,7 +6,8 @@ const cors = require('cors')
 dotenv.config()
 
 const app = express()
-app.use(express.json()) // Allow JSON request bodies
+app.use(express.json({ limit: '1mb'})) // Allow JSON request bodies
+app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.use(cors()) // Enable CORS
 
 // Database connection
