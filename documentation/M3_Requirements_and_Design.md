@@ -316,7 +316,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
         ---
 
-        #### **5️⃣ GET /listings?query={query}** - Searches for listings using keywords.
+        #### **5️⃣ GET /listings/search?query={query}** - Searches for listings using keywords.
         - **Query Parameters:**
             - `query`: Searches in `title` and `description` (case-insensitive).
             - `min_price`: Optional, filters listings with **price >= min_price**.
@@ -326,13 +326,13 @@ Buyers benefit from a personalized recommendation system and real-time chat func
         - **Example Queries:**
             - **Basic search by keyword (`query`)**
                 ```
-                http://localhost:5000/listings?query=Bike
+                https://nsefhqsvqf.execute-api.us-east-2.amazonaws.com/listings/search?query=bike
                 ```
-            - **Search with price filter**
+            - **Search with price filter** (need fix)
                 ```
                 http://localhost:5000/listings?query=Bike&min_price=100&max_price=300
                 ```
-            - **Search within 10km of a location**
+            - **Search within 10km of a location** (need fix)
                 ```
                 http://localhost:5000/listings?latitude=49.2827&longitude=-123.1207&radius=10
                 ```
