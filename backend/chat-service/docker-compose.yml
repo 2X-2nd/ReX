@@ -1,0 +1,28 @@
+version: '3.8'
+
+services:
+  chat-service:
+    build: .
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+    depends_on:
+      - mongo
+    networks:
+      - chat-network
+
+  mongo:
+    image: mongo:6.0
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb_data:/data/db
+    networks:
+      - chat-network
+
+volumes:
+  mongodb_data:
+
+networks:
+  chat-network:
