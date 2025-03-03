@@ -6,8 +6,8 @@ services:
     ports:
       - "${PORT}:${PORT}"
     environment:
-      - MONGODB_URI: ${MONGODB_URI}
-      - PORT: ${PORT}
+      MONGODB_URI: ${MONGODB_URI}
+      PORT: ${PORT}
     depends_on:
       - mongo
     networks:
