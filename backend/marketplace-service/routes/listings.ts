@@ -215,7 +215,14 @@ app.get('/listings/search', (req: { query: { query: any } }, res: { status: (arg
         return res.status(400).json({ error: "Query parameter is required" });
     }
 
-    const searchSql = `SELECT * FROM listings WHERE title LIKE ? OR description LIKE ?`;
+    const searchSql = `
+        SELECT l.id, l.title, l.description, l.price, 
+               GROUP_CONCAT(li.image_url) AS images
+        FROM listings l
+        LEFT JOIN listing_images li ON l.id = li.listing_id
+        WHERE l.title LIKE ? OR l.description LIKE ?
+        GROUP BY l.id
+    `;
     const searchValue = `%${query}%`;
 
     db.query(searchSql, [searchValue, searchValue], (err: any, results: any) => {
@@ -223,6 +230,12 @@ app.get('/listings/search', (req: { query: { query: any } }, res: { status: (arg
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
         }
+
+        // Convert images from CSV string to an array
+        results.forEach((row: any) => {
+            row.images = row.images ? row.images.split(',') : [];
+        });
+
         res.status(200).json({ results });
     });
 });
