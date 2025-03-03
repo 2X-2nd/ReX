@@ -6,12 +6,13 @@ services:
     ports:
       - "${PORT}:${PORT}"
     environment:
-      MONGODB_URI: ${MONGODB_URI}
+      - MONGODB_URI: ${MONGODB_URI}
+      - PORT: ${PORT}
     depends_on:
       - mongo
     networks:
       - chat-network
-    restart: unless-stopped
+    restart: always
 
   mongo:
     image: mongo:6.0
@@ -21,7 +22,7 @@ services:
       - mongodb_data:/data/db
     networks:
       - chat-network
-    restart: unless-stopped
+    restart: always
 
 volumes:
   mongodb_data:
