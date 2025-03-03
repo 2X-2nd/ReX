@@ -50,7 +50,7 @@ jobs:
             cd ../chat-service
             
             cat > .env <<EOF
-            PORT=${{ secrets.CHAT_PORT }}
+            PORT=${{ secrets.PROD_CHAT_PORT }}
             MONGODB_URI=${{ secrets.MONGODB_URI }}
             EOF
             
