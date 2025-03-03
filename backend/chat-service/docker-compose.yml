@@ -2,7 +2,12 @@ version: '3.8'
 
 services:
   chat-service:
-    build: .
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        - PORT=${PORT}
+    container_name: chat_service
     ports:
       - "${PORT}:${PORT}"
     environment:
@@ -16,6 +21,7 @@ services:
 
   mongo:
     image: mongo:6.0
+    container_name: mongodb
     ports:
       - "27017:27017"
     volumes:
@@ -29,3 +35,4 @@ volumes:
 
 networks:
   chat-network:
+    driver: bridge
