@@ -9,28 +9,31 @@ jobs:
   deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Copy files to EC2
+      - name: Copy services to EC2
         uses: appleboy/scp-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
-          source: "./backend"
+          source: |
+            ./backend/marketplace-service
+            ./backend/chat-service
           target: "/home/ubuntu/ReX"
-      
-      - name: Rebuild and Deploy
+          strip_components: 1
+
+      - name: Deploy Services
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.EC2_HOST }}
           username: ${{ secrets.EC2_USER }}
           key: ${{ secrets.EC2_KEY }}
           script: |
+            # Deploy Marketplace Service
             cd /home/ubuntu/ReX/backend/marketplace-service
-
-            # Write secrets into .env
+            
             cat > .env <<EOF
             PORT=${{ secrets.PROD_PORT }}
             DB_HOST=${{ secrets.PROD_DB_HOST }}
@@ -39,27 +42,24 @@ jobs:
             DB_NAME=${{ secrets.PROD_DB_NAME }}
             DB_PORT=${{ secrets.PROD_DB_PORT }}
             EOF
-
-            # Give .env permissions
+            
             chmod 600 .env
-
-            # Build and run container
             docker-compose down
             docker-compose --env-file .env build
             docker-compose --env-file .env up -d
 
-            # cd /home/ubuntu/ReX/backend/chat-service
+            # Deploy Chat Service
+            cd ../chat-service
+            
+            cat > .env <<EOF
+            PORT=${{ secrets.CHAT_PORT }}
+            MONGODB_URI=${{ secrets.MONGODB_URI }}
+            EOF
+            
+            chmod 600 .env
+            docker-compose down
+            docker-compose build --no-cache
+            docker-compose up -d --force-recreate
 
-            # # Write secrets into .env
-            # cat > .env <<EOF
-            # PORT=${{ secrets.PROD_PORT }}
-            # MONGODB_URI=${{ secrets.MONGODB_URI }}
-            # EOF
-
-            # # Give .env permissions
-            # chmod 600 .env
-
-            # # Build and run container
-            # docker-compose down
-            # docker-compose --env-file .env build
-            # docker-compose --env-file .env up -d
+            # Cleanup
+            docker system prune -af
