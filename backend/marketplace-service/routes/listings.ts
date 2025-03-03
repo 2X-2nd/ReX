@@ -1,4 +1,4 @@
-const express = require('express')
+import express, {Request, Response} from 'express'
 const mysql = require('mysql2')
 const dotenv = require('dotenv')
 const cors = require('cors')
@@ -28,7 +28,7 @@ db.connect((err: any) => {
 })
 
 // Create a new listing (Updated to include geolocation)
-app.post('/listings', (req: { body: { title: any; description: any; price: any; seller_id: any; images: any; latitude: any; longitude: any } }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string; id?: any; message?: string }): void; new(): any } } }) => {
+app.post('/listings', (req: Request, res: Response) => {
     const { title, description, price, seller_id, images, latitude, longitude } = req.body;
 
     if (!title || !price || !seller_id || !images || images.length === 0) {
@@ -62,7 +62,7 @@ app.post('/listings', (req: { body: { title: any; description: any; price: any; 
 });
 
 // GET /listings - Retrieve by ID or perform a search
-app.get('/listings', (req: { query: { id: any } }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string; results?: any }): void; new(): any } } }) => {
+app.get('/listings', (req: Request, res: Response) => {
     const { id } = req.query;
 
     if (id) {
@@ -96,7 +96,7 @@ app.get('/listings', (req: { query: { id: any } }, res: { status: (arg0: number)
 });
 
 // PUT /listings/:id - Update an existing listing
-app.put('/listings/:id', (req: { params: { id: any; }; body: { title: any; description: any; price: any; latitude: any; longitude: any; images: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string; message?: string; }): void; new(): any; }; }; }) => {
+app.put('/listings/:id', (req: Request, res: Response) => {
 
 
     const listingId = req.params.id;
@@ -180,7 +180,7 @@ app.put('/listings/:id', (req: { params: { id: any; }; body: { title: any; descr
 
 
 // DELETE /listings/:id - Remove a listing from the marketplace
-app.delete('/listings/:id', (req: { params: { id: any; }; }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string; message?: string; }): void; new(): any; }; }; }) => {
+app.delete('/listings/:id', (req: Request, res: Response) => {
     const listingId = req.params.id;
 
     // Check if the listing exists before deleting
@@ -209,7 +209,7 @@ app.delete('/listings/:id', (req: { params: { id: any; }; }, res: { status: (arg
 })
 
 // Search listings by keyword
-app.get('/listings/search', (req: { query: { query: any } }, res: { status: (arg0: number) => { (): any; new(): any; json: { (arg0: { error?: string; results?: any }): void; new(): any } } }) => {
+app.get('/listings/search', (req: Request, res: Response) => {
     const { query } = req.query;
     if (!query) {
         return res.status(400).json({ error: "Query parameter is required" });
