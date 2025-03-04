@@ -1,32 +1,17 @@
-# Stage 1: Builder
-FROM node:20.6-alpine AS builder
-WORKDIR /app
+ARG PORT
 
-# Copy package files
-COPY package*.json ./
-COPY tsconfig.json ./
-
-# Install dependencies
-RUN npm ci --include=dev
-
-# Copy source files
-COPY . ./src
-
-# Build TypeScript
-RUN npm run build
-
-# Stage 2: Runtime
 FROM node:20.6-alpine
+
 WORKDIR /app
 
-# Copy production files
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
+COPY package*.json ./
 
-# Environment variables
-ENV NODE_ENV=production
-ENV PORT=5000
-EXPOSE 5000
+RUN npm ci
 
-CMD ["node", "dist/server.js"]
+COPY . .
+
+RUN chmod +x node_modules/.bin/ts-node
+
+EXPOSE ${PORT}
+
+CMD ["npm", "start"]

@@ -12,7 +12,8 @@ services:
       MONGODB_URI: ${MONGODB_URI}
       PORT: ${PORT}
     depends_on:
-      - mongo
+      mongo:
+        condition: service_healthy
     networks:
       - chat-network
     restart: always
@@ -26,6 +27,11 @@ services:
       "--notablescan",                 # Prevent inefficient queries
       "--syncdelay=300"                # Reduce flush frequency
     ]
+    healthcheck:
+      test: ["CMD", "mongosh", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
     ports:
       - "27017:27017"
     volumes:
