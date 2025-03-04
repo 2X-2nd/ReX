@@ -46,6 +46,8 @@ jobs:
             docker-compose --env-file .env build
             docker-compose --env-file .env up -d
 
+            docker system prune -af
+
             # # Deploy Chat Service
             # cd /home/ubuntu/ReX/backend/chat-service
             
