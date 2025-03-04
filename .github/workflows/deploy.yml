@@ -52,7 +52,6 @@ jobs:
             cd /home/ubuntu/ReX/backend/chat-service
             
             cat > .env <<EOF
-            PORT=${{ secrets.PROD_CHAT_PORT }}
             DB_HOST=${{ secrets.PROD_DB_HOST }}
             DB_USER=${{ secrets.PROD_DB_USER }}
             DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }}
