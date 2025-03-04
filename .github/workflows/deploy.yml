@@ -47,7 +47,7 @@ jobs:
             # docker-compose --env-file .env up -d
 
             # Deploy Chat Service
-            cd ../chat-service
+            cd /home/ubuntu/ReX/backend/chat-service
             
             cat > .env <<EOF
             PORT=${{ secrets.PROD_CHAT_PORT }}
