@@ -13,10 +13,38 @@ services:
       PORT: ${CHAT_PORT}
     ports:
       - "${CHAT_PORT}:${CHAT_PORT}"
+    depends_on:
+      db:
+        condition: service_healthy
     networks:
-      - marketplace_network
+      - chat_network
+    restart: always
+  
+  db:
+    image: mysql:8.0
+    container_name: chat_db
+    environment:
+      MYSQL_ROOT_PASSWORD: ReXrootDB
+      MYSQL_DATABASE: chatdb
+      MYSQL_PASSWORD: ReXrootDB
+    volumes:
+      - mysql_data:/var/lib/mysql
+      - ./db-init:/docker-entrypoint-initdb.d
+    networks:
+      - chat_network
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 5s
+      timeout: 10s
+      retries: 5
+    ports:
+      - "${DB_PORT}:${DB_PORT}"
     restart: always
 
+volumes:
+  mysql_data:
+
 networks:
-  marketplace_network:
-    external: true
+  chat_network:
+    name: chat_network
+    driver: bridge
