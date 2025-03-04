@@ -18,8 +18,14 @@ services:
     restart: always
 
   mongo:
-    image: mongo:6.0
+    image: mongo:6.0-jammy
     container_name: mongodb
+    command: [
+      "--wiredTigerCacheSizeGB=0.25",  # Limit to 256MB RAM
+      "--nojournal",                   # Save 200MB+ disk
+      "--notablescan",                 # Prevent inefficient queries
+      "--syncdelay=300"                # Reduce flush frequency
+    ]
     ports:
       - "27017:27017"
     volumes:
