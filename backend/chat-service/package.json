@@ -1,9 +1,10 @@
 {
   "name": "chat-service",
   "version": "1.0.0",
-  "main": "index.js",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "ts-node server.ts",
+    "dev": "dotenv -e .env -- npx nodemon -e .ts server.ts"
   },
   "keywords": [],
   "author": "",
