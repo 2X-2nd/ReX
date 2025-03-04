@@ -48,18 +48,22 @@ jobs:
 
             docker system prune -af
 
-            # # Deploy Chat Service
-            # cd /home/ubuntu/ReX/backend/chat-service
+            # Deploy Chat Service
+            cd /home/ubuntu/ReX/backend/chat-service
             
-            # cat > .env <<EOF
-            # PORT=${{ secrets.PROD_CHAT_PORT }}
-            # MONGODB_URI=${{ secrets.MONGODB_URI }}
-            # EOF
+            cat > .env <<EOF
+            PORT=${{ secrets.PROD_CHAT_PORT }}
+            DB_HOST=${{ secrets.PROD_DB_HOST }}
+            DB_USER=${{ secrets.PROD_DB_USER }}
+            DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }}
+            DB_NAME=${{ secrets.PROD_DB_NAME }}
+            DB_PORT=${{ secrets.PROD_DB_PORT }}
+            EOF
             
-            # chmod 600 .env
-            # docker-compose down
-            # docker-compose --env-file .env build
-            # docker-compose --env-file .env up -d
+            chmod 600 .env
+            docker-compose down
+            docker-compose --env-file .env build
+            docker-compose --env-file .env up -d
 
-            # # Cleanup
-            # docker system prune -af
+            # Cleanup
+            docker system prune -af
