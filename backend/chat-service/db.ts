@@ -1,11 +1,13 @@
-import mongoose from 'mongoose';
+import mysql from 'mysql2';
 
-export const connectDB = async () => {
-    try {
-        await mongoose.connect(process.env.MONGODB_URI!);
-        console.log('MongoDB connected');
-    } catch (error) {
-        console.error('Database connection error:', error);
-        process.exit(1);
-    }
-};
+const db = mysql.createPool({
+    host: process.env.DB_NAME,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD,
+    database: process.env.DB_HOST,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+}).promise(); // Enables async/await support
+
+export default db;

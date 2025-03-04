@@ -50,4 +50,5 @@ volumes:
 
 networks:
   marketplace_network:
+    name: marketplace_network
     driver: bridge

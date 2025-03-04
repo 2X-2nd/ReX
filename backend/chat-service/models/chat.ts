@@ -1,32 +1,18 @@
-import mongoose, { Schema, Document } from 'mongoose';
+import db from '../db';
 
-export interface IChat extends Document {
-    participants: {
-        buyer: string;
-        seller: string;
-    };
-    messages: Array<{
-        senderId: string;
-        content: string;
-        timestamp: Date;
-    }>;
-    created: Date;
+// Start a new chat
+export async function startChat(buyerId: number, sellerId: number) {
+    const [result] = await db.query("INSERT INTO chats (buyer_id, seller_id) VALUES (?, ?)", [buyerId, sellerId]);
+    return (result as any).insertId; // Return new chat ID
 }
 
-const ChatSchema: Schema = new Schema({
-    participants: {
-        type: new Schema({
-            buyer: { type: String, required: [true, 'Buyer ID is required'] },
-            seller: { type: String, required: [true, 'Seller ID is required'] }
-        }),
-        required: [true, 'Participants are required']
-    },
-    messages: [{
-        senderId: { type: String, required: [true, 'Sender ID is required'] },
-        content: { type: String, required: [true, 'Message content is required'] },
-        timestamp: { type: Date, default: Date.now }
-    }],
-    created: { type: Date, default: Date.now }
-});
+// Get chat history
+export async function getChatHistory(chatId: number) {
+    const [messages] = await db.query("SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC", [chatId]);
+    return messages;
+}
 
-export default mongoose.model<IChat>('Chat', ChatSchema);
+// Send a message
+export async function sendMessage(chatId: number, senderId: number, message: string) {
+    await db.query("INSERT INTO messages (chat_id, sender_id, message) VALUES (?, ?, ?)", [chatId, senderId, message]);
+}

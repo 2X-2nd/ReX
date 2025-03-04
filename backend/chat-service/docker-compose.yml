@@ -1,48 +1,22 @@
 services:
-  mongo:
-    image: mongo:6.0-jammy
-    container_name: mongodb
-    command: [
-      "--wiredTigerCacheSizeGB=0.25",  # Limit to 256MB RAM
-      "--nojournal",                   # Save 200MB+ disk
-      "--notablescan",                 # Prevent inefficient queries
-      "--syncdelay=300"                # Reduce flush frequency
-    ]
-    healthcheck:
-      test: ["CMD", "mongosh", "ping", "-h", "localhost"]
-      interval: 5s
-      timeout: 10s
-      retries: 5
-    ports:
-      - "27017:27017"
-    volumes:
-      - mongodb_data:/data/db
-    networks:
-      - chat-network
-    restart: always
-    
   chat-service:
     build:
       context: .
       dockerfile: dockerfile
-      args:
-        - PORT=${PORT}
     container_name: chat_service
-    ports:
-      - "${PORT}:${PORT}"
     environment:
-      MONGODB_URI: ${MONGODB_URI}
-      PORT: ${PORT}
-    depends_on:
-      mongo:
-        condition: service_healthy
+      DB_HOST: ${DB_HOST}
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      DB_PORT: ${DB_PORT}
+      PORT: ${CHAT_PORT}
+    ports:
+      - "${CHAT_PORT}:${CHAT_PORT}"
     networks:
-      - chat-network
+      - marketplace_network
     restart: always
 
-volumes:
-  mongodb_data:
-
 networks:
-  chat-network:
-    driver: bridge
+  marketplace_network:
+    external: true

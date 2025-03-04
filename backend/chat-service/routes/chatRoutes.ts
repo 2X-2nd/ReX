@@ -1,78 +1,55 @@
-import { Router, Request, Response } from 'express';
-import Chat from '../models/chat';
+import express from 'express';
+import { startChat, getChatHistory, sendMessage } from '../models/chat';
 
-const router = Router();
+const router = express.Router();
 
-interface StartChatRequest {
-    buyerId: string;
-    sellerId: string;
-}
+// Start a new chat
+router.post('/chat/start', async (req, res) => {
+    const { buyerId, sellerId } = req.body;
+    if (!buyerId || !sellerId) {
+        return res.status(400).json({ error: "Buyer ID and Seller ID are required" });
+    }
 
-router.post('/chat/start', async (req: Request, res: Response) => {
     try {
-        const { buyerId, sellerId }: StartChatRequest = req.body;
-        
-        // Check if chat already exists
-        const existingChat = await Chat.findOne({
-            'participants.buyer': buyerId,
-            'participants.seller': sellerId
-        });
-
-        if (existingChat) {
-            return res.status(200).json(existingChat);
-        }
-
-        const newChat = new Chat({
-            participants: {
-                buyer: buyerId,
-                seller: sellerId
-            },
-            messages: []
-        });
-
-        const savedChat = await newChat.save();
-        res.status(201).json(savedChat);
+        const chatId = await startChat(buyerId, sellerId);
+        res.status(201).json({ chatId });
     } catch (error) {
-        res.status(500).json({ message: 'Error starting chat', error });
+        console.error(error);
+        res.status(500).json({ error: "Database error" });
     }
 });
 
-router.get('/chat/:chatId', async (req: Request, res: Response) => {
+// Get chat history
+router.get('/chat/:chatId', async (req, res) => {
+    const chatId = parseInt(req.params.chatId);
+    if (!chatId) {
+        return res.status(400).json({ error: "Invalid Chat ID" });
+    }
+
     try {
-        const chat = await Chat.findById(req.params.chatId);
-        if (!chat) {
-            return res.status(404).json({ message: 'Chat not found' });
-        }
-        res.json(chat);
+        const messages = await getChatHistory(chatId);
+        res.status(200).json({ messages });
     } catch (error) {
-        res.status(500).json({ message: 'Error retrieving chat', error });
+        console.error(error);
+        res.status(500).json({ error: "Database error" });
     }
 });
 
-interface SendMessageRequest {
-    senderId: string;
-    content: string;
-}
+// Send a message
+router.post('/chat/:chatId/message', async (req, res) => {
+    const chatId = parseInt(req.params.chatId);
+    const { senderId, message } = req.body;
 
-router.post('/chat/:chatId/message', async (req: Request, res: Response) => {
+    if (!chatId || !senderId || !message) {
+        return res.status(400).json({ error: "Chat ID, sender ID, and message are required" });
+    }
+
     try {
-        const { senderId, content }: SendMessageRequest = req.body;
-        const chat = await Chat.findById(req.params.chatId);
-
-        if (!chat) {
-            return res.status(404).json({ message: 'Chat not found' });
-        }
-
-        chat.messages.push({
-            senderId,
-            content,
-            timestamp: new Date()
-        });
-
-        const updatedChat = await chat.save();
-        res.status(201).json(updatedChat);
+        await sendMessage(chatId, senderId, message);
+        res.status(201).json({ success: "Message sent" });
     } catch (error) {
-        res.status(500).json({ message: 'Error sending message', error });
+        console.error(error);
+        res.status(500).json({ error: "Database error" });
     }
 });
 
