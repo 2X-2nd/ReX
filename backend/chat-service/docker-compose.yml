@@ -1,23 +1,4 @@
 services:
-  chat-service:
-    build:
-      context: .
-      dockerfile: dockerfile
-      args:
-        - PORT=${PORT}
-    container_name: chat_service
-    ports:
-      - "${PORT}:${PORT}"
-    environment:
-      MONGODB_URI: ${MONGODB_URI}
-      PORT: ${PORT}
-    depends_on:
-      mongo:
-        condition: service_healthy
-    networks:
-      - chat-network
-    restart: always
-
   mongo:
     image: mongo:6.0-jammy
     container_name: mongodb
@@ -36,6 +17,25 @@ services:
       - "27017:27017"
     volumes:
       - mongodb_data:/data/db
+    networks:
+      - chat-network
+    restart: always
+    
+  chat-service:
+    build:
+      context: .
+      dockerfile: dockerfile
+      args:
+        - PORT=${PORT}
+    container_name: chat_service
+    ports:
+      - "${PORT}:${PORT}"
+    environment:
+      MONGODB_URI: ${MONGODB_URI}
+      PORT: ${PORT}
+    depends_on:
+      mongo:
+        condition: service_healthy
     networks:
       - chat-network
     restart: always

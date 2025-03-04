@@ -23,6 +23,6 @@
     "@types/node": "^18.15.11",
     "dotenv": "^16.4.7",
     "nodemon": "^3.1.9",
-    "typescript": "^5.8.2"
+    "typescript": "^5.7.3"
   }
 }
