@@ -18,8 +18,14 @@ services:
     restart: always
 
   mongo:
-    image: mongo:6.0
+    image: mongo:6.0-jammy
     container_name: mongodb
+    command: [
+      "--storageEngine=wiredTiger",
+      "--wiredTigerCacheSizeGB=0.2",
+      "--nojournal",
+      "--nounixsocket"
+    ]
     ports:
       - "27017:27017"
     volumes:
