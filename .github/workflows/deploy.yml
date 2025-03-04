@@ -77,7 +77,7 @@ jobs:
             DB_HOST=${{ secrets.PROD_DB_HOST }}
             DB_USER=${{ secrets.PROD_DB_USER }}
             DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }}
-            DB_NAME=${{ secrets.PROD_DB_NAME }}
+            DB_NAME=${{ secrets.PROD_CHAT_DB_NAME }}
             DB_PORT=${{ secrets.PROD_DB_PORT }}
             CHAT_PORT=${{ secrets.PROD_CHAT_PORT }}
             EOF
