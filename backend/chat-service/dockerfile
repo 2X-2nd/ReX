@@ -1,26 +1,17 @@
-# Stage 1: Builder
-FROM node:20.6-alpine AS builder
+ARG PORT
+
+FROM node:20.6-alpine
+
 WORKDIR /app
 
-# Install dependencies
-COPY package*..json ./
-COPY tsconfig.json .
+COPY package*.json ./
+
 RUN npm ci
 
-# Copy source files
-COPY src ./src
+COPY . .
 
-# Build TypeScript
-RUN npm run build  # This should output to ./dist
+RUN chmod +x node_modules/.bin/ts-node
 
-# Stage 2: Runtime
-FROM node:20.6-alpine
-WORKDIR /app
+EXPOSE ${PORT}
 
-# Copy compiled JS and dependencies
-COPY --from=builder /app/package*.json ./
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/dist ./dist
-
-# Use compiled server.js
-CMD ["node", "dist/server.js"]  # Keep .js extension here
+CMD ["npm", "start"]
