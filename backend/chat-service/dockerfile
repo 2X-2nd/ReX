@@ -1,17 +1,32 @@
-ARG PORT
-
-FROM node:20.6-alpine
-
+# Stage 1: Builder
+FROM node:20.6-alpine AS builder
 WORKDIR /app
 
+# Copy package files
 COPY package*.json ./
+COPY tsconfig.json ./
 
-RUN npm ci
+# Install dependencies
+RUN npm ci --include=dev
 
-COPY . .
+# Copy source files
+COPY . ./src
 
-RUN chmod +x node_modules/.bin/ts-node
+# Build TypeScript
+RUN npm run build
 
-EXPOSE ${PORT}
+# Stage 2: Runtime
+FROM node:20.6-alpine
+WORKDIR /app
 
-CMD ["npm", "start"]
+# Copy production files
+COPY --from=builder /app/package*.json ./
+COPY --from=builder /app/node_modules ./node_modules
+COPY --from=builder /app/dist ./dist
+
+# Environment variables
+ENV NODE_ENV=production
+ENV PORT=5000
+EXPOSE 5000
+
+CMD ["node", "dist/server.js"]
