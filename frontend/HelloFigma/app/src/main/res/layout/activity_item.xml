@@ -1,0 +1,108 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#FFFFFF">
+
+    <!-- Exit Button -->
+    <ImageView
+        android:id="@+id/exitButton"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_margin="16dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:src="@drawable/frame_3_down_left"
+        android:contentDescription="Exit" />
+
+    <!-- Product Image -->
+    <ImageView
+        android:id="@+id/productImage"
+        android:layout_width="match_parent"
+        android:layout_height="431dp"
+        android:layout_below="@id/exitButton"
+        android:scaleType="centerCrop"
+        android:src="@drawable/frame_1_rectangle_2" />
+
+    <!-- Price Section -->
+    <LinearLayout
+        android:id="@+id/priceSection"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productImage"
+        android:orientation="horizontal"
+        android:padding="16dp">
+
+        <TextView
+            android:id="@+id/productPrice"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="$389"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="#000000" />
+
+        <TextView
+            android:id="@+id/productSavings"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Save $50 than new"
+            android:layout_marginStart="16dp"
+            android:textSize="14sp"
+            android:textColor="#FF0000"
+            android:clickable="true"
+            android:focusable="true" />
+    </LinearLayout>
+
+    <!-- Product Name -->
+    <TextView
+        android:id="@+id/productName"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/priceSection"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:text="Huawei P40 Smartphone"
+        android:textSize="20sp"
+        android:textStyle="bold"
+        android:textColor="#000000" />
+
+    <!-- Product Description -->
+    <TextView
+        android:id="@+id/productDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/productName"
+        android:paddingStart="16dp"
+        android:paddingEnd="16dp"
+        android:paddingTop="8dp"
+        android:text="8GB RAM, 128GB Storage, Red Color"
+        android:textSize="16sp"
+        android:textColor="#666666" />
+
+    <Button
+        android:id="@+id/remove"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:backgroundTint="#FF0000"
+        android:text="REMOVE"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+
+    <!-- "I Want It" Button -->
+    <Button
+        android:id="@+id/iWantItButton"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="16dp"
+        android:padding="16dp"
+        android:backgroundTint="#FF0000"
+        android:text="I Want It"
+        android:textColor="#FFFFFF"
+        android:textStyle="bold" />
+</RelativeLayout>

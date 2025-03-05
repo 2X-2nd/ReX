@@ -1,0 +1,2660 @@
+{
+  "name": "frame_3",
+  "version": 33,
+  "source-key": {
+    "type": "figma",
+    "file": "MiG3gqODXlU8A8ym5IofxP",
+    "node": "21:3",
+    "version": "2191893902992822185",
+    "component-id": "62119af9dfe788e730488a38d072df77f954af9d"
+  },
+  "default": "Frame 3",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Other Group"
+      },
+      {
+        "type": "group",
+        "id": "Clothing Group"
+      },
+      {
+        "type": "group",
+        "id": "Furniture Group"
+      },
+      {
+        "type": "group",
+        "id": "Appliance Group"
+      },
+      {
+        "type": "group",
+        "id": "Electronics Group"
+      },
+      {
+        "type": "group",
+        "id": "Search Group"
+      },
+      {
+        "type": "group",
+        "id": "Others Others Icon"
+      },
+      {
+        "type": "text",
+        "id": "Other"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 12"
+      },
+      {
+        "type": "text",
+        "id": "Other1"
+      },
+      {
+        "type": "image",
+        "id": "Question Mark"
+      },
+      {
+        "type": "group",
+        "id": "Other Clothes Icon"
+      },
+      {
+        "type": "group",
+        "id": "Shoes Icon"
+      },
+      {
+        "type": "group",
+        "id": "Bottoms Icon"
+      },
+      {
+        "type": "group",
+        "id": "Tops Icon"
+      },
+      {
+        "type": "text",
+        "id": "Clothing"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 13"
+      },
+      {
+        "type": "text",
+        "id": "Other2"
+      },
+      {
+        "type": "image",
+        "id": "Hat"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 14"
+      },
+      {
+        "type": "text",
+        "id": "Shoes"
+      },
+      {
+        "type": "image",
+        "id": "Trainers"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 15"
+      },
+      {
+        "type": "text",
+        "id": "Bottoms"
+      },
+      {
+        "type": "image",
+        "id": "Trousers"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 16"
+      },
+      {
+        "type": "text",
+        "id": "Tops"
+      },
+      {
+        "type": "image",
+        "id": "Military Uniform"
+      },
+      {
+        "type": "group",
+        "id": "Other Furnitures Icon"
+      },
+      {
+        "type": "group",
+        "id": "Storage Icon"
+      },
+      {
+        "type": "group",
+        "id": "Desk Icon"
+      },
+      {
+        "type": "group",
+        "id": "Bed Icon"
+      },
+      {
+        "type": "text",
+        "id": "Furniture"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 17"
+      },
+      {
+        "type": "text",
+        "id": "Other3"
+      },
+      {
+        "type": "image",
+        "id": "Lounge"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 18"
+      },
+      {
+        "type": "text",
+        "id": "Storage"
+      },
+      {
+        "type": "image",
+        "id": "Wardrobe"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 19"
+      },
+      {
+        "type": "text",
+        "id": "Desk"
+      },
+      {
+        "type": "image",
+        "id": "Desk1"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 20"
+      },
+      {
+        "type": "text",
+        "id": "Bed"
+      },
+      {
+        "type": "image",
+        "id": "Bed1"
+      },
+      {
+        "type": "group",
+        "id": "Other Appliances Icon"
+      },
+      {
+        "type": "group",
+        "id": "TV Icon"
+      },
+      {
+        "type": "group",
+        "id": "Laundry Icon"
+      },
+      {
+        "type": "group",
+        "id": "Fridge Icon"
+      },
+      {
+        "type": "text",
+        "id": "Appliance"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 21"
+      },
+      {
+        "type": "text",
+        "id": "Other4"
+      },
+      {
+        "type": "image",
+        "id": "Appliances"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 22"
+      },
+      {
+        "type": "text",
+        "id": "TV"
+      },
+      {
+        "type": "image",
+        "id": "Tv On Console"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 23"
+      },
+      {
+        "type": "text",
+        "id": "Laundry"
+      },
+      {
+        "type": "image",
+        "id": "Washing Machine"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 24"
+      },
+      {
+        "type": "text",
+        "id": "Fridge"
+      },
+      {
+        "type": "image",
+        "id": "Fridge1"
+      },
+      {
+        "type": "group",
+        "id": "Peripheral Icon"
+      },
+      {
+        "type": "group",
+        "id": "Tablet Icon"
+      },
+      {
+        "type": "group",
+        "id": "PC Icon"
+      },
+      {
+        "type": "group",
+        "id": "Cell Phone Icon"
+      },
+      {
+        "type": "text",
+        "id": "Electronics"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 25"
+      },
+      {
+        "type": "text",
+        "id": "Other5"
+      },
+      {
+        "type": "image",
+        "id": "Headset"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 26"
+      },
+      {
+        "type": "image",
+        "id": "Android Tablet"
+      },
+      {
+        "type": "text",
+        "id": "Tablet"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 27"
+      },
+      {
+        "type": "text",
+        "id": "PC"
+      },
+      {
+        "type": "image",
+        "id": "Laptop E-Mail"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 28"
+      },
+      {
+        "type": "text",
+        "id": "Cell Phone"
+      },
+      {
+        "type": "image",
+        "id": "Scan Nfc Tag"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 3"
+      },
+      {
+        "type": "group",
+        "id": "SearchBox"
+      },
+      {
+        "type": "group",
+        "id": "Vector"
+      },
+      {
+        "type": "group",
+        "id": "Rearch"
+      },
+      {
+        "type": "group",
+        "id": "Frame 4"
+      },
+      {
+        "type": "vector",
+        "id": "SearchBox1"
+      },
+      {
+        "type": "vector",
+        "id": "Vector1"
+      },
+      {
+        "type": "text",
+        "id": "Search"
+      },
+      {
+        "type": "image",
+        "id": "Down Left"
+      }
+    ],
+    "modes": {
+      "Frame 3": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": false,
+            "children": [
+              "Other Group",
+              "Clothing Group",
+              "Furniture Group",
+              "Appliance Group",
+              "Electronics Group",
+              "Search Group"
+            ],
+            "background-color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 0.9607843137254902
+            }
+          },
+          {
+            "id": "Other Group",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 28.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 736.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 138.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Others Others Icon",
+              "Other"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Clothing Group",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 28.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 575.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 352.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 138.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Other Clothes Icon",
+              "Shoes Icon",
+              "Bottoms Icon",
+              "Tops Icon",
+              "Clothing"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Furniture Group",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 32.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 414.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 352.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 138.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Other Furnitures Icon",
+              "Storage Icon",
+              "Desk Icon",
+              "Bed Icon",
+              "Furniture"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Appliance Group",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 28.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 253.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 352.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 138.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Other Appliances Icon",
+              "TV Icon",
+              "Laundry Icon",
+              "Fridge Icon",
+              "Appliance"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Electronics Group",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 32.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 91.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 352.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 139.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Peripheral Icon",
+              "Tablet Icon",
+              "PC Icon",
+              "Cell Phone Icon",
+              "Electronics"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Search Group",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 412.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 3",
+              "SearchBox",
+              "Vector",
+              "Rearch",
+              "Frame 4"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Others Others Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Others Others Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 12",
+              "Other1",
+              "Question Mark"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Other",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 5.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Other",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 20.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle 12",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_12.svg"
+          },
+          {
+            "id": "Other1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Other",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Question Mark",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 5.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "question_mark.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Other Clothes Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 275.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Other Clothes Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 13",
+              "Other2",
+              "Hat"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Shoes Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 184.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Shoes Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 14",
+              "Shoes",
+              "Trainers"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Bottoms Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 95.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Bottoms Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 15",
+              "Bottoms",
+              "Trousers"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Tops Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Tops Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 16",
+              "Tops",
+              "Military Uniform"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Clothing",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 5.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Clothing",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 20.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle 13",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_13.svg"
+          },
+          {
+            "id": "Other2",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Other",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Hat",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 5.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "hat.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 14",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_14.svg"
+          },
+          {
+            "id": "Shoes",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Shoes",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Trainers",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 5.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "trainers.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 15",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_15.svg"
+          },
+          {
+            "id": "Bottoms",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 81.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Bottoms",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Trousers",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "trousers.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 16",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_16.svg"
+          },
+          {
+            "id": "Tops",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Tops",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Military Uniform",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "military_uniform.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Other Furnitures Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 275.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Other Furnitures Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 17",
+              "Other3",
+              "Lounge"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Storage Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 184.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Storage Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 18",
+              "Storage",
+              "Wardrobe"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Desk Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 95.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Desk Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 19",
+              "Desk",
+              "Desk1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Bed Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Bed Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 20",
+              "Bed",
+              "Bed1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Furniture",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 5.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Furniture",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 20.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle 17",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_17.svg"
+          },
+          {
+            "id": "Other3",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Other",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Lounge",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "lounge.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 18",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_18.svg"
+          },
+          {
+            "id": "Storage",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Storage",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Wardrobe",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "wardrobe.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 19",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_19.svg"
+          },
+          {
+            "id": "Desk",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 81.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Desk",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Desk1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 7.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "desk.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 20",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_20.svg"
+          },
+          {
+            "id": "Bed",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Bed",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Bed1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 7.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "bed.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Other Appliances Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 275.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Other Appliances Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 21",
+              "Other4",
+              "Appliances"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "TV Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 184.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on TV Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 22",
+              "TV",
+              "Tv On Console"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Laundry Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 95.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Laundry Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 23",
+              "Laundry",
+              "Washing Machine"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Fridge Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on Fridge Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 24",
+              "Fridge",
+              "Fridge1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Appliance",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 5.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Appliance",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 20.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle 21",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_21.svg"
+          },
+          {
+            "id": "Other4",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Other",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Appliances",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "appliances.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 22",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_22.svg"
+          },
+          {
+            "id": "TV",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "TV",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Tv On Console",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 7.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "tv_on_console.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 23",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_23.svg"
+          },
+          {
+            "id": "Laundry",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 81.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Laundry",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Washing Machine",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "washing_machine.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 24",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_24.svg"
+          },
+          {
+            "id": "Fridge",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Fridge",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Fridge1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "fridge.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Peripheral Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 275.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 31.0
+              }
+            },
+            "tap-handler": "$on Peripheral Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 25",
+              "Other5",
+              "Headset"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Tablet Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 184.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 31.0
+              }
+            },
+            "tap-handler": "$on Tablet Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 26",
+              "Android Tablet",
+              "Tablet"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "PC Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 95.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 31.0
+              }
+            },
+            "tap-handler": "$on PC Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 27",
+              "PC",
+              "Laptop E-Mail"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Cell Phone Icon",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 31.0
+              }
+            },
+            "tap-handler": "$on Cell Phone Icon tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 28",
+              "Cell Phone",
+              "Scan Nfc Tag"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Electronics",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 4.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Electronics",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 20.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle 25",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_25.svg"
+          },
+          {
+            "id": "Other5",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Other",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Headset",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 7.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "headset.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 26",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_26.svg"
+          },
+          {
+            "id": "Android Tablet",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 7.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "android_tablet.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Tablet",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Tablet",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle 27",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_27.svg"
+          },
+          {
+            "id": "PC",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "PC",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Laptop E-Mail",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 7.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "laptop_e_mail.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 28",
+            "border-radius": 16.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 77.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 108.0
+              }
+            },
+            "vector-content": "rectangle_28.svg"
+          },
+          {
+            "id": "Cell Phone",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 3.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 80.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              },
+              "height-constraints": {
+                "sizing-mode": "shrink"
+              }
+            },
+            "text-content": "Cell Phone",
+            "overflow": "visible",
+            "max-lines": -1,
+            "line-height": 1.2102272851126534,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Scan Nfc Tag",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 9.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 7.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 59.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 73.0
+              }
+            },
+            "image-content": "scan_nfc_tag.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle 3",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 412.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              }
+            },
+            "vector-content": "rectangle_3.svg"
+          },
+          {
+            "id": "SearchBox",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 67.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 15.0
+              }
+            },
+            "tap-handler": "$on SearchBox tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 317.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 36.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "SearchBox1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Vector",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 357.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 25.0
+              }
+            },
+            "tap-handler": "$on Search Vector tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 17.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 18.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Vector1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Rearch",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 81.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 25.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 254.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 19.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Search"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Frame 4",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 28.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 19.0
+              }
+            },
+            "tap-handler": "$on GoBack tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Down Left"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "SearchBox1",
+            "border-radius": 10.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              }
+            },
+            "vector-content": "search_box.svg"
+          },
+          {
+            "id": "Vector1",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              }
+            },
+            "vector-content": "vector.svg"
+          },
+          {
+            "id": "Search",
+            "margin": {
+              "right": 8.819442749023438
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              }
+            },
+            "text-content": "$Search text content",
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 16.0,
+            "line-height": 1.2102272510528564,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Down Left",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "image-content": "down_left.png",
+            "scale": "contain"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on Others Others Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Other Clothes Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Shoes Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Bottoms Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Tops Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Other Furnitures Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Storage Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Desk Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Bed Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Other Appliances Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on TV Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Laundry Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Fridge Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Peripheral Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Tablet Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on PC Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Cell Phone Icon tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on SearchBox tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Search Vector tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on GoBack tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "Search text content": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Frame 3",
+      "size": {
+        "width": 412.0,
+        "height": 917.0
+      },
+      "parameters": {
+        "Search text content": "Search"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}

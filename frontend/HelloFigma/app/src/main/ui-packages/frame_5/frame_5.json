@@ -1,0 +1,1131 @@
+{
+  "name": "frame_5",
+  "version": 33,
+  "source-key": {
+    "type": "figma",
+    "file": "MiG3gqODXlU8A8ym5IofxP",
+    "node": "41:3",
+    "version": "2191893902992822185",
+    "component-id": "96edb8ac0cb08146a0fa95e3a6a86ffe9f73b4cb"
+  },
+  "default": "Frame 5",
+  "design": {
+    "atoms": [
+      {
+        "type": "group",
+        "id": "top_level",
+        "root": "true"
+      },
+      {
+        "type": "group",
+        "id": "Item Frame"
+      },
+      {
+        "type": "group",
+        "id": "Title Group"
+      },
+      {
+        "type": "group",
+        "id": "Next Page"
+      },
+      {
+        "type": "group",
+        "id": "Last Page"
+      },
+      {
+        "type": "group",
+        "id": "item4"
+      },
+      {
+        "type": "group",
+        "id": "item3"
+      },
+      {
+        "type": "group",
+        "id": "item2"
+      },
+      {
+        "type": "group",
+        "id": "item1"
+      },
+      {
+        "type": "image",
+        "id": "Chevron Right"
+      },
+      {
+        "type": "text",
+        "id": "Next Page1"
+      },
+      {
+        "type": "text",
+        "id": "Last Page1"
+      },
+      {
+        "type": "image",
+        "id": "Chevron Right1"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle Item 4"
+      },
+      {
+        "type": "image",
+        "id": "image 4"
+      },
+      {
+        "type": "text",
+        "id": "Item4 Price"
+      },
+      {
+        "type": "text",
+        "id": "Item4 Title"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle Item 3"
+      },
+      {
+        "type": "image",
+        "id": "image 3"
+      },
+      {
+        "type": "text",
+        "id": "Item3 Price"
+      },
+      {
+        "type": "text",
+        "id": "Item3 Title"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle Item 2"
+      },
+      {
+        "type": "image",
+        "id": "image 2"
+      },
+      {
+        "type": "text",
+        "id": "Item2 Price"
+      },
+      {
+        "type": "text",
+        "id": "Item2 Title"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle Item 1"
+      },
+      {
+        "type": "image",
+        "id": "image 1"
+      },
+      {
+        "type": "text",
+        "id": "Item1 Price"
+      },
+      {
+        "type": "text",
+        "id": "Item1 Title"
+      },
+      {
+        "type": "vector",
+        "id": "Rectangle 3"
+      },
+      {
+        "type": "group",
+        "id": "Category"
+      },
+      {
+        "type": "group",
+        "id": "Go Back Frame"
+      },
+      {
+        "type": "text",
+        "id": "Tops"
+      },
+      {
+        "type": "image",
+        "id": "Down Left"
+      }
+    ],
+    "modes": {
+      "Frame 5": {
+        "rules": [
+          {
+            "id": "top_level",
+            "is-structured": false,
+            "children": [
+              "Item Frame",
+              "Title Group"
+            ],
+            "background-color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 0.0,
+              "value": 0.9607843137254902
+            }
+          },
+          {
+            "id": "Item Frame",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 16.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 86.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 380.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 754.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Next Page",
+              "Last Page",
+              "item4",
+              "item3",
+              "item2",
+              "item1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Title Group",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 412.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle 3",
+              "Category",
+              "Go Back Frame"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Next Page",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 274.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 721.0
+              }
+            },
+            "tap-handler": "$on Next Page tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 106.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Chevron Right",
+              "Next Page1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Last Page",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 721.0
+              }
+            },
+            "tap-handler": "$on Last Page tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 102.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Last Page1",
+              "Chevron Right1"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "item4",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 198.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 367.32818603515625
+              }
+            },
+            "tap-handler": "$on item4 tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 314.6718444824219
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle Item 4",
+              "image 4",
+              "Item4 Price",
+              "Item4 Title"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "item3",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 367.32818603515625
+              }
+            },
+            "tap-handler": "$on item3 tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 314.6718444824219
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle Item 3",
+              "image 3",
+              "Item3 Price",
+              "Item3 Title"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "item2",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 198.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on item2 tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 315.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle Item 2",
+              "image 2",
+              "Item2 Price",
+              "Item2 Title"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "item1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 30.0
+              }
+            },
+            "tap-handler": "$on item1 tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 315.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Rectangle Item 1",
+              "image 1",
+              "Item1 Price",
+              "Item1 Title"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Chevron Right",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 61.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 45.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "image-content": "chevron_right.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Next Page1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 0.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "font-weight": 500.0,
+            "text-content": "Next Page",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 15.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Last Page1",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 31.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 8.0
+              }
+            },
+            "font-weight": 500.0,
+            "text-content": "Last Page",
+            "overflow": "visible",
+            "text-align": "left",
+            "text-size": 15.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Chevron Right1",
+            "relative-transform": [
+              [
+                -1.0,
+                0.0,
+                0.0
+              ],
+              [
+                0.0,
+                1.0,
+                0.0
+              ]
+            ],
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 38.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "image-content": "chevron_right.png",
+            "scale": "contain"
+          },
+          {
+            "id": "Rectangle Item 4",
+            "border-radius": 8.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 314.67181396484375
+              }
+            },
+            "vector-content": "rectangle_item_4.svg"
+          },
+          {
+            "id": "image 4",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 251.12245178222656
+              }
+            },
+            "image-content": "image_4.png",
+            "scale": "cover"
+          },
+          {
+            "id": "Item4 Price",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 284.67181396484375
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 151.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 30.0
+              }
+            },
+            "color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 1.0,
+              "value": 0.7254901960784313
+            },
+            "annotated-text-content": {
+              "text": "\\$25",
+              "annotated-text-span-list": [
+                {
+                  "span-start": 0,
+                  "span-length": 1
+                },
+                {
+                  "span-start": 1,
+                  "span-length": 2,
+                  "annotated-text-style": {
+                    "font-weight": 700.0,
+                    "typeface": "Inter"
+                  }
+                }
+              ]
+            },
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 24.0,
+            "line-height": 1.2102272510528564,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Item4 Title",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 262.3973388671875
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 151.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 22.549772262573242
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Colourful Pencils",
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 18.0,
+            "line-height": 1.2102272245619032,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle Item 3",
+            "border-radius": 8.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 314.67181396484375
+              }
+            },
+            "vector-content": "rectangle_item_3.svg"
+          },
+          {
+            "id": "image 3",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 251.12245178222656
+              }
+            },
+            "image-content": "image_3.png",
+            "scale": "cover"
+          },
+          {
+            "id": "Item3 Price",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 284.67181396484375
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 151.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 30.0
+              }
+            },
+            "color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 1.0,
+              "value": 0.7254901960784313
+            },
+            "annotated-text-content": {
+              "text": "\\$150",
+              "annotated-text-span-list": [
+                {
+                  "span-start": 0,
+                  "span-length": 1
+                },
+                {
+                  "span-start": 1,
+                  "span-length": 3,
+                  "annotated-text-style": {
+                    "font-weight": 700.0,
+                    "typeface": "Inter"
+                  }
+                }
+              ]
+            },
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 24.0,
+            "line-height": 1.2102272510528564,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Item3 Title",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 262.3973388671875
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 90.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 45.099544525146484
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Cellphone\n",
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 18.0,
+            "line-height": 1.2102272245619032,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle Item 2",
+            "border-radius": 8.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 314.67181396484375
+              }
+            },
+            "vector-content": "rectangle_item_2.svg"
+          },
+          {
+            "id": "image 2",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 251.12245178222656
+              }
+            },
+            "image-content": "image_2.png",
+            "scale": "cover"
+          },
+          {
+            "id": "Item2 Price",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 285.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 151.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 30.0
+              }
+            },
+            "color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 1.0,
+              "value": 0.7254901960784313
+            },
+            "annotated-text-content": {
+              "text": "\\$40",
+              "annotated-text-span-list": [
+                {
+                  "span-start": 0,
+                  "span-length": 1
+                },
+                {
+                  "span-start": 1,
+                  "span-length": 2,
+                  "annotated-text-style": {
+                    "font-weight": 700.0,
+                    "typeface": "Inter"
+                  }
+                }
+              ]
+            },
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 24.0,
+            "line-height": 1.2102272510528564,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Item2 Title",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 262.3973388671875
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 151.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 22.549772262573242
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Brown Coat",
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 18.0,
+            "line-height": 1.2102272245619032,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle Item 1",
+            "border-radius": 8.0,
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 314.67181396484375
+              }
+            },
+            "vector-content": "rectangle_item_1.svg"
+          },
+          {
+            "id": "image 1",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 182.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 251.12245178222656
+              }
+            },
+            "image-content": "image_1.png",
+            "scale": "cover"
+          },
+          {
+            "id": "Item1 Price",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 285.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 151.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 30.0
+              }
+            },
+            "color": {
+              "alpha": 1.0,
+              "hue": 0.0,
+              "saturation": 1.0,
+              "value": 0.7254901960784313
+            },
+            "annotated-text-content": {
+              "text": "\\$10",
+              "annotated-text-span-list": [
+                {
+                  "span-start": 0,
+                  "span-length": 1
+                },
+                {
+                  "span-start": 1,
+                  "span-length": 2,
+                  "annotated-text-style": {
+                    "font-weight": 700.0,
+                    "typeface": "Inter"
+                  }
+                }
+              ]
+            },
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 24.0,
+            "line-height": 1.2102272510528564,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Item1 Title",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 12.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 262.3973388671875
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 151.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 22.54977035522461
+              }
+            },
+            "font-weight": 700.0,
+            "text-content": "Colourful Pencils",
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-align": "left",
+            "text-size": 18.0,
+            "line-height": 1.2102272245619032,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Rectangle 3",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 412.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 71.0
+              }
+            },
+            "vector-content": "rectangle_3.svg"
+          },
+          {
+            "id": "Category",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 81.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 25.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 254.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 19.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Tops"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Go Back Frame",
+            "alignment": {
+              "horizontal": {
+                "attachment": "start",
+                "offset": 28.0
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 19.0
+              }
+            },
+            "tap-handler": "$on Go Back Frame tapped",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "is-structured": false,
+            "children": [
+              "Down Left"
+            ],
+            "clip-content": false
+          },
+          {
+            "id": "Tops",
+            "alignment": {
+              "horizontal": {
+                "attachment": "center",
+                "offset": -0.40972137451171875
+              },
+              "vertical": {
+                "attachment": "start",
+                "offset": 0.0
+              }
+            },
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 245.18055725097656
+              },
+              "height-constraints": {
+                "sizing-mode": "proportional",
+                "value": 1.0
+              }
+            },
+            "font-weight": 500.0,
+            "text-content": "$Category Name text content",
+            "overflow": "visible",
+            "max-lines": -1,
+            "text-size": 20.0,
+            "line-height": 1.2102272033691406,
+            "typeface": "Inter"
+          },
+          {
+            "id": "Down Left",
+            "size-constraints": {
+              "width-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              },
+              "height-constraints": {
+                "sizing-mode": "fixed",
+                "value": 33.0
+              }
+            },
+            "image-content": "down_left.png",
+            "scale": "contain"
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {
+    "on Next Page tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Last Page tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on item4 tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on item3 tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on item2 tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on item1 tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "on Go Back Frame tapped": {
+      "data-type": "void-callback",
+      "required": false,
+      "description": ""
+    },
+    "Category Name text content": {
+      "data-type": "text",
+      "required": false,
+      "description": ""
+    }
+  },
+  "previews": [
+    {
+      "design": "Frame 5",
+      "size": {
+        "width": 412.0,
+        "height": 917.0
+      },
+      "parameters": {
+        "Category Name text content": "Tops"
+      }
+    }
+  ],
+  "adin-component-search-paths": [],
+  "image-search-paths": [],
+  "vector-search-paths": []
+}
