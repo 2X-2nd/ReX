@@ -1,12 +1,13 @@
 # M3 - Requirements and Design
 
 ## 1. Change History
-<!-- Leave blank for M3 -->
+Removed administrator and storage use cases.
+Change requirement specification to correct format.
 
 ## 2. Project Description
 ReX is a local second-hand marketplace for buying and selling pre-owned items. When relocating or decluttering, sellers can instantly offload their items to partner warehouses, where they’re securely stored until sold. This prevents waste, preserves value, and lets sellers move forward stress-free.
 
-The app integrates Google Maps API to help users find the nearest storage facilities, making it easy to choose the most convenient option. Once stored, items are listed with detailed descriptions and photos on the platform. Additionally, our app integrates a price recommendation and comparison feature. It analyzes the prices of similar second-hand items in our database and the past transaction prices to suggest a fair and competitive price for sellers.Furthermore, the app compares the listing price with the market price of similar new items from other platforms (e.g. eBay, Amazon), showcasing potential savings for buyers. This innovative feature ensures sellers get the best value while enhancing buyer satisfaction by highlighting the cost-effectiveness of second-hand purchases.
+The app integrates Google Maps API to help users find the nearest storage facilities, making it easy to choose the most convenient option. Once stored, items are listed with detailed descriptions and photos on the platform. Additionally, our app integrates a price recommendation and comparison feature. It analyzes the prices of similar second-hand items in our database and the past transaction prices to suggest a fair and competitive price for sellers. Furthermore, the app compares the listing price with the market price of similar new items from other platforms (e.g. eBay, Amazon), showcasing potential savings for buyers. This innovative feature ensures sellers get the best value while enhancing buyer satisfaction by highlighting the cost-effectiveness of second-hand purchases.
 
 Buyers benefit from a personalized recommendation system and real-time chat functionality for seamless communication and a customized shopping experience. Whether buyers prefer self-pickup from the warehouse or delivery, the app simplifies the entire process, making second-hand trading faster, more efficient, and ultimately more rewarding for all users.
 
@@ -16,7 +17,6 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
 ### **3.2. Actors Description**
 1. **[User]**: User is the people uses the app. They can act as a buyer who wants to purchase second-hand items, browse listings and chat with sellers. They can also act as a seller when they wants to list unwanted items for sale. They can deposit their items in partner warehouses, post product listings, and manage their listings.
-2. **[Administrator]**：The administrator ensures the smooth operation of the platform, including monitoring listings and handling user disputes.
 
 ### **3.3. Functional Requirements**
 <a name="fr1"></a>
@@ -103,41 +103,95 @@ Buyers benefit from a personalized recommendation system and real-time chat func
                 - 2b. System cannot fetch competitor prices.
                     - 2b1. System displays a message about unavailability of competitor price data.
                     - 2b2. User proceeds with the recommended price based on internal data.
-3. **[Store Item in Storage Facility]**
-   - **Overview**:
-       1. Find nearby warehouses
-       2. Schedule item drop-off
+3. **[Chat]**
+    - **Overview**:
+        1. Enable real-time messaging between buyers and sellers.
+        2. Store chat history for future reference.
 
-   - **Detailed Flow for Each Independent Scenario**:
+    - **Detailed Flow for Each Independent Scenario**:
+        1. **[Initiate Chat]**:
+            - **Description**: User can start a conversation with another user regarding a listing.
+            - **Primary actor(s)**: User
+            - **Main success scenario**:
+                1. Buyer clicks on "Chat" from the listing page.
+                2. System opens a chat window and establishes a connection.
+                3. Buyer and Seller can exchange messages in real time.
+                4. System stores the conversation history.
+            
+            - **Failure scenario(s)**:
+                - 2a. Network issues prevent connection.
+                    - 2a1. System displays an error message about network unavailability.
+                    - 2a2. User retries when network is restored.
+                - 3a. Message delivery fails.
+                    - 3a1. System notifies sender that message was not sent.
+                    - 3a2. System retries sending the message.
 
-       1. **[Find Nearby Warehouses]**:
-           - **Description**: User locate storage facilities near their current location using the Google Maps API.
-           - **Primary actor(s)**: User
-           - **Main success scenario**:
-               1. User selects the "Find Storage" option.
-               2. System uses user's location to find nearby warehouses.
-               3. User selects a preferred facility.
-           - **Failure scenario(s)**:
-               - 1a. Location permissions are denied.
-                   - 1a1. System prompts the user to enable location services.
-                   - 1a2. User enables location services and retries.
-               - 1b. No warehouses available nearby.
-                   - 1b1. System displays a message stating unavailability of storage options.
-                   - 1b2. User can retry later or contact support.
+4. **[Search Listings]**
+    - **Overview**:
+        1. Allow users to search for available listings based on various filters.
+        2. Provide an intuitive search experience with relevant results.
+    
+    - **Detailed Flow for Each Independent Scenario**:
+        1. **[Perform Search]**:
+            - **Description**: User can search for listings using keywords and filters.
+            - **Primary actor(s)**: User
+            - **Main success scenario**:
+                1. User enters a keyword in the search bar.
+                2. User applies filters (e.g., price range, category, location).
+                3. System processes the request and returns matching listings.
+            
+            - **Failure scenario(s)**:
+                - 2a. No matching listings found.
+                    - 2a1. System displays a message indicating no results were found.
+                    - 2a2. System suggests alternative search terms.
+                - 3a. System is slow or unresponsive.
+                    - 3a1. System notifies the user of a delay.
+                    - 3a2. User retries the search.
 
-       2. **[Schedule Item Drop-Off]**:
-           - **Description**: User schedule a time to deposit items at a selected warehouse.
-           - **Primary actor(s)**: User
-           - **Main success scenario**:
-               1. User selects a warehouse and chooses a convenient drop-off time.
-               2. System confirms the booking and sends a confirmation message.
-           - **Failure scenario(s)**:
-               - 2a. Selected time slot is unavailable.
-                   - 2a1. System suggests alternative time slots.
-                   - 2a2. User selects a new time and proceeds.
-               - 2b. System fails to confirm the booking due to server issues.
-                   - 2b1. User receives a notification about the issue.
-                   - 2b2. User retries later or contacts support.
+5. **[Price Recommendation]**
+    - **Overview**:
+        1. Assist users in setting a competitive price for their listings.
+        2. Utilize historical data and market trends for recommendations.
+    
+    - **Detailed Flow for Each Independent Scenario**:
+        1. **[Generate Price Recommendation]**:
+            - **Description**: System suggests a suitable price based on similar listings.
+            - **Primary actor(s)**: User
+            - **Main success scenario**:
+                1. User enters item details when creating a listing.
+                2. System retrieves similar listings and analyzes market trends.
+                3. System displays a recommended price range.
+            
+            - **Failure scenario(s)**:
+                - 2a. Insufficient historical data available.
+                    - 2a1. System informs the user that no recommendation is available.
+                    - 2a2. User manually enters a price.
+                - 3a. System fails to process recommendations.
+                    - 3a1. System notifies user of the issue.
+                    - 3a2. User proceeds without recommendations.
+
+6. **[Price Comparison]**
+    - **Overview**:
+        1. Enable users to compare prices of similar items.
+        2. Provide insights into price variations across listings.
+    
+    - **Detailed Flow for Each Independent Scenario**:
+        1. **[Compare Prices]**:
+            - **Description**: User can compare the prices of similar items in search results.
+            - **Primary actor(s)**: User
+            - **Main success scenario**:
+                1. User performs a search for a specific item.
+                2. System retrieves similar listings.
+                3. System displays a price comparison chart or summary.
+            
+            - **Failure scenario(s)**:
+                - 2a. No similar listings available.
+                    - 2a1. System notifies user that no comparisons can be made.
+                    - 2a2. User proceeds with regular search results.
+                - 3a. System fails to generate a comparison.
+                    - 3a1. System informs user of an error.
+                    - 3a2. User retries comparison later.
+
 
 ### **3.4. Screen Mockups**
 ![Screen Mockup Diagram](images/mockup.png)
@@ -170,30 +224,30 @@ Buyers benefit from a personalized recommendation system and real-time chat func
     - **Database Schema**:
         - **`listings` Table**:
             ```sql
-            CREATE TABLE listings (
+            CREATE TABLE listings(
                 id INT AUTO_INCREMENT PRIMARY KEY,
-                title VARCHAR(255) NOT NULL,  -- Max 255 characters
-                description TEXT,  -- No strict limit
-                price DECIMAL(10,2) NOT NULL,  -- Up to 10 digits, 2 decimal places
-                seller_id INT NOT NULL,  -- Foreign key linking to users
-                latitude DECIMAL(10,6) NULL,  -- Optional geolocation data
-                longitude DECIMAL(10,6) NULL,  -- Optional geolocation data
+                title VARCHAR(255) NOT NULL,
+                description TEXT,
+                price DECIMAL(10,2) NOT NULL,
+                seller_id VARCHAR(25) NOT NULL,
+                latitude DECIMAL(9,6),
+                longitude DECIMAL(9,6),
                 created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
             );
             ```
         - **`listing_images` Table**:
             ```sql
-            CREATE TABLE listing_images (
+            CREATE TABLE listing_images(
                 id INT AUTO_INCREMENT PRIMARY KEY,
                 listing_id INT NOT NULL,
-                image_url VARCHAR(500) NOT NULL,  -- Max 500 characters
+                image_url TEXT NOT NULL,
                 FOREIGN KEY (listing_id) REFERENCES listings(id) ON DELETE CASCADE
             );
             ```
 
     - **Interfaces**:
 
-        #### **1️⃣ POST /listings** - Creates a new product listing.
+        ###### **1️. POST /listings** - Creates a new product listing.
         - **Request Body (JSON):**
             ```json
             {
@@ -233,7 +287,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
         ---
 
-        #### **2️⃣ GET /listings?id={id}** - Retrieves details of a specific listing.
+        ###### **2️. GET /listings?id={id}** - Retrieves details of a specific listing.
         - **Response:**
             - **Success (200 OK)**:
                 ```json
@@ -261,7 +315,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
         ---
 
-        #### **3️⃣ PUT /listings/{id}** - Updates an existing listing.
+        ###### **3️. PUT /listings/{id}** - Updates an existing listing.
         - **Request Body (Only fields to update):**
             ```json
             {
@@ -297,7 +351,7 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
         ---
 
-        #### **4️⃣ DELETE /listings/{id}** - Removes a listing from the marketplace.
+        ###### **4️. DELETE /listings/{id}** - Removes a listing from the marketplace.
         - **Response:**
             - **Success (200 OK):**
                 ```json
@@ -316,25 +370,14 @@ Buyers benefit from a personalized recommendation system and real-time chat func
 
         ---
 
-        #### **5️⃣ GET /listings/search?query={query}** - Searches for listings using keywords.
+        ###### **5️. GET /listings/search?query={query}** - Searches for listings using keywords.
         - **Query Parameters:**
             - `query`: Searches in `title` and `description` (case-insensitive).
-            - `min_price`: Optional, filters listings with **price >= min_price**.
-            - `max_price`: Optional, filters listings with **price <= max_price**.
-            - `latitude`, `longitude`, `radius`: Filters results **within radius (km)** from given coordinates.
 
         - **Example Queries:**
             - **Basic search by keyword (`query`)**
                 ```
                 https://nsefhqsvqf.execute-api.us-east-2.amazonaws.com/listings/search?query=bike
-                ```
-            - **Search with price filter** (need fix)
-                ```
-                http://localhost:5000/listings?query=Bike&min_price=100&max_price=300
-                ```
-            - **Search within 10km of a location** (need fix)
-                ```
-                http://localhost:5000/listings?latitude=49.2827&longitude=-123.1207&radius=10
                 ```
 
         - **Response:**
@@ -375,51 +418,11 @@ Buyers benefit from a personalized recommendation system and real-time chat func
             - `latitude` / `longitude`: Must be valid geographic coordinates.
             - If no listings match, return `404`.
 
-
-
-2. **Storage Management Service**
-    - **Purpose**: Manages warehouse storage and assigns storage locations for stored items.
-    - **Interfaces**:
-        - `POST /storage/request` - Requests storage space for an item.
-        - `GET /storage/status/{itemId}` - Retrieves storage status of an item.
-        - `DELETE /storage/{itemId}` - Removes an item from storage after sale or withdrawal.
-
-3. **User Service**
-
-## 1️⃣ Purpose
-The User Service manages user profiles, preferences, and geolocation. It does not handle authentication, as this is managed by Google OAuth.
-
-## 2️⃣ API Endpoints "http://3.138.121.192:8080/users"
-
-### **2.1. POST /users/register** - Registers a new user
-- **Request Body (JSON):**
-    ```json
-    {
-        "google_id": "103217936482731253672",
-        "email": "user@example.com",
-        "username": "john_doe",
-        "preferences": ["electronics", "furniture"],
-        "latitude": 49.2827,
-        "longitude": -123.1207
-    }
-    ```
-- **Response:**
-    - **Success (201 Created):**
-        ```json
-        {
-            "message": "User registered successfully",
-            "user_id": "103217936482731253672"
-        }
-        ```
----
-
-### **2.2. GET /users/{id}** - Retrieves user profile
-- **Request Example:**
-    ```http
-    GET /users/103217936482731253672
-    ```
-- **Response:**
-    - **Success (200 OK):**
+2. **User Service**
+    - **Purpose**: The User Service manages user profiles, preferences, and geolocation. It does not handle authentication, as this is managed by Google OAuth.
+    - **interfaces**:
+    ###### **2.1. POST /users/register** - Registers a new user
+    - **Request Body (JSON):**
         ```json
         {
             "google_id": "103217936482731253672",
@@ -430,63 +433,92 @@ The User Service manages user profiles, preferences, and geolocation. It does no
             "longitude": -123.1207
         }
         ```
----
+    - **Response:**
+        - **Success (201 Created):**
+            ```json
+            {
+                "message": "User registered successfully",
+                "user_id": "103217936482731253672"
+            }
+            ```
+    ---
 
-### **2.3. PUT /users/{id}** - Updates user details
-- **Request Body (JSON):**
-    ```json
-    {
-        "username": "johndoe_new",
-        "preferences": ["books", "gaming"],
-        "latitude": 49.2900,
-        "longitude": -123.1000
-    }
-    ```
-- **Response:**
-    - **Success (200 OK):**
+    ###### **2.2. GET /users/{id}** - Retrieves user profile
+
+    - **Request Example:**
+        ```http
+        GET /users/103217936482731253672
+        ```
+    - **Response:**
+        - **Success (200 OK):**
+            ```json
+            {
+                "google_id": "103217936482731253672",
+                "email": "user@example.com",
+                "username": "john_doe",
+                "preferences": ["electronics", "furniture"],
+                "latitude": 49.2827,
+                "longitude": -123.1207
+            }
+            ```
+    ---
+
+    ###### **2.3. PUT /users/{id}** - Updates user details
+    - **Request Body (JSON):**
         ```json
         {
-            "message": "User updated successfully"
+            "username": "johndoe_new",
+            "preferences": ["books", "gaming"],
+            "latitude": 49.2900,
+            "longitude": -123.1000
         }
         ```
----
+    - **Response:**
+        - **Success (200 OK):**
+            ```json
+            {
+                "message": "User updated successfully"
+            }
+            ```
+    ---
 
-### **2.4. DELETE /users/{id}** - Deletes a user account
-- **Request Example:**
-    ```http
-    DELETE /users/103217936482731253672
-    ```
-- **Response:**
-    - **Success (200 OK):**
-        ```json
-        {
-            "message": "User deleted successfully"
-        }
+    ###### **2.4. DELETE /users/{id}** - Deletes a user account
+    - **Request Example:**
+        ```http
+        DELETE /users/103217936482731253672
         ```
+    - **Response:**
+        - **Success (200 OK):**
+            ```json
+            {
+                "message": "User deleted successfully"
+            }
+            ```
+    ---
+
+    ###### 3️. Database Schema
+    The service maintains a single table where each row represents a user. It includes:
+    - **Google ID** as the primary key.
+    - **Email** (unique for each user).
+    - **Optional username** (if set).
+    - **Preferences** (stored as JSON).
+    - **Geolocation** (latitude and longitude for location-based features).
+
+    ---
+
+    ###### 4️. Notes
+    - Authentication is fully handled by Google OAuth.
+    - Passwords are **not stored** in this service.
+    - Preferences allow users to personalize their recommendations.
+    - Location data enables nearby service suggestions.
+
 ---
-
-## 3️⃣ Database Schema
-The service maintains a single table where each row represents a user. It includes:
-- **Google ID** as the primary key.
-- **Email** (unique for each user).
-- **Optional username** (if set).
-- **Preferences** (stored as JSON).
-- **Geolocation** (latitude and longitude for location-based features).
-
----
-
-## 4️⃣ Notes
-- Authentication is fully handled by Google OAuth.
-- Passwords are **not stored** in this service.
-- Preferences allow users to personalize their recommendations.
-- Location data enables nearby service suggestions.
-
 
 4. **Recommendation Engine**
     - **Purpose**: Provides price suggestions and personalized recommendations.
     - **Interfaces**:
 
-        #### **1️⃣ GET /recommendations/{userId}** - Fetches personalized item recommendations.
+        ###### **1️. GET /recommendations/{userId}** - Fetches personalized item recommendations.
         - **Description**: Retrieves relevant listings based on the user's saved preferences.
         - **Process**:
             1. Queries the **User Service** to get the user's preferences.
@@ -513,7 +545,7 @@ The service maintains a single table where each row represents a user. It includ
         
         ---
 
-        #### **2️⃣ POST /price-suggestions** - Suggests a price for a new listing.
+        ###### **2️. POST /price-suggestions** - Suggests a price for a new listing.
         - **Description**: Provides a price recommendation based on internal listings and external data sources.
         - **Request Body (JSON)**:
             ```json
@@ -546,7 +578,7 @@ The service maintains a single table where each row represents a user. It includ
 
         ---
 
-        #### **3️⃣ GET /price-comparison/{itemId}** - Retrieves price comparisons from external sources.
+        ###### **3️. GET /price-comparison/{itemId}** - Retrieves price comparisons from external sources.
         - **Description**: Compares the price of a given listing to similar items and provides a pricing insight.
         - **Process**:
             1. Retrieves the item details from the **Listings Service**.
@@ -579,10 +611,48 @@ The service maintains a single table where each row represents a user. It includ
 
 5. **Chat Service**
     - **Purpose**: Manages buyer-seller chat functionality.
+    - **Database Schema**:
+        - **`chats` Table**:
+            ```sql
+            CREATE TABLE chats(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                buyer_id VARCHAR(25) NOT NULL,
+                seller_id VARCHAR(25) NOT NULL,
+                created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+            );
+            ```
+        - **`messages` Table**:
+            ```sql
+            CREATE TABLE messages(
+                id INT AUTO_INCREMENT PRIMARY KEY,
+                chat_id INT NOT NULL,
+                sender_id VARCHAR(25) NOT NULL,
+                message TEXT NOT NULL,
+                timestamp TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+                FOREIGN KEY (chat_id) REFERENCES chats(id) ON DELETE CASCADE
+            );
+            ```
     - **Interfaces**:
         - `POST /chat/start` - Initiates a chat between a buyer and seller.
+        - **Request Body (JSON):**
+        ```json
+        {
+            "buyerId": "1",
+            "sellerId": "2"
+        }
+        ```
+        ---
         - `GET /chat/{chatId}` - Retrieves chat history.
+        ---
         - `POST /chat/{chatId}/message` - Sends a new message.
+        - **Request Body (JSON):**
+        ```json
+        {
+            "senderId": "1",
+            "message": "hello"
+        }
+        ```
+    ---
 
 ### **4.4. Frameworks**
 - **Cloud Provider**: AWS
