@@ -36,7 +36,7 @@ router.get('/chat/:chatId', async (req, res) => {
 });
 
 // Get chat history with userId
-router.get('/chat/:userId', async (req, res) => {
+router.get('/chat/user/:userId', async (req, res) => {
     const userId = req.params.userId;
     if (!userId) { return res.status(400).json({ error: "Invalid User ID" }); }
     try {
