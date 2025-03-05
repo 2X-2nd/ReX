@@ -1,5 +1,5 @@
 import express from 'express';
-import { startChat, getChatHistory, sendMessage } from '../models/chat';
+import { startChat, getChatHistory, getUserChats, sendMessage } from '../models/chat';
 
 const router = express.Router();
 
@@ -19,7 +19,7 @@ router.post('/chat/start', async (req, res) => {
     }
 });
 
-// Get chat history
+// Get chat history with chatId
 router.get('/chat/:chatId', async (req, res) => {
     const chatId = parseInt(req.params.chatId);
     if (!chatId) {
@@ -29,6 +29,19 @@ router.get('/chat/:chatId', async (req, res) => {
     try {
         const messages = await getChatHistory(chatId);
         res.status(200).json({ messages });
+    } catch (error) {
+        console.error(error);
+        res.status(500).json({ error: "Database error" });
+    }
+});
+
+// Get chat history with userId
+router.get('/chat', async (req, res) => {
+    const userId = req.body;
+    if (!userId) { return res.status(400).json({ error: "Invalid User ID" }); }
+    try {
+        const chatIds = await getUserChats(userId);
+        res.status(200).json({ chatIds });
     } catch (error) {
         console.error(error);
         res.status(500).json({ error: "Database error" });
