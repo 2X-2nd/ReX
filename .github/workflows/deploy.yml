@@ -13,41 +13,41 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Copy services to EC2
-        uses: appleboy/scp-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          source: "./backend/marketplace-service"
-          target: "/home/ubuntu/ReX"
-          strip_components: 1
+      # - name: Copy services to EC2
+      #   uses: appleboy/scp-action@master
+      #   with:
+      #     host: ${{ secrets.EC2_HOST }}
+      #     username: ${{ secrets.EC2_USER }}
+      #     key: ${{ secrets.EC2_KEY }}
+      #     source: "./backend/marketplace-service"
+      #     target: "/home/ubuntu/ReX"
+      #     strip_components: 1
 
-      - name: Deploy Services
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.EC2_HOST }}
-          username: ${{ secrets.EC2_USER }}
-          key: ${{ secrets.EC2_KEY }}
-          script: |
-            # Deploy Marketplace Service
-            cd /home/ubuntu/ReX/backend/marketplace-service
+      # - name: Deploy Services
+      #   uses: appleboy/ssh-action@master
+      #   with:
+      #     host: ${{ secrets.EC2_HOST }}
+      #     username: ${{ secrets.EC2_USER }}
+      #     key: ${{ secrets.EC2_KEY }}
+      #     script: |
+      #       # Deploy Marketplace Service
+      #       cd /home/ubuntu/ReX/backend/marketplace-service
             
-            cat > .env <<EOF
-            PORT=${{ secrets.PROD_PORT }}
-            DB_HOST=${{ secrets.PROD_DB_HOST }}
-            DB_USER=${{ secrets.PROD_DB_USER }}
-            DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }}
-            DB_NAME=${{ secrets.PROD_DB_NAME }}
-            DB_PORT=${{ secrets.PROD_DB_PORT }}
-            EOF
+      #       cat > .env <<EOF
+      #       PORT=${{ secrets.PROD_PORT }}
+      #       DB_HOST=${{ secrets.PROD_DB_HOST }}
+      #       DB_USER=${{ secrets.PROD_DB_USER }}
+      #       DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }}
+      #       DB_NAME=${{ secrets.PROD_DB_NAME }}
+      #       DB_PORT=${{ secrets.PROD_DB_PORT }}
+      #       EOF
             
-            chmod 600 .env
-            docker-compose down
-            docker-compose --env-file .env build
-            docker-compose --env-file .env up -d
+      #       chmod 600 .env
+      #       docker-compose down
+      #       docker-compose --env-file .env build
+      #       docker-compose --env-file .env up -d
 
-            docker system prune -af
+      #       docker system prune -af
       
       # Chat Service
       - name: Checkout code
