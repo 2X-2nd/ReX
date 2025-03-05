@@ -13,7 +13,7 @@ export async function getChatHistory(chatId: number) {
 }
 
 // Get chat history with userId
-export async function getUserChats(userId: number) {
+export async function getUserChats(userId: string) {
     const [chats] = await db.query(`
         SELECT c.id
         FROM chats c
