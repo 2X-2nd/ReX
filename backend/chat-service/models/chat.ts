@@ -15,7 +15,7 @@ export async function getChatHistory(chatId: number) {
 // Get chat history with userId
 export async function getUserChats(userId: string) {
     const [chats] = await db.query(`
-        SELECT c.chat_id
+        SELECT c.id
         FROM chats c
         WHERE c.buyer_id = ? OR c.seller_id = ?
     `, [userId, userId]);
