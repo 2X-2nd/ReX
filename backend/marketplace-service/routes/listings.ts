@@ -220,12 +220,12 @@ app.get('/listings/search', (req: Request, res: Response) => {
                GROUP_CONCAT(li.image_url) AS images
         FROM listings l
         LEFT JOIN listing_images li ON l.id = li.listing_id
-        WHERE l.title LIKE ? OR l.description LIKE ?
+        WHERE l.title LIKE ? OR l.description LIKE ? OR l.category LIKE ?
         GROUP BY l.id
     `;
     const searchValue = `%${query}%`;
 
-    db.query(searchSql, [searchValue, searchValue], (err: any, results: any) => {
+    db.query(searchSql, [searchValue, searchValue, searchValue], (err: any, results: any) => {
         if (err) {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
