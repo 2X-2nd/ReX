@@ -27,18 +27,18 @@ db.connect((err: any) => {
     console.log('✅ Connected to MySQL')
 })
 
-// Create a new listing (Updated to include geolocation)
+// Create a new listing
 app.post('/listings', (req: Request, res: Response) => {
-    const { title, description, price, seller_id, images, latitude, longitude } = req.body;
+    const { title, description, price, seller_id, images, latitude, longitude, category } = req.body;
 
     if (!title || !price || !seller_id || !images || images.length === 0) {
         return res.status(400).json({ error: "Missing required fields" });
     }
 
     // Insert the listing first
-    const sql = `INSERT INTO listings (title, description, price, seller_id, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)`;
+    const sql = `INSERT INTO listings (title, description, price, seller_id, latitude, longitude, category) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    db.query(sql, [title, description, price, seller_id, latitude || null, longitude || null], (err: any, result: { insertId: any }) => {
+    db.query(sql, [title, description, price, seller_id, latitude || null, longitude || null, category || null], (err: any, result: { insertId: any }) => {
         if (err) {
             console.error("❌ Error inserting listing:", err);
             return res.status(500).json({ error: "Database error" });
@@ -226,6 +226,38 @@ app.get('/listings/search', (req: Request, res: Response) => {
     const searchValue = `%${query}%`;
 
     db.query(searchSql, [searchValue, searchValue], (err: any, results: any) => {
+        if (err) {
+            console.error("Error searching listings:", err);
+            return res.status(500).json({ error: "Database error" });
+        }
+
+        // Convert images from CSV string to an array
+        results.forEach((row: any) => {
+            row.images = row.images ? row.images.split(',') : [];
+        });
+
+        res.status(200).json({ results });
+    });
+});
+
+// Search listings by category
+app.get('/listings/category', (req: Request, res: Response) => {
+    const { query } = req.query;
+    if (!query) {
+        return res.status(400).json({ error: "Query parameter is required" });
+    }
+
+    const searchSql = `
+        SELECT l.id, l.title, l.description, l.price, 
+               GROUP_CONCAT(li.image_url) AS images
+        FROM listings l
+        LEFT JOIN listing_images li ON l.id = li.listing_id
+        WHERE l.category LIKE ?
+        GROUP BY l.id
+    `;
+    const searchValue = `%${query}%`;
+
+    db.query(searchSql, [searchValue], (err: any, results: any) => {
         if (err) {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });

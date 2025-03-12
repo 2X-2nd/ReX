@@ -8,6 +8,7 @@ CREATE TABLE IF NOT EXISTS listings(
     seller_id VARCHAR(25) NOT NULL,
     latitude DECIMAL(9,6),
     longitude DECIMAL(9,6),
+    category TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
 );
 
