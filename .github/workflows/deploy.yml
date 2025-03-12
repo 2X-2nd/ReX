@@ -13,6 +13,15 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
+      - name: Check Commit Author
+        run: |
+          AUTHOR=$(git log -1 --pretty=format:'%ae')
+          echo "Last commit author: $AUTHOR"
+          if [[ "$AUTHOR" != "dingxiyang610@icloud.com" ]]; then
+            echo "Skipping deployment."
+            exit 1
+          fi
+
       - name: Copy services to EC2
         uses: appleboy/scp-action@master
         with:
