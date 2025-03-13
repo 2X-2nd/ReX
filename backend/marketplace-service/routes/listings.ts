@@ -6,25 +6,29 @@ const cors = require('cors')
 dotenv.config()
 
 const app = express()
-app.use(express.json({ limit: '1mb'})) // Allow JSON request bodies
+app.use(express.json({ limit: '1mb'}))
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.use(cors()) // Enable CORS
 
 // Database connection
-const db = mysql.createConnection({
+const db = mysql.createPool({
     host: process.env.DB_HOST,
     user: process.env.DB_USER,
     password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME
-})
+    database: process.env.DB_NAME,
+    waitForConnections: true,
+    connectionLimit: 10,
+    queueLimit: 0
+});
 
 
-db.connect((err: any) => {
+db.connect((err: any, connection: any) => {
     if (err) {
         console.error('❌ Database connection failed:', err)
         return
     }
     console.log('✅ Connected to MySQL')
+    connection.release();
 })
 
 // Create a new listing
