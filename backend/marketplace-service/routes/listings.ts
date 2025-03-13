@@ -21,8 +21,7 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
-
-db.connect((err: any, connection: any) => {
+db.getConnection((err: any, connection: any) => {
     if (err) {
         console.error('❌ Database connection failed:', err)
         return
