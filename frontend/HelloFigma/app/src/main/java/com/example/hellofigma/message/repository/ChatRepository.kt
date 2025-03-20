@@ -10,6 +10,9 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import retrofit2.Response
 import java.time.Instant
+import java.io.IOException
+import retrofit2.HttpException
+import com.google.gson.JsonParseException
 
 
 class ChatRepository private constructor(context: Context) {
@@ -74,6 +77,7 @@ class ChatRepository private constructor(context: Context) {
                                 val result = chatUserApiService.getUser(otherUserId)
                                 otherUserName = result.username
                             } catch (e: Exception) {
+                                e.printStackTrace()
                             }
                         }
                         Chat(

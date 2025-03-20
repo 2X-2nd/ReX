@@ -73,9 +73,6 @@ class MainActivity : ComponentActivity() {
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso)
     }
 
-    /**
-     * Google login
-     */
     private fun googleLogin() {
         val account = GoogleSignIn.getLastSignedInAccount(this)
         // If it does not exist, request login
@@ -98,11 +95,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    /**
-     * Handle sign in result
-     *
-     * @param completedTask
-     */
+
     private fun handleSignInResult(completedTask: Task<GoogleSignInAccount>) {
         try {
             val account: GoogleSignInAccount = completedTask.getResult(ApiException::class.java)
@@ -115,11 +108,6 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    /**
-     * Register account
-     *
-     * @param account
-     */
     private fun registerAccount(account: GoogleSignInAccount) {
         viewModel.userRegister(
             RegisterRequest(

@@ -13,6 +13,10 @@ import com.example.weather_dashboard.data.models.UserResponse
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import javax.inject.Inject
+import java.io.IOException
+import retrofit2.HttpException
+import com.google.gson.JsonParseException
+
 
 
 class ProductRepository @Inject constructor(
@@ -21,12 +25,20 @@ class ProductRepository @Inject constructor(
     private val userApi: UserApi,
 ) {
     suspend fun userRegister(registerRequest: RegisterRequest): RegisterResponse? {
-        try {
-            return userApi.userRegister(registerRequest)
-        } catch (e: Exception) {
-            return null
+        return try {
+            userApi.userRegister(registerRequest)
+        } catch (e: IOException) {
+            // Handle network issues
+            null
+        } catch (e: HttpException) {
+            // Handle HTTP response errors
+            null
+        } catch (e: JsonParseException) {
+            // Handle JSON parsing issues
+            null
         }
     }
+
 
     suspend fun getUser(google_id: String): UserResponse? {
         try {

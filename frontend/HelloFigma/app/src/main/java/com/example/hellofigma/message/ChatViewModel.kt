@@ -17,6 +17,10 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
+import retrofit2.HttpException
+import com.google.gson.JsonParseException
+import kotlinx.coroutines.CancellationException
 
 
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
@@ -59,17 +63,26 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
                 val result = repository.getChatHistory(chatId = chatId, otherUserId = otherUserId, currentUserId = userId)
                 withContext(Dispatchers.Main) {
                     _loadChatHistoryState.value = when (result) {
-                        is NetworkResult.Success -> {
-                            NetworkResult.Success(Unit)
-                        }
-                        is NetworkResult.Error -> {
-                            NetworkResult.Error(result.error ?: "Load chat history fail")
-                        }
+                        is NetworkResult.Success -> NetworkResult.Success(Unit)
+                        is NetworkResult.Error -> NetworkResult.Error(result.error ?: "Load chat history fail")
                         else -> NetworkResult.Error("Unknown error")
                     }
                 }
+            } catch (e: IOException) {
+                // 处理网络错误
+                _loadChatHistoryState.value = NetworkResult.Error("Network error: ${e.message}")
+            } catch (e: HttpException) {
+                // 处理 HTTP 错误
+                _loadChatHistoryState.value = NetworkResult.Error("Server error: ${e.code()}")
+            } catch (e: JsonParseException) {
+                // 处理 JSON 解析错误
+                _loadChatHistoryState.value = NetworkResult.Error("Data parsing error")
+            } catch (e: CancellationException) {
+                // 任务取消（协程被取消时抛出的异常，通常不需要特殊处理）
+                throw e
             } catch (e: Exception) {
-                _loadChatHistoryState.value = NetworkResult.Error("Add fail: ${e.message}")
+                // 捕获其他未知异常（作为最后的兜底）
+                _loadChatHistoryState.value = NetworkResult.Error("Unexpected error: ${e.message}")
             }
         }
     }

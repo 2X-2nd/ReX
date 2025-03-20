@@ -4,6 +4,7 @@ import android.app.Activity
 import android.content.Intent
 import android.graphics.BitmapFactory
 import android.util.Base64
+import android.util.Log
 import androidx.activity.compose.rememberLauncherForActivityResult
 import androidx.activity.result.ActivityResultLauncher
 import androidx.activity.result.contract.ActivityResultContracts
@@ -283,16 +284,24 @@ public fun loadNetworkPainter(base64: String): Painter {
     }
 
     val bitmap = remember(base64) {
-        try {
-            // 去除可能的 Base64 前缀
-            val pureBase64 = base64.substringAfter(",", base64)
-            val decodedBytes = Base64.decode(pureBase64, Base64.DEFAULT)
-            BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-        } catch (e: Exception) {
-            null // 解码失败返回 null
-        }
+        decodeBase64ToBitmap(base64)
     }
 
     return bitmap?.asImageBitmap()?.let { BitmapPainter(it) }
-        ?: painterResource(R.drawable.frame_1_rectangle_item_1) // 失败时显示占位图
+        ?: painterResource(R.drawable.frame_1_rectangle_item_1) // fallback image
 }
+
+fun decodeBase64ToBitmap(base64: String): android.graphics.Bitmap? {
+    return try {
+        val pureBase64 = base64.substringAfter(",", base64)  // delete data:image/png;base64,
+        val decodedBytes = Base64.decode(pureBase64, Base64.DEFAULT)
+        BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
+    } catch (e: IllegalArgumentException) {  // Base64 format error
+        Log.e("loadNetworkPainter", "Base64 decoding failed", e)
+        null
+    } catch (e: RuntimeException) {  // Bitmap decoding failed
+        Log.e("loadNetworkPainter", "Bitmap decoding failed", e)
+        null
+    }
+}
+

@@ -229,10 +229,9 @@ fun ChatScreen(
 @Composable
 fun MessageBubble(chatName: String, message: Message, modifier: Modifier = Modifier) {
     val isSentByMe = message.isSentByMe
-    val boxAlignment = if (isSentByMe) Alignment.TopEnd else Alignment.TopStart
-    val alignment = if (isSentByMe) Alignment.End else Alignment.Start
-    val bubbleColor = if (isSentByMe) Color(0xFF2196F3) else Color(0xFFE0E0E0)
-    val textColor = if (isSentByMe) Color.White else Color.Black
+    val boxAlignment = getBoxAlignment(isSentByMe)
+    val alignment = getMessageAlignment(isSentByMe)
+    val bubbleStyle = getBubbleStyle(isSentByMe)
     val senderName = if (isSentByMe) "Me" else chatName
 
     Box(
@@ -245,45 +244,75 @@ fun MessageBubble(chatName: String, message: Message, modifier: Modifier = Modif
             modifier = Modifier.widthIn(max = 280.dp),
             horizontalAlignment = alignment
         ) {
-            // 对方消息显示发送者名称
             if (!isSentByMe) {
-                Text(
-                    text = senderName,
-                    style = MaterialTheme.typography.caption,
-                    color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f),
-                    modifier = Modifier.padding(bottom = 2.dp)
-                )
+                SenderNameText(senderName)
             }
 
-            // 消息气泡
-            Card(
-                backgroundColor = bubbleColor,
-                shape = RoundedCornerShape(
-                    topStart = 12.dp,
-                    topEnd = 12.dp,
-                    bottomStart = if (isSentByMe) 12.dp else 4.dp,
-                    bottomEnd = if (isSentByMe) 4.dp else 12.dp
-                )
-            ) {
-                Text(
-                    text = message.content,
-                    color = textColor,
-                    modifier = Modifier.padding(12.dp)
-                )
-            }
+            MessageCard(message.content, bubbleStyle)
 
-            // 时间戳和发送状态
-            Row(
-                verticalAlignment = Alignment.CenterVertically,
-                horizontalArrangement = if (isSentByMe) Arrangement.End else Arrangement.Start
-            ) {
-                Text(
-                    text = formatTimestamp(message.timestamp),
-                    style = MaterialTheme.typography.overline,
-                    color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
-                )
-            }
+            TimestampRow(message.timestamp, isSentByMe)
         }
+    }
+}
+
+// **提取：获取对齐方式**
+fun getBoxAlignment(isSentByMe: Boolean) = if (isSentByMe) Alignment.TopEnd else Alignment.TopStart
+fun getMessageAlignment(isSentByMe: Boolean) = if (isSentByMe) Alignment.End else Alignment.Start
+
+// **提取：获取气泡样式**
+data class BubbleStyle(val backgroundColor: Color, val textColor: Color, val shape: RoundedCornerShape)
+
+fun getBubbleStyle(isSentByMe: Boolean): BubbleStyle {
+    return BubbleStyle(
+        backgroundColor = if (isSentByMe) Color(0xFF2196F3) else Color(0xFFE0E0E0),
+        textColor = if (isSentByMe) Color.White else Color.Black,
+        shape = RoundedCornerShape(
+            topStart = 12.dp,
+            topEnd = 12.dp,
+            bottomStart = if (isSentByMe) 12.dp else 4.dp,
+            bottomEnd = if (isSentByMe) 4.dp else 12.dp
+        )
+    )
+}
+
+// **提取：显示发送者名称**
+@Composable
+fun SenderNameText(senderName: String) {
+    Text(
+        text = senderName,
+        style = MaterialTheme.typography.caption,
+        color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f),
+        modifier = Modifier.padding(bottom = 2.dp)
+    )
+}
+
+// **提取：消息气泡**
+@Composable
+fun MessageCard(content: String, bubbleStyle: BubbleStyle) {
+    Card(
+        backgroundColor = bubbleStyle.backgroundColor,
+        shape = bubbleStyle.shape
+    ) {
+        Text(
+            text = content,
+            color = bubbleStyle.textColor,
+            modifier = Modifier.padding(12.dp)
+        )
+    }
+}
+
+// **提取：时间戳**
+@Composable
+fun TimestampRow(timestamp: Long, isSentByMe: Boolean) {
+    Row(
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = if (isSentByMe) Arrangement.End else Arrangement.Start
+    ) {
+        Text(
+            text = formatTimestamp(timestamp),
+            style = MaterialTheme.typography.overline,
+            color = MaterialTheme.colors.onSurface.copy(alpha = 0.6f)
+        )
     }
 }
 

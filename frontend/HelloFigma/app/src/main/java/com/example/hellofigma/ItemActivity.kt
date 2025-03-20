@@ -147,8 +147,14 @@ class ItemActivity : ComponentActivity() {
             val pureBase64 = base64.substringAfter(",", base64)
             val decodedBytes = Base64.decode(pureBase64, Base64.DEFAULT)
             BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-        } catch (e: Exception) {
-            e.printStackTrace()
+        } catch (e: IllegalArgumentException) {
+            // 处理 Base64 解码失败（格式错误）
+            null
+        } catch (e: OutOfMemoryError) {
+            // 处理图片过大导致的内存溢出
+            null
+        } catch (e: ArrayIndexOutOfBoundsException) {
+            // 处理数组越界异常
             null
         }
     }
