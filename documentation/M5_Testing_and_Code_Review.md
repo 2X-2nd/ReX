@@ -161,5 +161,95 @@ The automated test execution logs:
 ![PostActivityTest_Result](./images/Espresso_Execution_Log2.png)
 ![PostActivityTest_Result](./images/Espresso_Execution_Log3.png)
 
+### 5. Automated Code Review Results
+
+#### 5.1. Commit Hash Where Codacy Ran
+
+
+#### 5.2. Unfixed Issues per Codacy Category
+(Screenshot placeholder)
+
+#### 5.3. Unfixed Issues per Codacy Code Pattern
+(Screenshot placeholder)
+
+---
+
+#### 5.4. Justifications for Unfixed Issues
+
+##### Code Pattern: Method too long / Function too long
+
+1. **The function `onCreate` is too long (161). The maximum length is 60.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/PostActivity.kt`
+   - **Justification:**
+     The `onCreate` function in `PostActivity` is responsible for setting up the entire activity UI components, permission handling, click listeners, and initial data bindings. Breaking it up further would fragment related UI logic and reduce code readability. Given Android's standard practice for activity setup in `onCreate`, we consider this acceptable.
+
+2. **The function `ChatScreen` is too long (94). The maximum length is 60.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/message/ChatActivity.kt`
+   - **Justification:**
+     `ChatScreen` is a Jetpack Compose function responsible for rendering complex UI with multiple conditional UI elements and listeners. Breaking it down further would lead to many small, tightly coupled composables, harming readability and increasing unnecessary overhead. Thus, keeping it intact preserves UI flow clarity.
+
+3. **The function `MainCard` is too long (128). The maximum length is 60.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/MainScreen.kt`
+   - **Justification:**
+     `MainCard` defines the primary card UI in the home screen, including layout, styling, and event handlers. Due to Compose's declarative nature, breaking it apart negatively impacts the card’s consistency and readability. The length stems from Compose’s DSL, not poor logic separation.
+
+4. **The function `onCreate` is too long (106). The maximum length is 60.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/CategoryActivity.kt`
+   - **Justification:**
+     Similar to the previous `onCreate`, it initializes UI components, adapters, listeners, and binds the category data. Splitting into smaller methods would introduce unnecessary indirection and harm maintainability.
+
+5. **The function `getChatList` is too long (69). The maximum length is 60.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/message/repository/ChatRepository.kt`
+   - **Justification:**
+     `getChatList` encapsulates data fetching, processing, and state management logic essential for chat UI. Breaking it into smaller methods reduces cohesion and increases overhead due to tightly coupled logic.
+
+6. **The function `onCreate` is too long (92). The maximum length is 60.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/ItemActivity.kt`
+   - **Justification:**
+     It handles view initialization, event listeners, and binding product data. Splitting this standard `onCreate` setup would unnecessarily fragment tightly related initialization code.
+
+---
+
+##### Code Pattern: Too many parameters
+
+1. **The function `ChatScreen` has too many parameters. The current threshold is set to 6.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/message/ChatActivity.kt`
+   - **Justification:**
+     `ChatScreen` requires multiple parameters to display accurate chat content (userId, chatId, otherUserId, otherUserName, ViewModel, callback). Reducing the parameter count is not feasible without sacrificing the composable's clarity or functionality. Using a data class to wrap parameters would add unnecessary complexity.
+
+---
+
+##### Code Pattern: Cyclomatic complexity
+
+1. **Method `MainCard` has a cyclomatic complexity of 19 (limit is 8).**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/MainScreen.kt`
+   - **Justification:**
+     The complexity arises from UI conditionals (e.g., user state, product availability). Reducing conditionals would require splitting UI logic unnaturally across files, reducing maintainability and readability.
+
+---
+
+##### Code Pattern: Expression with labels
+
+1. **Expression with labels increase complexity and affect maintainability.**
+
+   - **Location in Git:** `frontend/HelloFigma/app/src/main/java/com/example/hellofigma/PostActivity.kt`
+   - **Justification:**
+     Labels (`return@setOnClickListener`) are standard in Kotlin Android development to manage nested lambdas, especially within UI event listeners. Removing them would lead to unclear control flow, contrary to Kotlin’s design idioms.
+
+---
+
+> **Note:** All identified issues above are acceptable trade-offs in an Android Jetpack Compose or standard Activity context. Fixing them would reduce readability, consistency, or UI structure clarity.
+
+---
+
+
 
 
