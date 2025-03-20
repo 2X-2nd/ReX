@@ -157,9 +157,9 @@ Test Logs:
 ### 4.3. Espresso Execution Logs
 
 The automated test execution logs:
-![PostActivityTest_Result](./images/Espresso_Execution_Log.png1)
-![PostActivityTest_Result](./images/Espresso_Execution_Log.png2)
-![PostActivityTest_Result](./images/Espresso_Execution_Log.png3)
+![PostActivityTest_Result](./images/Espresso_Execution_Log1.png)
+![PostActivityTest_Result](./images/Espresso_Execution_Log2.png)
+![PostActivityTest_Result](./images/Espresso_Execution_Log3.png)
 
 
 
