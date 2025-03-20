@@ -1,6 +1,7 @@
 package com.example.hellofigma.message
 
 import android.app.Application
+import android.util.Log
 import androidx.compose.runtime.State
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.AndroidViewModel
@@ -100,9 +101,12 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
                 )
 
                 repository.getChatHistory(chatId, otherUserId, userId)
-            } catch (e: Exception) {
-                // 处理发送失败情况
-                e.printStackTrace()
+            } catch (e: IOException) {
+                Log.e("sendMessage", "Network error while sending message: ${e.message}", e)
+            } catch (e: HttpException) {
+                Log.e("sendMessage", "HTTP error while sending message: ${e.code()} ${e.message()}", e)
+            } catch (e: JsonParseException) {
+                Log.e("sendMessage", "JSON parsing error while sending message: ${e.message}", e)
             }
         }
     }
