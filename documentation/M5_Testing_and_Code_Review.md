@@ -157,12 +157,9 @@ Test Logs:
 ### 4.3. Espresso Execution Logs
 
 The automated test execution logs:
+![PostActivityTest_Result](./images/Espresso_Execution_Log.png1)
+![PostActivityTest_Result](./images/Espresso_Execution_Log.png2)
+![PostActivityTest_Result](./images/Espresso_Execution_Log.png3)
 
-```
-> Task :app:connectedDebugAndroidTest
-Starting 15 tests on Medium_Phone_API_35(AVD) - 15
-Medium_Phone_API_35(AVD) - 15 Tests 15/15 completed. (0 skipped) (0 failed)
-Finished 15 tests on Medium_Phone_API_35(AVD) - 15
 
-BUILD SUCCESSFUL in 52s
-```
+
