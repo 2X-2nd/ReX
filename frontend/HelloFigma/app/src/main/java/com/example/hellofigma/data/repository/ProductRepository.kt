@@ -3,6 +3,8 @@ package com.example.hellofigma.data.repository
 import com.example.hellofigma.data.model.RegisterRequest
 import com.example.weather_dashboard.data.models.DeleteProductResponse
 import com.example.weather_dashboard.data.models.ItemResponse
+import com.example.weather_dashboard.data.models.PostPriceSuggestionsRequest
+import com.example.weather_dashboard.data.models.PostPriceSuggestionsResponse
 import com.example.weather_dashboard.data.models.PostProductRequest
 import com.example.weather_dashboard.data.models.PostProductResponse
 import com.example.weather_dashboard.data.models.ProductResponse
@@ -15,6 +17,7 @@ import javax.inject.Inject
 
 class ProductRepository @Inject constructor(
     private val productApi: ProductApi,
+    private val priceSuggestionsApi: PriceSuggestionsApi,
     private val userApi: UserApi,
 ) {
     suspend fun userRegister(registerRequest: RegisterRequest): RegisterResponse? {
@@ -81,6 +84,15 @@ class ProductRepository @Inject constructor(
             return response
         } catch (e: Exception) {
             return PostProductResponse(id = "", message = "POST - Server error!")
+        }
+    }
+
+    suspend fun PostPriceSuggestions(postPriceSuggestionsRequest: PostPriceSuggestionsRequest): PostPriceSuggestionsResponse? {
+        try {
+            val response = priceSuggestionsApi.postPriceSuggestions(postPriceSuggestionsRequest = postPriceSuggestionsRequest)
+            return response
+        } catch (e: Exception) {
+            return PostPriceSuggestionsResponse(best_price = 0.0, similar_items = emptyList())
         }
     }
 }

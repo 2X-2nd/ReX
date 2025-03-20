@@ -8,6 +8,7 @@ import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
@@ -35,6 +36,7 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import com.example.hellofigma.message.model.Chat
 import com.example.hellofigma.ui.theme.HelloFigmaTheme
+import kotlinx.coroutines.delay
 
 class MessageActivity : ComponentActivity() {
     private val viewModel by viewModels<ChatViewModel>()
@@ -49,20 +51,31 @@ class MessageActivity : ComponentActivity() {
             HelloFigmaTheme {
                 Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
                     // FullScreenScreen(this)
-                    MessageList(
-                        userId = userId,
-                        viewModel = viewModel,
-                        modifier = Modifier.padding(innerPadding).fillMaxSize(),
-                        onBack = { finish() },
-                        onChatClicked = { otherUserId, otherUserName ->
-                            startActivity(
-                                Intent(this, ChatActivity::class.java)
-                                    .putExtra("userId", userId)
-                                    .putExtra("otherUserId", otherUserId)
-                                    .putExtra("otherUserName", otherUserName)
-                            )
+                    if (userId.isEmpty()) {
+                        Box(
+                            modifier = Modifier
+                                .padding(innerPadding)
+                                .fillMaxSize(),
+                            contentAlignment = Alignment.Center
+                        ) {
+                            Text("not logged on!")
                         }
-                    )
+                    } else {
+                        MessageList(
+                            userId = userId,
+                            viewModel = viewModel,
+                            modifier = Modifier.padding(innerPadding).fillMaxSize(),
+                            onBack = { finish() },
+                            onChatClicked = { otherUserId, otherUserName ->
+                                startActivity(
+                                    Intent(this, ChatActivity::class.java)
+                                        .putExtra("userId", userId)
+                                        .putExtra("otherUserId", otherUserId)
+                                        .putExtra("otherUserName", otherUserName)
+                                )
+                            }
+                        )
+                    }
                 }
             }
         }
@@ -80,6 +93,12 @@ fun MessageList(
 ) {
     val chats by viewModel.chats.collectAsState(initial = null)
 
+    LaunchedEffect(Unit) {
+        while (true) {
+            viewModel.getChatList(userId)
+            delay(6000)
+        }
+    }
     LaunchedEffect(Unit) {
         viewModel.loadChats(userId)
     }

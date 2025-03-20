@@ -5,6 +5,8 @@ import androidx.lifecycle.viewModelScope
 import com.example.hellofigma.data.repository.DataStoreManager
 import com.example.hellofigma.data.repository.LoginState
 import com.example.hellofigma.data.repository.ProductRepository
+import com.example.weather_dashboard.data.models.PostPriceSuggestionsRequest
+import com.example.weather_dashboard.data.models.PostPriceSuggestionsResponse
 import com.example.weather_dashboard.data.models.PostProductRequest
 import com.example.weather_dashboard.data.models.PostProductResponse
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -39,6 +41,15 @@ class PostViewModel @Inject constructor(
         viewModelScope.launch {
             _postProductResult.value = null;
             _postProductResult.value = repository.postProduct(postProductRequest)
+        }
+    }
+
+    private val _postPriceSuggestionsResponseResult = MutableStateFlow<PostPriceSuggestionsResponse?>(null)
+    val postPriceSuggestionsResponseResult: StateFlow<PostPriceSuggestionsResponse?> = _postPriceSuggestionsResponseResult
+    fun PostPriceSuggestions(postPriceSuggestionsRequest: PostPriceSuggestionsRequest) {
+        viewModelScope.launch {
+            _postPriceSuggestionsResponseResult.value = null;
+            _postPriceSuggestionsResponseResult.value = repository.PostPriceSuggestions(postPriceSuggestionsRequest)
         }
     }
 }

@@ -25,10 +25,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import com.example.hellofigma.data.repository.LoginState
 import com.example.hellofigma.viewmodel.PostViewModel
+import com.example.weather_dashboard.data.models.PostPriceSuggestionsRequest
 import com.example.weather_dashboard.data.models.PostProductRequest
 import com.google.android.gms.location.*
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.util.*
 
 
@@ -41,6 +44,7 @@ class PostActivity : AppCompatActivity() {
     private lateinit var etTitle: EditText
     private lateinit var etDescription: EditText
     private lateinit var etPrice: EditText
+    private lateinit var tvSuggestedPrice: TextView
     private lateinit var warehouseOptions: LinearLayout
     private lateinit var radioGroupWarehouse: RadioGroup
     private lateinit var radioYourLocation: RadioButton
@@ -111,6 +115,7 @@ class PostActivity : AppCompatActivity() {
         etTitle = findViewById(R.id.etTitle)
         etDescription = findViewById(R.id.etDescription)
         etPrice = findViewById(R.id.etPrice)
+        tvSuggestedPrice = findViewById(R.id.tvSuggestedPrice)
 
         warehouseOptions = findViewById(R.id.warehouseOptions)
         radioGroupWarehouse = findViewById(R.id.radioGroupWarehouse)
@@ -127,6 +132,28 @@ class PostActivity : AppCompatActivity() {
         //image
         imageView = findViewById(R.id.btnAddImage)
 
+        etTitle.setOnFocusChangeListener { view, hasFocus ->
+            if (!hasFocus) {
+                val title = etTitle.text.toString().trim()
+                if (title.isEmpty()) {
+                    etTitle.error = "Title is required"
+                } else {
+                    etTitle.error = null
+
+                    viewModel.PostPriceSuggestions(PostPriceSuggestionsRequest(keyword = title))
+                }
+            } else {
+                tvSuggestedPrice.text = ""
+            }
+        }
+
+        lifecycleScope.launch {
+            viewModel.postPriceSuggestionsResponseResult.collect { response ->
+                if (response != null) {
+                    tvSuggestedPrice.text = "Suggested: $%.2f".format(response.best_price)
+                }
+            }
+        }
 
         fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
         checkLocationPermission()
@@ -174,7 +201,7 @@ class PostActivity : AppCompatActivity() {
             }
         }
 
-        // Cancel all other option while manual address is selected
+        // **手动输入时，自动取消其他选项**
         etManualAddress.addTextChangedListener(object : TextWatcher {
             override fun afterTextChanged(s: Editable?) {
                 if (!s.isNullOrEmpty()) {
@@ -199,11 +226,6 @@ class PostActivity : AppCompatActivity() {
             val description = etDescription.text.toString().trim()
             val price = etPrice.text.toString().trim()
 
-            if (imageBase64.isEmpty()) {
-                etTitle.error = "Image is required"
-                return@setOnClickListener
-            }
-
             if (title.isEmpty()) {
                 etTitle.error = "Title is required"
                 return@setOnClickListener
@@ -216,6 +238,11 @@ class PostActivity : AppCompatActivity() {
 
             if (price.isEmpty()) {
                 etPrice.error = "Price is required"
+                return@setOnClickListener
+            }
+
+            if (imageBase64.isEmpty()) {
+                etTitle.error = "Image is required"
                 return@setOnClickListener
             }
 
@@ -321,8 +348,19 @@ class PostActivity : AppCompatActivity() {
 
     private fun updateUserLocation(location: Location) {
         this.location = location
-        val address = getAddressFromLocation(location.latitude, location.longitude)
-        tvUserLocation.text = address
+        lifecycleScope.launch(Dispatchers.IO) { // 在 IO 线程执行耗时操作
+            val address = try {
+                getAddressFromLocation(location.latitude, location.longitude)
+            } catch (e: Exception) {
+                "Unknown Location"
+            }
+            withContext(Dispatchers.Main) { // 切换回主线程更新 UI
+                tvUserLocation.text = address
+            }
+        }
+        //this.location = location
+        //val address = getAddressFromLocation(location.latitude, location.longitude)
+        //tvUserLocation.text = address
     }
 
     private fun getAddressFromLocation(lat: Double, lng: Double): String {

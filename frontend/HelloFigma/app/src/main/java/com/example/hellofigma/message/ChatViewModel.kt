@@ -17,7 +17,6 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
-import java.util.UUID
 
 
 class ChatViewModel(application: Application) : AndroidViewModel(application) {
@@ -28,6 +27,10 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     private val repository = ChatRepository.getInstance(application)
+
+    suspend fun getChatList(userId: String) {
+        repository.getChatList(userId);
+    }
 
     private val _chats = MutableStateFlow<List<Chat>?>(null)
     val chats: StateFlow<List<Chat>?> = _chats.asStateFlow()
@@ -78,20 +81,8 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
     fun sendMessage(chatId: String, userId: String, otherUserId: String, message: String) {
         viewModelScope.launch(Dispatchers.IO) {
             try {
-                // 1. 先保存到本地数据库（乐观更新）
-                val tempMessage = Message(
-                    messageId = UUID.randomUUID().toString(),
-                    chatId = otherUserId,
-                    content = message,
-                    isSentByMe = true,
-                    timestamp = System.currentTimeMillis()
-                )
-                repository.insertMessage(tempMessage)
-
-                repository.updateLastMessage(userId, otherUserId, message, tempMessage.timestamp)
-
-                // 2. 调用API发送消息
-                val response = repository.apiService.sendMessage(
+                // 调用API发送消息
+                repository.apiService.sendMessage(
                     chatId = chatId,
                     request = SendMessageRequest(
                         senderId = userId,
@@ -99,14 +90,7 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
                     )
                 )
 
-                // 3. 更新服务器返回的真实消息ID
-                if (response.isSuccessful) {
-                    val serverMessage = response.body()!!
-                    repository.updateMessageId(
-                        tempId = tempMessage.messageId,
-                        serverId = serverMessage.messageId
-                    )
-                }
+                repository.getChatHistory(chatId, otherUserId, userId)
             } catch (e: Exception) {
                 // 处理发送失败情况
                 e.printStackTrace()

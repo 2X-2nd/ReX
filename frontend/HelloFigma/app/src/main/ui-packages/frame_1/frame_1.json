@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "MiG3gqODXlU8A8ym5IofxP",
     "node": "1:104",
-    "version": "2191893902992822185",
+    "version": "2185701397116440600",
     "component-id": "f5b4908eea0b58ead83060d2781085e0ed0865e9"
   },
   "default": "Frame 1",
@@ -1550,7 +1550,7 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
@@ -1635,7 +1635,7 @@
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "shrink"
@@ -1714,17 +1714,17 @@
               },
               "vertical": {
                 "attachment": "start",
-                "offset": 249.0
+                "offset": 249.02279663085938
               }
             },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 26.0
+                "value": 25.97719955444336
               }
             },
             "color": {
@@ -1811,17 +1811,17 @@
               },
               "vertical": {
                 "attachment": "start",
-                "offset": 252.0
+                "offset": 251.73941040039062
               }
             },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 26.0
+                "value": 26.26058578491211
               }
             },
             "color": {

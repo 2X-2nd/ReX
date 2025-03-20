@@ -40,10 +40,12 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.unit.dp
 import com.example.hellofigma.message.model.Message
 import com.example.hellofigma.message.repository.NetworkResult
 import com.example.hellofigma.ui.theme.HelloFigmaTheme
+import kotlinx.coroutines.delay
 
 
 class ChatActivity : ComponentActivity() {
@@ -53,7 +55,7 @@ class ChatActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
         enableEdgeToEdge()
 
-        val userId = "aaa"// intent.getStringExtra("userId") ?: ""
+        val userId = intent.getStringExtra("userId") ?: ""
         val otherUserId = intent.getStringExtra("otherUserId") ?: ""
         val otherUserName = intent.getStringExtra("otherUserName") ?: ""
 
@@ -142,8 +144,16 @@ fun ChatScreen(
     }
 
     // 加载历史消息
+    /*
     LaunchedEffect(otherUserId) {
         viewModel.loadChatHistory(chatId, userId, otherUserId)
+    }*/
+    // 轮询加载历史消息
+    LaunchedEffect(otherUserId) {
+        while (true) {
+            viewModel.loadChatHistory(chatId, userId, otherUserId)
+            delay(6000)
+        }
     }
 
     Scaffold(
@@ -189,13 +199,14 @@ fun ChatScreen(
                     OutlinedTextField(
                         value = newMessage,
                         onValueChange = { newMessage = it },
-                        modifier = Modifier.weight(1f),
+                        modifier = Modifier.weight(1f).testTag("MessageInput"),
                         placeholder = { Text("Input message...") },
                         singleLine = false,
                         maxLines = 3
                     )
 
                     IconButton(
+                        modifier = Modifier.testTag("SendButton"),
                         onClick = {
                             if (newMessage.isNotBlank()) {
                                 viewModel.sendMessage(chatId, userId, otherUserId, newMessage)

@@ -5,7 +5,7 @@
     "type": "figma",
     "file": "MiG3gqODXlU8A8ym5IofxP",
     "node": "41:3",
-    "version": "2191893902992822185",
+    "version": "2185701397116440600",
     "component-id": "96edb8ac0cb08146a0fa95e3a6a86ffe9f73b4cb"
   },
   "default": "Frame 5",
@@ -363,7 +363,7 @@
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 315.0
+                "value": 314.67181396484375
               }
             },
             "is-structured": false,
@@ -395,7 +395,7 @@
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 315.0
+                "value": 314.67181396484375
               }
             },
             "is-structured": false,
@@ -538,17 +538,17 @@
               },
               "vertical": {
                 "attachment": "start",
-                "offset": 284.67181396484375
+                "offset": 284.9471435546875
               }
             },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 30.0
+                "value": 29.724699020385742
               }
             },
             "color": {
@@ -651,17 +651,17 @@
               },
               "vertical": {
                 "attachment": "start",
-                "offset": 284.67181396484375
+                "offset": 284.9471435546875
               }
             },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 30.0
+                "value": 29.724699020385742
               }
             },
             "color": {
@@ -764,17 +764,17 @@
               },
               "vertical": {
                 "attachment": "start",
-                "offset": 285.0
+                "offset": 284.94708251953125
               }
             },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 30.0
+                "value": 29.724700927734375
               }
             },
             "color": {
@@ -877,17 +877,17 @@
               },
               "vertical": {
                 "attachment": "start",
-                "offset": 285.0
+                "offset": 284.9471130371094
               }
             },
             "size-constraints": {
               "width-constraints": {
                 "sizing-mode": "fixed",
-                "value": 151.0
+                "value": 64.0
               },
               "height-constraints": {
                 "sizing-mode": "fixed",
-                "value": 30.0
+                "value": 29.724699020385742
               }
             },
             "color": {

@@ -1,5 +1,6 @@
 package com.example.hellofigma.di
 
+import com.example.hellofigma.data.repository.PriceSuggestionsApi
 import com.example.hellofigma.data.repository.ProductApi
 import com.example.hellofigma.data.repository.UserApi
 import dagger.Module
@@ -21,6 +22,7 @@ import javax.inject.Named
 object NetworkModule {
     private const val USER_BASE_URL = "http://3.138.121.192:8080/"
     private const val PRODUCT_BASE_URL = "https://nsefhqsvqf.execute-api.us-east-2.amazonaws.com/"
+    private const val PRICE_SUGGESTIONS_BASE_URL = "http://3.138.121.192:5001/"
 
     @Provides
     fun provideOkHttpClient(): OkHttpClient {
@@ -58,6 +60,19 @@ object NetworkModule {
     }
 
     /*
+     商品服务的 Retrofit
+     */
+    @Provides
+    @Named("PriceSuggestionsRetrofit")
+    fun providePriceSuggestionsRetrofit(client: OkHttpClient): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(PRICE_SUGGESTIONS_BASE_URL)
+            .client(client)
+            .addConverterFactory(GsonConverterFactory.create())
+            .build()
+    }
+
+    /*
      用户相关接口（绑定到 UserRetrofit）
      */
     @Provides
@@ -71,5 +86,10 @@ object NetworkModule {
     @Provides
     fun provideProductApi(@Named("ProductRetrofit") retrofit: Retrofit): ProductApi {
         return retrofit.create(ProductApi::class.java)
+    }
+
+    @Provides
+    fun providePriceSuggestionsApi(@Named("PriceSuggestionsRetrofit") retrofit: Retrofit): PriceSuggestionsApi {
+        return retrofit.create(PriceSuggestionsApi::class.java)
     }
 }

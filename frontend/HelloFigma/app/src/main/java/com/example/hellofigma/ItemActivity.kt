@@ -116,6 +116,7 @@ class ItemActivity : ComponentActivity() {
             }
             else {
                 Toast.makeText(this, "You do not have permission to delete", Toast.LENGTH_SHORT).show()
+                remove.contentDescription = "You do not have permission to delete"
             }
         }
 
@@ -136,6 +137,7 @@ class ItemActivity : ComponentActivity() {
             } else {
                 // Handle the click event for the "I Want It" button
                 Toast.makeText(this, "You haven't logged in yet", Toast.LENGTH_SHORT).show()
+                iWantItButton.contentDescription = "You haven't logged in yet"
             }
         }
     }

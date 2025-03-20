@@ -9,6 +9,9 @@ import retrofit2.http.Path
 
 // Retrofit接口
 interface ChatApi {
+    @GET("chat/user/{userId}")
+    suspend fun getChatList(@Path("userId") userId: String): Response<ChatListResponse>
+
     @POST("chat/start")
     suspend fun startChat(@Body request: StartChatRequest): Response<StartChatResponse>
 
@@ -55,4 +58,12 @@ data class RemoteMessage(
     val sender_id: String,
     val message: String,
     val timestamp: String
+)
+
+data class ChatListResponse(
+    val chatIds: List<ChatListId>
+)
+
+data class ChatListId(
+    val id: String
 )

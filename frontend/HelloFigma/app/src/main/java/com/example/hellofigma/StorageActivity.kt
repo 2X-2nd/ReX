@@ -112,7 +112,7 @@ class StorageActivity : AppCompatActivity(), OnMapReadyCallback {
     private fun addUserLocationMarker(location: Location) {
         val userLatLng = LatLng(location.latitude, location.longitude)
 
-        userLocationMarker?.remove()  // remove the previous marker
+        userLocationMarker?.remove()  // 移除旧的用户位置钉
 
         userLocationMarker = googleMap.addMarker(
             MarkerOptions().position(userLatLng).title("Your Location").icon(
@@ -142,7 +142,7 @@ class StorageActivity : AppCompatActivity(), OnMapReadyCallback {
             val addresses = geocoder.getFromLocation(lat, lng, 1)
             if (addresses!!.isNotEmpty()) {
                 val address = addresses[0]
-                address.getAddressLine(0) // get the first address line
+                address.getAddressLine(0) // 获取完整地址
             } else {
                 "Unknown Location"
             }

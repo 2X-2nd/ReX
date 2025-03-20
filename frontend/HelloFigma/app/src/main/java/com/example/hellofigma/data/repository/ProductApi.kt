@@ -2,6 +2,8 @@ package com.example.hellofigma.data.repository
 
 import com.example.weather_dashboard.data.models.DeleteProductResponse
 import com.example.weather_dashboard.data.models.ItemResponse
+import com.example.weather_dashboard.data.models.PostPriceSuggestionsRequest
+import com.example.weather_dashboard.data.models.PostPriceSuggestionsResponse
 import com.example.weather_dashboard.data.models.PostProductRequest
 import com.example.weather_dashboard.data.models.PostProductResponse
 import com.example.weather_dashboard.data.models.ProductResponse
@@ -38,4 +40,9 @@ interface ProductApi {
     suspend fun postProduct(
         @Body postProductRequest: PostProductRequest
     ): PostProductResponse
+
+    @POST("price-suggestions")
+    suspend fun postPriceSuggestions(
+        @Body postPriceSuggestionsRequest: PostPriceSuggestionsRequest
+    ): PostPriceSuggestionsResponse
 }

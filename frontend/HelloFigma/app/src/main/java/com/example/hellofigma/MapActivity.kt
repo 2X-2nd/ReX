@@ -50,7 +50,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
     override fun onMapReady(map: GoogleMap) {
         googleMap = map
 
-        // add warehouse markers
+        // **添加仓库标记**
         warehouseLocations.forEach { (name, latLng) ->
             googleMap.addMarker(MarkerOptions().position(latLng).title(name))
         }
@@ -99,7 +99,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
 
     private fun getUserLocation() {
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
-            // give permission for location
+            // 权限已授予，可以安全地调用 fusedLocationClient.lastLocation
             fusedLocationClient.lastLocation.addOnSuccessListener { location ->
                 if (location != null) {
                     addUserLocationMarker(location)
@@ -108,20 +108,20 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
                 Toast.makeText(this, "Failed to get location", Toast.LENGTH_SHORT).show()
             }
         } else {
-            // unable to get permission for location
+            // 权限未授予，向用户请求权限
             requestPermissionLauncher.launch(Manifest.permission.ACCESS_FINE_LOCATION)
         }
 
     }
 
-    // add your location marker
+    // **在地图上添加 Your Location 的地图钉**
     private fun addUserLocationMarker(location: Location) {
         val userLatLng = LatLng(location.latitude, location.longitude)
 
-        // remove previous marker
+        // **移除旧的 Your Location 钉**
         userLocationMarker?.remove()
 
-        // add new marker
+        // **添加新的 Your Location 钉**
         userLocationMarker = googleMap.addMarker(
             MarkerOptions().position(userLatLng).title("Your Location").icon(
                 BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_BLUE)
@@ -131,7 +131,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         googleMap.animateCamera(CameraUpdateFactory.newLatLngZoom(userLatLng, 12f))
     }
 
-    // click warehouse and return
+    // **选择仓库并返回**
     private fun returnSelectedWarehouse(warehouseName: String?) {
         val resultIntent = Intent().apply {
             putExtra("selectedWarehouse", warehouseName)
@@ -140,7 +140,7 @@ class MapActivity : AppCompatActivity(), OnMapReadyCallback {
         finish()
     }
 
-    // choose your location and return
+    // **选择 Your Location 并返回**
     private fun returnSelectedYourLocation() {
         val userLatLng = userLocationMarker?.position
         if (userLatLng != null) {

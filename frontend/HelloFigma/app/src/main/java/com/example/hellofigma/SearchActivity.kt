@@ -58,17 +58,17 @@ class SearchActivity : AppCompatActivity() {
         val searchButton: ImageView = findViewById(R.id.searchButton)
         val searchInput: EditText = findViewById(R.id.searchInput)
 
-        // return the user to the previous activity
+        // 返回按钮点击事件
         backButton.setOnClickListener {
-            finish()
+            finish() // 关闭当前 Activity
         }
 
-        // activity of the searchButton on clicked
+        // 搜索按钮点击事件
         searchButton.setOnClickListener {
             performSearch(searchInput.text.toString())
         }
 
-        // activity of the searchInput on pressed enter
+        // 监听软键盘回车（搜索键）
         searchInput.setOnEditorActionListener { _, actionId, event ->
             if (actionId == EditorInfo.IME_ACTION_SEARCH ||
                 (event?.action == KeyEvent.ACTION_DOWN && event.keyCode == KeyEvent.KEYCODE_ENTER)) {
@@ -81,10 +81,12 @@ class SearchActivity : AppCompatActivity() {
             }
         }
 
+        // 打开界面时自动弹出软键盘并聚焦输入框
         searchInput.requestFocus()
         showKeyboard(searchInput)
     }
 
+    // 执行搜索逻辑
     private fun performSearch(query: String) {
         if (query.isNotEmpty()) {
             viewModel.searchProduct(query)
@@ -93,11 +95,13 @@ class SearchActivity : AppCompatActivity() {
         }
     }
 
+    // 显示软键盘
     private fun showKeyboard(editText: EditText) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.showSoftInput(editText, InputMethodManager.SHOW_IMPLICIT)
     }
 
+    // 隐藏软键盘
     private fun hideKeyboard(editText: EditText) {
         val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(editText.windowToken, 0)

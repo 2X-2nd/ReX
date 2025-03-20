@@ -4,9 +4,11 @@ import android.content.Context
 import androidx.room.Room
 import com.example.hellofigma.message.model.Chat
 import com.example.hellofigma.message.model.Message
+import com.example.hellofigma.message.network.ChatUserRetrofitClient
 import com.example.hellofigma.message.network.RetrofitClient
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
+import retrofit2.Response
 import java.time.Instant
 
 
@@ -29,6 +31,80 @@ class ChatRepository private constructor(context: Context) {
     }
 
     val apiService = RetrofitClient.instance.create(ChatApi::class.java)
+
+    val chatUserApiService = ChatUserRetrofitClient.instance.create(ChatUserApi::class.java)
+
+    suspend fun getChatList(userId: String) {
+        try {
+            if (userId.isEmpty()) {
+                return
+            }
+
+            val response = apiService.getChatList(userId)
+            if (response.isSuccessful) {
+                response.body()?.let { history ->
+                    val chats = history.chatIds
+                        .filter { chat ->
+                            db.chatDao().getChatByChatId(userId, chat.id) == null // 只处理数据库不存在的记录
+                        }
+                        .map { chat ->
+                        var otherUserId = ""
+                        var lastMessage = ""
+                        var lastTimestamp = "No timestamp"
+
+                        val response2 = apiService.getChatHistory(chat.id)
+                        if (response2.isSuccessful) {
+                            response2.body()?.let { history2 ->
+                                val users = history2.messages
+                                    .filter { it.sender_id != userId }
+                                    .map { it.sender_id }
+                                    .distinct()
+
+                                otherUserId = users.firstOrNull() ?: ""
+
+                                val lastMsg = history2.messages.lastOrNull()
+                                lastMessage = lastMsg?.message ?: "No messages"
+                                lastTimestamp = lastMsg?.timestamp ?: "No timestamp"
+                            }
+                        }
+
+                        var otherUserName = otherUserId
+                        if (otherUserId.isNotEmpty()) {
+                            try {
+                                val result = chatUserApiService.getUser(otherUserId)
+                                otherUserName = result.username
+                            } catch (e: Exception) {
+                            }
+                        }
+                        Chat(
+                            chatId = chat.id.toString(),
+                            userId = userId,
+                            otherUserId = chat.id.toString(),
+                            otherUserName = otherUserName,
+                            lastMessage = lastMessage,
+                            timestamp = parseTimestamp(lastTimestamp)
+                        )
+                    }
+
+                    // 批量保存到数据库
+                    db.chatDao().insertChats(chats)
+                }
+                NetworkResult.Success("Success")
+            } else {
+                NetworkResult.Error("Failed to create chat: ${response.code()}")
+            }
+        } catch (e: Exception) {
+
+        }
+    }
+
+    private fun parseTimestamp(isoTime: String): Long {
+        return try {
+            Instant.parse(isoTime).toEpochMilli()
+        } catch (e: Exception) {
+            0L
+        }
+    }
 
     // 获取聊天列表
     fun getChats(userId: String): Flow<List<Chat>> {

@@ -289,10 +289,10 @@ public fun loadNetworkPainter(base64: String): Painter {
             val decodedBytes = Base64.decode(pureBase64, Base64.DEFAULT)
             BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
         } catch (e: Exception) {
-            null // return null if decoding fails
+            null // 解码失败返回 null
         }
     }
 
     return bitmap?.asImageBitmap()?.let { BitmapPainter(it) }
-        ?: painterResource(R.drawable.frame_1_rectangle_item_1) // show the default image if decoding fails
+        ?: painterResource(R.drawable.frame_1_rectangle_item_1) // 失败时显示占位图
 }
