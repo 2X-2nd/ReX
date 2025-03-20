@@ -244,12 +244,3 @@ The automated test execution logs:
    - **Justification:**
      Labels (`return@setOnClickListener`) are standard in Kotlin Android development to manage nested lambdas, especially within UI event listeners. Removing them would lead to unclear control flow, contrary to Kotlin’s design idioms.
 
----
-
-> **Note:** All identified issues above are acceptable trade-offs in an Android Jetpack Compose or standard Activity context. Fixing them would reduce readability, consistency, or UI structure clarity.
-
----
-
-
-
-
