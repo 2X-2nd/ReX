@@ -373,14 +373,16 @@ class PostActivity : AppCompatActivity() {
     }
 
     private fun getAddressFromLocation(lat: Double, lng: Double): String {
-        try {
+        return try {
             val geocoder = Geocoder(this, Locale.getDefault())
-            return geocoder.getFromLocation(lat, lng, 1)?.get(0)?.getAddressLine(0)
-                ?: "Unknown Location"
-        } catch (e: Exception) {
-            return "Unknown Location"
+            geocoder.getFromLocation(lat, lng, 1)?.get(0)?.getAddressLine(0) ?: "Unknown Location"
+        } catch (e: IOException) { // 网络或 I/O 问题
+            "Unknown Location"
+        } catch (e: IllegalArgumentException) { // 经纬度值不在有效范围内
+            "Unknown Location"
         }
     }
+
 
     private fun selectImageFromGallery() {
         val intent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
@@ -403,11 +405,16 @@ class PostActivity : AppCompatActivity() {
     private fun uriToBase64(context: Context, uri: Uri): String? {
         return try {
             val inputStream = context.contentResolver.openInputStream(uri)
-            val bytes = inputStream?.readBytes() // 读取全部字节
-            Base64.encodeToString(bytes, Base64.DEFAULT) // 编码为 Base64
-        } catch (e: Exception) {
+            // 如果 inputStream 为 null，则直接返回 null
+            val bytes = inputStream?.readBytes() ?: return null
+            Base64.encodeToString(bytes, Base64.DEFAULT)
+        } catch (e: IOException) {
+            e.printStackTrace()
+            null
+        } catch (e: SecurityException) {
             e.printStackTrace()
             null
         }
     }
+
 }

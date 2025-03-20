@@ -73,18 +73,13 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
                     }
                 }
             } catch (e: IOException) {
-                // 处理网络错误
                 _loadChatHistoryState.value = NetworkResult.Error("Network error: ${e.message}")
             } catch (e: HttpException) {
-                // 处理 HTTP 错误
                 _loadChatHistoryState.value = NetworkResult.Error("Server error: ${e.code()}")
             } catch (e: JsonParseException) {
-                // 处理 JSON 解析错误
                 _loadChatHistoryState.value = NetworkResult.Error("Data parsing error")
-            } catch (e: CancellationException) {
-                // 任务取消（协程被取消时抛出的异常，通常不需要特殊处理）
-                throw e
             }
+
         }
     }
 
