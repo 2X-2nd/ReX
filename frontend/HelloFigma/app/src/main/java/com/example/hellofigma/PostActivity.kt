@@ -14,6 +14,7 @@ import android.provider.MediaStore
 import android.text.Editable
 import android.text.TextWatcher
 import android.util.Base64
+import android.util.Log
 import android.view.View
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
@@ -32,6 +33,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+import java.io.IOException
 import java.util.*
 
 
@@ -351,8 +353,15 @@ class PostActivity : AppCompatActivity() {
         lifecycleScope.launch(Dispatchers.IO) { // 在 IO 线程执行耗时操作
             val address = try {
                 getAddressFromLocation(location.latitude, location.longitude)
-            } catch (e: Exception) {
+            } catch (e: IOException) { // 处理网络错误或地址解析失败
+                Log.e("PostActivity", "Failed to get address: Network error", e)
                 "Unknown Location"
+            } catch (e: SecurityException) { // 处理缺少定位权限
+                Log.e("PostActivity", "Failed to get address: No location permission", e)
+                "Permission Denied"
+            } catch (e: IllegalArgumentException) { // 处理无效的经纬度
+                Log.e("PostActivity", "Failed to get address: Invalid coordinates", e)
+                "Invalid Location"
             }
             withContext(Dispatchers.Main) { // 切换回主线程更新 UI
                 tvUserLocation.text = address

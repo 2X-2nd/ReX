@@ -6,6 +6,7 @@ import android.content.pm.PackageManager
 import android.location.Geocoder
 import android.location.Location
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -16,6 +17,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.*
+import java.io.IOException
 import java.util.Locale
 
 class StorageActivity : AppCompatActivity(), OnMapReadyCallback {
@@ -140,14 +142,17 @@ class StorageActivity : AppCompatActivity(), OnMapReadyCallback {
         val geocoder = Geocoder(this, Locale.getDefault())
         return try {
             val addresses = geocoder.getFromLocation(lat, lng, 1)
-            if (addresses!!.isNotEmpty()) {
-                val address = addresses[0]
-                address.getAddressLine(0) // 获取完整地址
+            if (!addresses.isNullOrEmpty()) {
+                addresses[0].getAddressLine(0) // 获取完整地址
             } else {
                 "Unknown Location"
             }
-        } catch (e: Exception) {
+        } catch (e: IOException) { // 处理网络或 GPS 服务不可用的情况
+            Log.e("LocationService", "Network or GPS error while fetching address", e)
             "Unknown Location"
+        } catch (e: IllegalArgumentException) { // 处理无效的经纬度
+            Log.e("LocationService", "Invalid latitude or longitude: ($lat, $lng)", e)
+            "Invalid Location"
         }
     }
 }

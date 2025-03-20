@@ -1,6 +1,7 @@
 package com.example.hellofigma.message.repository
 
 import android.content.Context
+import android.util.Log
 import androidx.room.Room
 import com.example.hellofigma.message.model.Chat
 import com.example.hellofigma.message.model.Message
@@ -13,6 +14,7 @@ import java.time.Instant
 import java.io.IOException
 import retrofit2.HttpException
 import com.google.gson.JsonParseException
+import java.time.format.DateTimeParseException
 
 
 class ChatRepository private constructor(context: Context) {
@@ -72,14 +74,20 @@ class ChatRepository private constructor(context: Context) {
                         }
 
                         var otherUserName = otherUserId
-                        if (otherUserId.isNotEmpty()) {
-                            try {
-                                val result = chatUserApiService.getUser(otherUserId)
-                                otherUserName = result.username
-                            } catch (e: Exception) {
-                                e.printStackTrace()
+                            if (otherUserId.isNotEmpty()) {
+                                try {
+                                    val result = chatUserApiService.getUser(otherUserId)
+                                    otherUserName = result.username
+                                } catch (e: IOException) { // 处理网络错误
+                                    Log.e("ChatRepository", "Network error while fetching user info: ${e.message}", e)
+                                } catch (e: HttpException) { // 处理 HTTP 失败
+                                    Log.e("ChatRepository", "HTTP error ${e.code()} while fetching user info", e)
+                                } catch (e: JsonParseException) { // 处理 JSON 解析错误
+                                    Log.e("ChatRepository", "JSON parsing error while fetching user info", e)
+                                } catch (e: NullPointerException) { // 处理返回数据为空的情况
+                                    Log.e("ChatRepository", "User data is null for userId: $otherUserId", e)
+                                }
                             }
-                        }
                         Chat(
                             chatId = chat.id.toString(),
                             userId = userId,
@@ -97,15 +105,26 @@ class ChatRepository private constructor(context: Context) {
             } else {
                 NetworkResult.Error("Failed to create chat: ${response.code()}")
             }
-        } catch (e: Exception) {
-
+        } catch (e: IOException) { // 处理网络问题
+            Log.e("ChatRepository", "Network error while fetching chat list: ${e.message}", e)
+        } catch (e: HttpException) { // 处理 HTTP 错误
+            Log.e("ChatRepository", "HTTP error ${e.code()} while fetching chat list", e)
+        } catch (e: JsonParseException) { // 处理 JSON 解析错误
+            Log.e("ChatRepository", "JSON parsing error while fetching chat list", e)
+        } catch (e: NullPointerException) { // 处理数据为空的情况
+            Log.e("ChatRepository", "Unexpected null response while fetching chat list", e)
         }
+
     }
 
-    private fun parseTimestamp(isoTime: String): Long {
+    private fun parseTimestamp(isoTime: String?): Long {
         return try {
             Instant.parse(isoTime).toEpochMilli()
-        } catch (e: Exception) {
+        } catch (e: DateTimeParseException) { // 处理时间格式错误
+            Log.e("TimestampParser", "Invalid date format: $isoTime", e)
+            0L
+        } catch (e: NullPointerException) { // 处理 `null` 值
+            Log.e("TimestampParser", "Timestamp is null", e)
             0L
         }
     }
@@ -149,8 +168,21 @@ class ChatRepository private constructor(context: Context) {
                     emit(NetworkResult.Error("Failed to create chat: ${response.code()}"))
                 }
             }
-        } catch (e: Exception) {
-            emit(NetworkResult.Error(e.toString()))
+        } catch (e: IOException) { // 网络错误
+            Log.e("FetchData", "Network error: ${e.message}", e)
+            emit(NetworkResult.Error("Network error: ${e.message}"))
+        } catch (e: HttpException) { // HTTP 响应错误
+            Log.e("FetchData", "HTTP error ${e.code()}: ${e.message}", e)
+            emit(NetworkResult.Error("Server error: ${e.code()}"))
+        } catch (e: JsonParseException) { // JSON 解析错误
+            Log.e("FetchData", "JSON parsing error: ${e.message}", e)
+            emit(NetworkResult.Error("Data parsing error"))
+        } catch (e: NullPointerException) { // 处理空值情况
+            Log.e("FetchData", "Unexpected null value", e)
+            emit(NetworkResult.Error("Unexpected null value"))
+        } catch (e: IllegalStateException) { // Flow 处理错误
+            Log.e("FetchData", "Illegal state: ${e.message}", e)
+            emit(NetworkResult.Error("Illegal state: ${e.message}"))
         }
     }
 
@@ -180,8 +212,18 @@ class ChatRepository private constructor(context: Context) {
             else {
                 NetworkResult.Error("Failed to create chat: ${response.code()}")
             }
-        } catch (e: Exception) {
-            NetworkResult.Error("Network connection failed: ${e.localizedMessage}")
+        } catch (e: IOException) { // 网络异常
+            Log.e("getChatHistory", "Network error: ${e.message}", e)
+            NetworkResult.Error("Network error: ${e.message}")
+        } catch (e: HttpException) { // HTTP 响应异常
+            Log.e("getChatHistory", "HTTP error: ${e.code()} ${e.message}", e)
+            NetworkResult.Error("HTTP error: ${e.code()}")
+        } catch (e: JsonParseException) { // JSON 解析错误
+            Log.e("getChatHistory", "JSON parsing error", e)
+            NetworkResult.Error("Data parsing error")
+        } catch (e: NullPointerException) { // 处理 `null` 值
+            Log.e("getChatHistory", "Unexpected null value", e)
+            NetworkResult.Error("Unexpected null value")
         }
     }
 

@@ -8,6 +8,7 @@ import android.graphics.BitmapFactory
 import android.net.Uri
 import android.os.Bundle
 import android.util.Base64
+import android.util.Log
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
@@ -144,17 +145,14 @@ class ItemActivity : ComponentActivity() {
 
     private fun decodeBase64(base64: String): Bitmap? {
         return try {
-            val pureBase64 = base64.substringAfter(",", base64)
+            val pureBase64 = base64.substringAfter(",", base64) // 移除 `data:image/png;base64,`
             val decodedBytes = Base64.decode(pureBase64, Base64.DEFAULT)
             BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.size)
-        } catch (e: IllegalArgumentException) {
-            // 处理 Base64 解码失败（格式错误）
+        } catch (e: IllegalArgumentException) { // 处理 Base64 解析失败
+            Log.e("decodeBase64", "Base64 decoding failed", e)
             null
-        } catch (e: OutOfMemoryError) {
-            // 处理图片过大导致的内存溢出
-            null
-        } catch (e: ArrayIndexOutOfBoundsException) {
-            // 处理数组越界异常
+        } catch (e: OutOfMemoryError) { // 处理 Bitmap 内存溢出
+            Log.e("decodeBase64", "Bitmap decoding failed: Out of Memory", e)
             null
         }
     }

@@ -48,14 +48,18 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
 
     private val _addChatState = mutableStateOf<NetworkResult<Chat>>(NetworkResult.Loading)
     val addChatState: State<NetworkResult<Chat>> = _addChatState
+
     fun addChat(userId: String, otherUserId: String, otherUserName: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            repository.addChat(userId, otherUserId, otherUserName)
-                .collect { result ->
-                    _addChatState.value = result
-                }
+            handleAddChat(userId, otherUserId, otherUserName)
         }
     }
+
+    private suspend fun handleAddChat(userId: String, otherUserId: String, otherUserName: String) {
+        repository.addChat(userId, otherUserId, otherUserName)
+            .collect { result -> _addChatState.value = result }
+    }
+
 
     fun loadChatHistory(chatId: String, userId: String, otherUserId: String) {
         viewModelScope.launch(Dispatchers.IO) {
@@ -80,9 +84,6 @@ class ChatViewModel(application: Application) : AndroidViewModel(application) {
             } catch (e: CancellationException) {
                 // 任务取消（协程被取消时抛出的异常，通常不需要特殊处理）
                 throw e
-            } catch (e: Exception) {
-                // 捕获其他未知异常（作为最后的兜底）
-                _loadChatHistoryState.value = NetworkResult.Error("Unexpected error: ${e.message}")
             }
         }
     }

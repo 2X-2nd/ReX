@@ -48,6 +48,7 @@ import com.example.hellofigma.message.MessageActivity
 import com.example.hellofigma.viewmodel.ProductViewModel
 import com.google.relay.compose.EmptyPainter
 import com.example.weather_dashboard.data.models.Product
+import java.io.IOException
 
 
 @Composable
@@ -299,8 +300,14 @@ fun decodeBase64ToBitmap(base64: String): android.graphics.Bitmap? {
     } catch (e: IllegalArgumentException) {  // Base64 format error
         Log.e("loadNetworkPainter", "Base64 decoding failed", e)
         null
-    } catch (e: RuntimeException) {  // Bitmap decoding failed
-        Log.e("loadNetworkPainter", "Bitmap decoding failed", e)
+    } catch (e: IllegalArgumentException) { // Base64 格式错误
+        Log.e("loadNetworkPainter", "Base64 decoding failed", e)
+        null
+    } catch (e: OutOfMemoryError) { // 内存不足，无法解码 Bitmap
+        Log.e("loadNetworkPainter", "Bitmap decoding failed: Out of Memory", e)
+        null
+    } catch (e: IOException) { // 处理可能的 I/O 异常（尽管通常不涉及，但更安全）
+        Log.e("loadNetworkPainter", "Bitmap decoding failed: IO Exception", e)
         null
     }
 }
