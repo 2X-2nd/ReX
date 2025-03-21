@@ -270,3 +270,11 @@ The automated test execution logs:
    - **Justification:**
      Labels (`return@setOnClickListener`) are standard in Kotlin Android development to manage nested lambdas, especially within UI event listeners. Removing them would lead to unclear control flow, contrary to Kotlin’s design idioms.
 
+##### Code Pattern: typescript eslint: No var requires
+
+1. **Require statement not part of import statement.**
+
+   - **Location in Git:** `backend/user-service/server.js` and `backend/user-service/userRoutes.js` and `backend/user-service/userRoutes.js` 
+   - **Justification:**
+    Codacy is enforcing the typescript eslint: No var requires rule while it is actually this rule has been deprecated in favour of the @typescript-eslint/no-require-imports rule.
+
