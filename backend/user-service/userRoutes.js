@@ -1,16 +1,15 @@
-const express = require('express');
+import express from 'express';
+import db from '../db.js';
+
 const router = express.Router();
-const db = require('../db');
 
 // POST /users/register - Registers a new user
 router.post('/register', async (req, res) => {
     const { google_id, email, username, preferences, latitude, longitude } = req.body;
 
     try {
-        // Convert preferences array to JSON string before inserting into MySQL
         const preferencesJson = JSON.stringify(preferences);
 
-        // Insert user into the database
         await db.execute(
             `INSERT INTO users (google_id, email, username, preferences, latitude, longitude) VALUES (?, ?, ?, ?, ?, ?)`,
             [google_id, email, username, preferencesJson, latitude, longitude]
@@ -21,8 +20,6 @@ router.post('/register', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
-
-module.exports = router;
 
 // GET /users/:id - Retrieves user profile
 router.get('/:id', async (req, res) => {
@@ -36,22 +33,20 @@ router.get('/:id', async (req, res) => {
         }
 
         const user = rows[0];
+        console.log("Raw database response:", user);
 
-        console.log("Raw database response:", user); // Debugging line
-
-        // Ensure preferences is properly parsed
         if (typeof user.preferences === 'string') {
             try {
                 user.preferences = JSON.parse(user.preferences);
             } catch (error) {
                 console.error("JSON parsing error:", error);
-                user.preferences = []; // Fallback to an empty array if parsing fails
+                user.preferences = [];
             }
         } else if (!Array.isArray(user.preferences)) {
-            user.preferences = []; // Ensure preferences is always an array
+            user.preferences = [];
         }
 
-        console.log("Parsed preferences:", user.preferences); // Debugging line
+        console.log("Parsed preferences:", user.preferences);
 
         res.status(200).json(user);
     } catch (error) {
@@ -59,14 +54,11 @@ router.get('/:id', async (req, res) => {
     }
 });
 
-
-
 // DELETE /users/:id - Deletes a user account
 router.delete('/:id', async (req, res) => {
     const { id } = req.params;
 
     try {
-        // Delete user from database
         const [result] = await db.execute(`DELETE FROM users WHERE google_id = ?`, [id]);
 
         if (result.affectedRows === 0) {
@@ -85,10 +77,8 @@ router.put('/:id', async (req, res) => {
     const { email, username, preferences, latitude, longitude } = req.body;
 
     try {
-        // Convert preferences to JSON string before updating
         const preferencesJson = JSON.stringify(preferences);
 
-        // Update user in the database
         const [result] = await db.execute(
             `UPDATE users SET email = ?, username = ?, preferences = ?, latitude = ?, longitude = ? WHERE google_id = ?`,
             [email, username, preferencesJson, latitude, longitude, id]
@@ -103,3 +93,5 @@ router.put('/:id', async (req, res) => {
         res.status(500).json({ error: error.message });
     }
 });
+
+export default router;
