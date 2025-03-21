@@ -1,6 +1,8 @@
-import 'dotenv/config';
-import express from 'express';
-import axios from 'axios';
+
+import dotenv/config = require('dotenv/config');
+import express = require('express');
+import axios = require('axios');
+
 
 const app = express();
 const PORT = process.env.PORT || 5001;
