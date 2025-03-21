@@ -1,12 +1,12 @@
-import express, {Request, Response} from 'express'
-const mysql = require('mysql2')
-const dotenv = require('dotenv')
-const cors = require('cors')
+import express, { Request, Response } from 'express'
+import mysql, { ResultSetHeader, RowDataPacket } from 'mysql2'
+import dotenv from 'dotenv'
+import cors from 'cors'
 
 dotenv.config()
 
 const app = express()
-app.use(express.json({ limit: '1mb'}))
+app.use(express.json({ limit: '1mb' }))
 app.use(express.urlencoded({ limit: '1mb', extended: true }))
 app.use(cors()) // Enable CORS
 
@@ -41,30 +41,24 @@ app.post('/listings', (req: Request, res: Response) => {
     // Insert the listing first
     const sql = `INSERT INTO listings (title, description, price, seller_id, latitude, longitude, category) VALUES (?, ?, ?, ?, ?, ?, ?)`;
 
-    db.query(sql, [title, description, price, seller_id, latitude || null, longitude || null, category || null], (err: any, result: { insertId: any }) => {
+    db.query(sql, [title, description, price, seller_id, latitude || null, longitude || null, category || null], (err, result) => {
         if (err) {
-            console.error("❌ Error inserting listing:", err);
             return res.status(500).json({ error: "Database error" });
         }
-
-        const listingId = result.insertId;
+        const insertResult = result as ResultSetHeader;
+        const listingId = insertResult.insertId;
 
         // Insert images into listing_images table
         const imageSql = "INSERT INTO listing_images (listing_id, image_url) VALUES ?";
         const imageValues = images.map((image: string) => [listingId, image]);
 
         db.query(imageSql, [imageValues], (err: any) => {
-            if (err) {
-                console.error("❌ Error inserting images:", err);
-                return res.status(500).json({ error: "Database error" });
-            }
-
             res.status(201).json({ id: listingId, message: "Listing created successfully" });
         });
     });
 });
 
-// GET /listings - Retrieve by ID or perform a search
+// GET /listings - Retrieve by ID
 app.get('/listings', (req: Request, res: Response) => {
     const { id } = req.query;
 
@@ -72,7 +66,7 @@ app.get('/listings', (req: Request, res: Response) => {
         // Get listing details
         const sql = `SELECT * FROM listings WHERE id = ?`;
 
-        db.query(sql, [id], (err: any, results: string | any[]) => {
+        db.query(sql, [id], (err: any, results: RowDataPacket[]) => {
             if (err) return res.status(500).json({ error: "Database error" });
             if (results.length === 0) return res.status(404).json({ error: "Listing not found" });
 
@@ -100,14 +94,12 @@ app.get('/listings', (req: Request, res: Response) => {
 
 // PUT /listings/:id - Update an existing listing
 app.put('/listings/:id', (req: Request, res: Response) => {
-
-
     const listingId = req.params.id;
     const { title, description, price, latitude, longitude, images } = req.body;
 
     // Check if the listing exists before updating
     const checkSql = "SELECT * FROM listings WHERE id = ?";
-    db.query(checkSql, [listingId], (err: any, results: string | any[]) => {
+    db.query(checkSql, [listingId], (err, results: RowDataPacket[]) => {
         if (err) {
             console.error("Error checking listing:", err)
             return res.status(500).json({ error: "Database error" })
@@ -167,11 +159,6 @@ app.put('/listings/:id', (req: Request, res: Response) => {
                 const imageValues = images.map((image: any) => [listingId, image])
 
                 db.query(insertImageSql, [imageValues], (err: any) => {
-                    if (err) {
-                        console.error("Error inserting new images:", err)
-                        return res.status(500).json({ error: "Database error" })
-                    }
-
                     res.status(200).json({ message: "Listing updated successfully" })
                 })
             })
@@ -181,14 +168,13 @@ app.put('/listings/:id', (req: Request, res: Response) => {
     })
 })
 
-
 // DELETE /listings/:id - Remove a listing from the marketplace
 app.delete('/listings/:id', (req: Request, res: Response) => {
     const listingId = req.params.id;
 
     // Check if the listing exists before deleting
     const checkSql = "SELECT * FROM listings WHERE id = ?";
-    db.query(checkSql, [listingId], (err: any, results: string | any[]) => {
+    db.query(checkSql, [listingId], (err, results: RowDataPacket[]) => {
         if (err) {
             console.error("Error checking listing:", err)
             return res.status(500).json({ error: "Database error" })
@@ -275,8 +261,9 @@ app.get('/listings/category', (req: Request, res: Response) => {
     });
 });
 
-// **Start the Microservice**
 const PORT = process.env.PORT || 8080;
 app.listen(PORT, () => {
-    console.log(`🚀 Listings microservice running on port ${PORT}`)
-})
+    console.log(`🚀 Listings microservice running on port ${PORT}`);
+});
+
+export default app;

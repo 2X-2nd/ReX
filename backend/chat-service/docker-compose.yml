@@ -3,6 +3,8 @@ services:
     build:
       context: .
       dockerfile: dockerfile
+      args:
+        - PORT=${CHAT_PORT}
     container_name: chat_service
     environment:
       DB_HOST: ${DB_HOST}
