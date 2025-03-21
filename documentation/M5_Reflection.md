@@ -26,3 +26,4 @@ We relied on AI technologies for approximately **15%** of this milestone, specif
 - **Leyang Gao:** Implemented front-end Espresso test cases and contributed to writing the front-end test specification section in the Testing_And_Code_Review.md report. Contributed ~12 hours.
 - **Yichen Li:** Implemented front-end Espresso test cases and contributed to writing the Codacy issues justification and formatting the Testing_And_Code_Review.md report. Contributed ~14 hours.
 - **Tianrui Chu:** Implemented back-end Jest test cases for user service and recommendation engine, wrote the non functional test for user service and recommendation engine and formatting the Testing_And_Code_Review.md report. Contributed ~13 hours.
+- **Dingxi Yang:** Implemented back-end Jest test cases for chat service and marketplace service. Contributed ~13 hours.
