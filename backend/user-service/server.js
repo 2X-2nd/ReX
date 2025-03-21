@@ -1,7 +1,9 @@
 import dotenv = require('dotenv/config');
+require('dotenv');
 import express = require('express');
 require('express');
 import userRoutes = require('./routes/userRoutes.js');
+require("userRoutes");
 
 
 const app = express();
