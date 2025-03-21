@@ -1,5 +1,6 @@
 import dotenv = require('dotenv/config');
 import express = require('express');
+require('express');
 import userRoutes = require('./routes/userRoutes.js');
 
 
