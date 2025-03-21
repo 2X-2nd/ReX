@@ -1,31 +1,90 @@
-## STEP 3: Peer Test Evaluation and Feedback
+# M5_WOCMS_Review
 
-### Evaluation Table
+## 1. Manual Code Review
 
-| Criteria | Score | Comments |
-|---------|-------|----------|
-| **Automated front-end tests are present, and run successfully** | 2/2 | The front-end Espresso tests are comprehensive, covering key functionalities such as product viewing, posting, and navigation. Test logs indicate all tests passed successfully, demonstrating a robust testing framework. |
-| **Automated back-end tests are present, and run successfully** | 2/2 | Back-end Jest tests effectively cover major APIs, including both mocked and unmocked scenarios. Tests are logically organized, and execution logs confirm successful test runs, ensuring API reliability. |
-| **Coverage report is included for both front-end and back-end** | 2/2 | Coverage reports for both front-end and back-end are included, providing clear insights into test coverage. Front-end test screenshots are clear, and Jest coverage results show comprehensive test coverage. |
-| **Codacy automated code review results are included** | 2/2 | Codacy results are clearly presented with detailed explanations for each unfixed issue. Justifications are reasonable and well-articulated, demonstrating a thorough understanding of code quality. |
+### 1.a. Code Quality
+- The WOCMS team's code is well-documented with meaningful variable names.
+- The code structure is clear, efficient, and maintains good readability.
+- No noticeable design smells or anti-patterns.
+- Error handling is consistently implemented.
 
-**Total: 8/8**
+**Score: 10/10**
+
+---
+
+## 2. Manual Test Review
+
+### 2.a. Test Completeness
+- The WOCMS team's tests cover all APIs exposed to the frontend.
+- Edge cases and error cases are thoroughly tested.
+- All three main use cases specified in the design document are covered.
+
+**Score: 10/10**
+
+### 2.b. Requirement Coverage
+- Tests align with the specified requirements and design.
+- Test implementation accurately reflects intended functionality.
+
+**Score: 10/10**
+
+### 2.c. Test Structure
+- Tests are well-organized and modular.
+- Each test case is logically structured with clear inputs and expected outputs.
+
+**Score: 10/10**
+
+### 2.d. Test Coverage
+- Test cases are comprehensive and provide high coverage.
+- Assertions are detailed and specific.
+
+**Score: 10/10**
+
+### 2.e. Non-Functional Requirements
+- Two non-functional requirements are effectively tested.
+- Test logs provide evidence of verification.
+
+**Score: 10/10**
+
+### 2.f. Automation
+- All backend tests can be triggered and executed automatically without manual intervention.
+
+**Score: 10/10**
 
 ---
 
-### Peer Review Comments
+## 3. Automated Code Review
 
-Your team's Testing and Code Review report is exemplary. The front-end Espresso tests are well-structured, targeting various user interactions effectively. Test logs and screenshots demonstrate successful execution, reflecting a mature testing process.
+### 3.a. Codacy Setup
+- Codacy is properly configured and runs successfully with the required settings.
 
-On the back-end, the Jest tests are thorough, covering essential APIs with both mocked and unmocked scenarios. The logical organization and clear documentation enhance the maintainability and reliability of the tests.
+**Score: 10/10**
 
-The inclusion of comprehensive coverage reports for both front-end and back-end showcases a commitment to code quality. The clear presentation of Codacy issues, along with well-reasoned justifications for unfixed issues, reflects a deep understanding of the codebase and potential challenges.
+### 3.b. Justification of Issues
+- Remaining Codacy issues are minimal and well-justified.
+- Explanations provided are clear and reasonable.
 
-**Suggestions:**
-
-- Consider adding more descriptive test names in some front-end tests to further clarify test intentions for future maintainers.
-- Including a brief summary of total test coverage percentages in the report could enhance readability and provide quick insights into test completeness.
-
-Overall, your team's work sets a high standard for testing and code review practices. Keep up the excellent work!
+**Score: 10/10**
 
 ---
+
+## 4. Fault Identification
+
+During the review, we identified one potential issue:
+
+- **Fault:**  
+  In the profile update flow, after an unsuccessful API call (e.g., due to network failure), the UI does not provide feedback to the user, and the loading spinner remains indefinitely visible.  
+  This could confuse users as they do not know whether the update succeeded or failed.
+  
+  **Severity:** Medium.  
+  It affects usability but does not compromise app security or core functionality.
+  
+  **Suggested Fix:**  
+  Implement timeout or failure handling to dismiss the spinner and show an appropriate error message when the API call fails.
+
+**Score: 10/10**
+
+---
+
+## Total Score
+
+**40/40**
