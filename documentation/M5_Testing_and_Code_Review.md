@@ -21,9 +21,21 @@
 | **GET /recommendations/:userId**     | [`backend/tests/recommendationNM.test.js#L35`](#)  | [`backend/tests/recommendationM.test.js#L65`](#)  | User Service (API), Listings Service (API) |
 | **POST /price-suggestions**          | [`backend/tests/recommendationNM.test.js#L90`](#)  | [`backend/tests/recommendationM.test.js#L130`](#) | eBay API (SerpAPI)                 |
 | **GET /price-comparison/:itemId**    | [`backend/tests/recommendationNM.test.js#L150`](#) | [`backend/tests/recommendationM.test.js#L200`](#) | Listings Service (API), eBay API (SerpAPI) |
+| **POST /chat/start**    | [`backend/chat-service/test/chat.mock.test.ts#L13`](#) | [`backend/chat-service/test/chat.test.ts#L17`](#) | Database (MySQL) |
+| **GET /chat/:chatId**    | [`backend/chat-service/test/chat.mock.test.ts#L47`](#) | [`backend/chat-service/test/chat.test.ts#L46`](#) | Database (MySQL) |
+| **GET /chat/user/:userId**    | [`backend/chat-service/test/chat.mock.test.ts#L86`](#) | [`backend/chat-service/test/chat.test.ts#L73`](#) | Database (MySQL) |
+| **POST /chat/:chatId/message**    | [`backend/chat-service/test/chat.mock.test.ts#L114`](#) | [`backend/chat-service/test/chat.test.ts#L88`](#) | Database (MySQL) |
+| **POST /listings**    | [`backend/marketplace-service/test/listings.test.ts#L48`](#) | [`backend/marketplace-service/test/listings.mock.test.ts#L37`](#) | Database (MySQL) |
+| **GET /listings**    | [`backend/marketplace-service/test/listings.test.ts#L84`](#) | [`backend/marketplace-service/test/listings.mock.test.ts#L74`](#) | Database (MySQL) |
+| **GET /listings/:id**    | [`backend/marketplace-service/test/listings.test.ts#L105`](#) | [`backend/marketplace-service/test/listings.mock.test.ts#L74`](#) | Database (MySQL) |
+| **PUT /listings/:id**    | [`backend/marketplace-service/test/listings.test.ts#L131-L182`](#) | [`backend/marketplace-service/test/listings.mock.test.ts#L144`](#) | Database (MySQL) |
+| **DELETE /listings/:id**    | [`backend/marketplace-service/test/listings.test.ts#L193`](#) | [`backend/marketplace-service/test/listings.mock.test.ts#L202`](#) | Database (MySQL) |
 #### 2.2 Test Results
 <img width="510" alt="2025-03-20_23-34-20" src="https://github.com/user-attachments/assets/0a6c28d9-672a-4fcb-a930-a5c25e464c12" />
 <img width="440" alt="2025-03-20_23-38-02" src="https://github.com/user-attachments/assets/66bb3ab0-ec8a-4c9a-900c-20e06d05c999" />
+<img width="541" alt="image" src="https://github.com/user-attachments/assets/5fc0147c-34d8-4ee7-9e71-6be3317fb81a" />
+<img width="524" alt="image" src="https://github.com/user-attachments/assets/313671a7-69ab-47cb-b81c-0267d14e430f" />
+
 
 ## 3. Back-end Test Specification: Tests of Non-Functional Requirements
 
