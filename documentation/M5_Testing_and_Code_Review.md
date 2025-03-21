@@ -10,9 +10,7 @@
 
 ## 2. Back-end Test Specification: APIs
 
-### 2.1. Locations of Back-end Tests and Instructions to Run Them
-
-#### 2.1.1. Tests
+#### 2.1 Test Locations
 
 | **Interface**                         | **Describe Group Location, No Mocks**                  | **Describe Group Location, With Mocks**              | **Mocked Components**              |
 | ------------------------------------- | ---------------------------------------------------- | -------------------------------------------------- | ---------------------------------- |
@@ -23,6 +21,22 @@
 | **GET /recommendations/:userId**     | [`backend/tests/recommendationNM.test.js#L35`](#)  | [`backend/tests/recommendationM.test.js#L65`](#)  | User Service (API), Listings Service (API) |
 | **POST /price-suggestions**          | [`backend/tests/recommendationNM.test.js#L90`](#)  | [`backend/tests/recommendationM.test.js#L130`](#) | eBay API (SerpAPI)                 |
 | **GET /price-comparison/:itemId**    | [`backend/tests/recommendationNM.test.js#L150`](#) | [`backend/tests/recommendationM.test.js#L200`](#) | Listings Service (API), eBay API (SerpAPI) |
+#### 2.2 Test Results
+<img width="510" alt="2025-03-20_23-34-20" src="https://github.com/user-attachments/assets/0a6c28d9-672a-4fcb-a930-a5c25e464c12" />
+<img width="440" alt="2025-03-20_23-38-02" src="https://github.com/user-attachments/assets/66bb3ab0-ec8a-4c9a-900c-20e06d05c999" />
+
+## 3. Back-end Test Specification: Tests of Non-Functional Requirements
+
+| **Non-Functional Requirement**  | **Location in Git**                              |
+| ------------------------------- | ------------------------------------------------ |
+| **User Service Response Time** | [`tests/performance.test.js`](#) |
+| **Recommendation Enginep Response Time**          | [`test/recommendation-engine-performance.test.js`](#) |
+
+
+Performance testing evaluated the user service's response times and scalability across multiple scenarios. Tests included single requests (GET/POST), concurrent handling (10 simultaneous requests), sustained load (50 sequential requests), and rapid sequential access (20 quick requests). Individual requests occasionally exceeded the 50ms threshold (GET: 62ms, POST: 58ms), while the service maintained excellent performance under load with 5-6ms average response times. The system processed concurrent requests efficiently and demonstrated consistent performance during the 50-request load test, with maximum response time of 9ms. These metrics indicate a well-architected service suitable for scaling in production environments. Testing utilized a mock database implementation to isolate application logic performance.
+
+The performance tests evaluated two aspects of the recommendation service: single request response times and concurrent load handling. Single requests performed well (under 200ms), but the service struggled under load with 50 concurrent requests, showing higher average response times (recommendations: 2019ms, price suggestions: 467ms, price comparison: 666ms) than the target of 300ms. This indicates the service works well for individual users but may need optimization for high-traffic scenarios.
+
 
 ## 4. Front-end Test Specification
 
