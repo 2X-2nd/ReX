@@ -21,7 +21,7 @@ const db = mysql.createPool({
     queueLimit: 0
 });
 
-db.getConnection((err: any, connection: any) => {
+db.getConnection((err: unknown, connection: any) => {
     if (err) {
         console.error('❌ Database connection failed:', err)
         return
@@ -52,7 +52,7 @@ app.post('/listings', (req: Request, res: Response) => {
         const imageSql = "INSERT INTO listing_images (listing_id, image_url) VALUES ?";
         const imageValues = images.map((image: string) => [listingId, image]);
 
-        db.query(imageSql, [imageValues], (err: any) => {
+        db.query(imageSql, [imageValues], (err: unknown) => {
             res.status(201).json({ id: listingId, message: "Listing created successfully" });
         });
     });
@@ -66,7 +66,7 @@ app.get('/listings', (req: Request, res: Response) => {
         // Get listing details
         const sql = `SELECT * FROM listings WHERE id = ?`;
 
-        db.query(sql, [id], (err: any, results: RowDataPacket[]) => {
+        db.query(sql, [id], (err: unknown, results: RowDataPacket[]) => {
             if (err) return res.status(500).json({ error: "Database error" });
             if (results.length === 0) return res.status(404).json({ error: "Listing not found" });
 
@@ -74,10 +74,10 @@ app.get('/listings', (req: Request, res: Response) => {
 
             // Fetch images separately
             const imageSql = `SELECT image_url FROM listing_images WHERE listing_id = ?`;
-            db.query(imageSql, [id], (err: any, imageResults: any[]) => {
+            db.query(imageSql, [id], (err: unknown, imageResults: any[]) => {
                 if (err) return res.status(500).json({ error: "Database error" });
 
-                listing.images = imageResults.map((img: { image_url: any }) => img.image_url);
+                listing.images = imageResults.map((img: { image_url: unknown }) => img.image_url);
                 res.status(200).json(listing);
             });
         });
@@ -85,7 +85,7 @@ app.get('/listings', (req: Request, res: Response) => {
         // Fetch multiple listings
         const sql = `SELECT l.*, (SELECT image_url FROM listing_images WHERE listing_id = l.id LIMIT 1) AS image FROM listings l`;
 
-        db.query(sql, (err: any, results: any) => {
+        db.query(sql, (err: unknown, results: any) => {
             if (err) return res.status(500).json({ error: "Something wrong" });
             res.status(200).json({ results });
         });
@@ -138,7 +138,7 @@ app.put('/listings/:id', (req: Request, res: Response) => {
             let updateSql = `UPDATE listings SET ${updateFields.join(", ")} WHERE id = ?`;
             values.push(listingId)
 
-            db.query(updateSql, values, (err: any) => {
+            db.query(updateSql, values, (err: unknown) => {
                 if (err) {
                     console.error("Error updating listing:", err)
                     return res.status(500).json({ error: "Database error" })
@@ -149,16 +149,16 @@ app.put('/listings/:id', (req: Request, res: Response) => {
         // If images are provided, update them
         if (images && images.length > 0) {
             const deleteImageSql = "DELETE FROM listing_images WHERE listing_id = ?";
-            db.query(deleteImageSql, [listingId], (err: any) => {
+            db.query(deleteImageSql, [listingId], (err: unknown) => {
                 if (err) {
                     console.error("Error deleting old images:", err)
                     return res.status(500).json({ error: "Database error" })
                 }
 
                 const insertImageSql = "INSERT INTO listing_images (listing_id, image_url) VALUES ?";
-                const imageValues = images.map((image: any) => [listingId, image])
+                const imageValues = images.map((image: unknown) => [listingId, image])
 
-                db.query(insertImageSql, [imageValues], (err: any) => {
+                db.query(insertImageSql, [imageValues], (err: unknown) => {
                     res.status(200).json({ message: "Listing updated successfully" })
                 })
             })
@@ -186,7 +186,7 @@ app.delete('/listings/:id', (req: Request, res: Response) => {
 
         // Delete the listing (Cascades to listing_images)
         const deleteSql = "DELETE FROM listings WHERE id = ?";
-        db.query(deleteSql, [listingId], (err: any) => {
+        db.query(deleteSql, [listingId], (err: unknown) => {
             if (err) {
                 console.error("Error deleting listing:", err)
                 return res.status(500).json({ error: "Database error" })
@@ -212,9 +212,8 @@ app.get('/listings/search', (req: Request, res: Response) => {
         WHERE l.title LIKE ? OR l.description LIKE ? OR l.category LIKE ?
         GROUP BY l.id
     `;
-    const searchValue = `%${query}%`;
 
-    db.query(searchSql, [searchValue, searchValue, searchValue], (err: any, results: any) => {
+    db.query(searchSql, [query, query, query], (err: unknown, results: any) => {
         if (err) {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
@@ -244,9 +243,8 @@ app.get('/listings/category', (req: Request, res: Response) => {
         WHERE l.category LIKE ?
         GROUP BY l.id
     `;
-    const searchValue = `%${query}%`;
 
-    db.query(searchSql, [searchValue], (err: any, results: any) => {
+    db.query(searchSql, [query], (err: unknown, results: any) => {
         if (err) {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
@@ -261,9 +259,11 @@ app.get('/listings/category', (req: Request, res: Response) => {
     });
 });
 
-const PORT = process.env.PORT || 8080;
-app.listen(PORT, () => {
-    console.log(`🚀 Listings microservice running on port ${PORT}`);
-});
+const PORT = process.env.PORT ?? 8080;
+if (process.env.NODE_ENV !== 'test') {
+    app.listen(PORT, () => {
+        console.log(`🚀 Listings microservice running on port ${PORT}`);
+    });
+}
 
 export default app;
