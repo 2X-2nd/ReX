@@ -3,50 +3,48 @@
 ## 1. Manual Code Review
 
 ### 1.a. Code Quality
-- The WOCMS team's code is well-documented with meaningful variable names.
-- The code structure is clear, efficient, and maintains good readability.
-- No noticeable design smells or anti-patterns.
-- Error handling is consistently implemented.
+- The WOCMS team's code is well-documented with appropriate variable names.
+- Code structure is generally clean and efficient.
+- One minor issue noticed: some methods could be broken down further to improve modularity.
+- Error handling is present but could benefit from more explicit comments in certain edge cases.
 
-**Score: 10/10**
+**Score: 9/10**
 
 ---
 
 ## 2. Manual Test Review
 
 ### 2.a. Test Completeness
-- The WOCMS team's tests cover all APIs exposed to the frontend.
-- Edge cases and error cases are thoroughly tested.
-- All three main use cases specified in the design document are covered.
+- All APIs exposed to the frontend are covered.
+- Error cases and edge cases are included.
+- Three main use cases are well-tested.
 
 **Score: 10/10**
 
 ### 2.b. Requirement Coverage
-- Tests align with the specified requirements and design.
-- Test implementation accurately reflects intended functionality.
+- Test implementation clearly matches the requirements and design specification.
 
 **Score: 10/10**
 
 ### 2.c. Test Structure
-- Tests are well-organized and modular.
-- Each test case is logically structured with clear inputs and expected outputs.
+- Tests are well-structured.
+- Some test methods could be better named to reflect specific behavior tested.
 
-**Score: 10/10**
+**Score: 9/10**
 
 ### 2.d. Test Coverage
-- Test cases are comprehensive and provide high coverage.
-- Assertions are detailed and specific.
+- High coverage achieved.
+- Assertions cover most typical and edge behaviors.
 
 **Score: 10/10**
 
 ### 2.e. Non-Functional Requirements
-- Two non-functional requirements are effectively tested.
-- Test logs provide evidence of verification.
+- Both non-functional requirements are tested effectively with logs provided.
 
 **Score: 10/10**
 
 ### 2.f. Automation
-- All backend tests can be triggered and executed automatically without manual intervention.
+- All backend tests can be executed automatically via GitHub Actions.
 
 **Score: 10/10**
 
@@ -55,36 +53,32 @@
 ## 3. Automated Code Review
 
 ### 3.a. Codacy Setup
-- Codacy is properly configured and runs successfully with the required settings.
+- Codacy configured correctly and runs as required.
 
 **Score: 10/10**
 
 ### 3.b. Justification of Issues
-- Remaining Codacy issues are minimal and well-justified.
-- Explanations provided are clear and reasonable.
+- Remaining issues justified clearly, but one or two could have a more detailed explanation (e.g., why refactoring would affect UI consistency).
 
-**Score: 10/10**
+**Score: 9/10**
 
 ---
 
 ## 4. Fault Identification
 
-During the review, we identified one potential issue:
+During the review, we identified the following issue:
 
 - **Fault:**  
-  In the profile update flow, after an unsuccessful API call (e.g., due to network failure), the UI does not provide feedback to the user, and the loading spinner remains indefinitely visible.  
-  This could confuse users as they do not know whether the update succeeded or failed.
+  In the product deletion feature, when deletion fails due to server error (e.g., network failure or backend error), the UI does not display a clear error message to the user. The current flow assumes deletion success or permission denial but lacks feedback for unexpected failures.
   
   **Severity:** Medium.  
-  It affects usability but does not compromise app security or core functionality.
+  It impacts usability in case of unexpected failures, though it does not affect the core functionality under normal conditions.
   
   **Suggested Fix:**  
-  Implement timeout or failure handling to dismiss the spinner and show an appropriate error message when the API call fails.
-
-**Score: 10/10**
+  Add appropriate error handling and user feedback (Snackbar or Toast) in case of unexpected server errors during product deletion.
 
 ---
 
 ## Total Score
 
-**40/40**
+**38/40**
