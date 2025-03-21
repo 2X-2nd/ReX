@@ -3,6 +3,7 @@
 ## 1. Change History
 Removed administrator and storage use cases.
 Change requirement specification to correct format.
+Reworded backend example's explanation for better understanding
 
 ## 2. Project Description
 ReX is a local second-hand marketplace for buying and selling pre-owned items. When relocating or decluttering, sellers can instantly offload their items to partner warehouses, where they’re securely stored until sold. This prevents waste, preserves value, and lets sellers move forward stress-free.
