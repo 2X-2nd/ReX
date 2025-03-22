@@ -190,17 +190,52 @@ The automated test execution logs:
 ### 5. Automated Code Review Results
 
 #### 5.1. Commit Hash Where Codacy Ran
-
+33530273d5ce5247929a574a359a77891b02befa
 
 #### 5.2. Unfixed Issues per Codacy Category
-(Screenshot placeholder)
+<img width="385" alt="image" src="https://github.com/user-attachments/assets/ae2dff19-cd3a-42c3-b2af-f9fc6f3b7e3e" />
+
 
 #### 5.3. Unfixed Issues per Codacy Code Pattern
-(Screenshot placeholder)
+<img width="320" alt="image" src="https://github.com/user-attachments/assets/c6c686fe-6b9e-4948-b0a2-264341b3f937" />
+
 
 ---
 
 #### 5.4. Justifications for Unfixed Issues
+
+##### Code Pattern: @typescript eslint: No explicit any
+
+1. **Unexpected any. Specify a different type.**
+   - **Location in Git:** `backend/marketplace-service/routes/listings.ts`, `backend/chat-service/models/chat.ts`
+   - **Justification:**
+     All of the suggestion fixes are performed, but these changes are not shown in Codacy for some reason.
+
+##### Code Pattern: @typescript eslint: No var requires
+
+1. **Require statement not part of import statement.**
+   - **Location in Git:** `backend/user-service/userRoutes.js`, `backend/recomendation-engine/index.js`, `backend/marketplace-service/routes/listings.ts`, `backend/user-service/server.js`, 
+   - **Justification:**
+     All of the suggestion fixes are performed, but these changes are not shown in Codacy for some reason.
+
+##### Code Pattern: @typescript eslint: Prefer nullish coalescing
+
+1. **Prefer using nullish coalescing operator (`??`) instead of a logical or (`||`), as it is a safer operator.**
+   - **Location in Git:** `backend/chat-service/server.ts`, `backend/marketplace-service/routes/listings.ts`
+   - **Justification:**
+     All of the suggestion fixes are performed, but these changes are not shown in Codacy for some reason.
+
+##### Code Pattern: Others
+
+1. **Invalid type "string | ParsedQs | (string | ParsedQs)[]" of template literal expression.**
+   - **Location in Git:** `backend/marketplace-service/routes/listings.ts`
+   - **Justification:**
+     All of the suggestion fixes are performed, but these changes are not shown in Codacy for some reason.
+
+2. **'query' may use Object's default stringification format ('[object Object]') when stringified.**
+   - **Location in Git:** `backend/marketplace-service/routes/listings.ts`
+   - **Justification:**
+     All of the suggestion fixes are performed, but these changes are not shown in Codacy for some reason.
 
 ##### Code Pattern: Method too long / Function too long
 
