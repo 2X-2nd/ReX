@@ -36,6 +36,7 @@
 <img width="541" alt="image" src="https://github.com/user-attachments/assets/5fc0147c-34d8-4ee7-9e71-6be3317fb81a" />
 <img width="524" alt="image" src="https://github.com/user-attachments/assets/313671a7-69ab-47cb-b81c-0267d14e430f" />
 
+Some of the lines are not covered since they are server or database validation check, which cannot be caught by test suites.
 
 ## 3. Back-end Test Specification: Tests of Non-Functional Requirements
 
