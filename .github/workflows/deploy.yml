@@ -6,6 +6,36 @@ on:
       - main
 
 jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: |
+          cd backend/marketplace-service
+          npm install
+
+      - name: Run Tests
+        run: |
+          cd backend/marketplace-service
+          npm test
+      
+      - name: Install dependencies
+        run: |
+          cd backend/chat-service
+          npm install
+
+      - name: Run Tests
+        run: |
+          cd backend/chat-service
+          npm test
   deploy:
     runs-on: ubuntu-latest
     steps:
@@ -59,42 +89,42 @@ jobs:
             docker system prune -af
       
       # Chat Service
-      # - name: Checkout code
-      #   uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3
 
-      # - name: Copy services to EC2
-      #   uses: appleboy/scp-action@master
-      #   with:
-      #     host: ${{ secrets.EC2_HOST_2 }}
-      #     username: ${{ secrets.EC2_USER }}
-      #     key: ${{ secrets.EC2_KEY_2 }}
-      #     source: "./backend/chat-service"
-      #     target: "/home/ubuntu/ReX"
-      #     strip_components: 1
+      - name: Copy services to EC2
+        uses: appleboy/scp-action@master
+        with:
+          host: ${{ secrets.EC2_HOST_2 }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY_2 }}
+          source: "./backend/chat-service"
+          target: "/home/ubuntu/ReX"
+          strip_components: 1
 
-      # - name: Deploy Services
-      #   uses: appleboy/ssh-action@master
-      #   with:
-      #     host: ${{ secrets.EC2_HOST_2 }}
-      #     username: ${{ secrets.EC2_USER }}
-      #     key: ${{ secrets.EC2_KEY_2 }}
-      #     script: |
-      #       # Deploy Chat Service
-      #       cd /home/ubuntu/ReX/backend/chat-service
+      - name: Deploy Services
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.EC2_HOST_2 }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_KEY_2 }}
+          script: |
+            # Deploy Chat Service
+            cd /home/ubuntu/ReX/backend/chat-service
             
-      #       cat > .env <<EOF
-      #       DB_HOST=${{ secrets.PROD_DB_HOST }}
-      #       DB_USER=${{ secrets.PROD_DB_USER }}
-      #       DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }}
-      #       DB_NAME=${{ secrets.PROD_CHAT_DB_NAME }}
-      #       DB_PORT=${{ secrets.PROD_DB_PORT }}
-      #       CHAT_PORT=${{ secrets.PROD_CHAT_PORT }}
-      #       EOF
+            cat > .env <<EOF
+            DB_HOST=${{ secrets.PROD_DB_HOST }}
+            DB_USER=${{ secrets.PROD_DB_USER }}
+            DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }}
+            DB_NAME=${{ secrets.PROD_CHAT_DB_NAME }}
+            DB_PORT=${{ secrets.PROD_DB_PORT }}
+            CHAT_PORT=${{ secrets.PROD_CHAT_PORT }}
+            EOF
             
-      #       chmod 600 .env
-      #       docker-compose down
-      #       docker-compose --env-file .env build
-      #       docker-compose --env-file .env up -d
+            chmod 600 .env
+            docker-compose down
+            docker-compose --env-file .env build
+            docker-compose --env-file .env up -d
 
-      #       # Cleanup
-      #       docker system prune -af
+            # Cleanup
+            docker system prune -af
