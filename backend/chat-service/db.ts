@@ -1,4 +1,4 @@
-import mysql from 'mysql2';
+import mysql from 'mysql2/promise';
 
 const db = mysql.createPool({
     host: process.env.DB_HOST,
@@ -8,6 +8,10 @@ const db = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-}).promise(); // Enables async/await support
+});
+
+db.getConnection()
+    .then(() => console.log("✅ Connected to MySQL"))
+    .catch((err) => console.error("❌ MySQL Connection Error:", err));
 
 export default db;

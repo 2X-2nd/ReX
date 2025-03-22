@@ -1,8 +1,7 @@
 import request from 'supertest';
-import mysql from 'mysql2'
 import app from '../server'
+import mysql from 'mysql2'
 require("dotenv").config();
-
 
 describe('Chat Routes (Non-Mocking)', () => {
     beforeAll(async () => {
@@ -12,8 +11,22 @@ describe('Chat Routes (Non-Mocking)', () => {
             password: process.env.DB_PASSWORD,
             database: process.env.DB_NAME
         });
+        await new Promise<void>((resolve, reject) => {
+            db.query("SET FOREIGN_KEY_CHECKS=0", (err) => {
+                if (err) reject(err);
+                db.query("TRUNCATE TABLE messages", (err) => {
+                    if (err) reject(err);
+                    db.query("TRUNCATE TABLE chats", (err) => {
+                        if (err) reject(err);
+                        db.query("SET FOREIGN_KEY_CHECKS=1", (err) => {
+                            if (err) reject(err);
+                            resolve();
+                        });
+                    });
+                });
+            });
+        });
     });
-
     describe('POST /chat/start', () => {
         // Input: buyerId = 'buyer123', sellerId = 'seller456'
         // Expected status code: 201

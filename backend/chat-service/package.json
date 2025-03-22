@@ -5,7 +5,7 @@
   "scripts": {
     "start": "ts-node server.ts",
     "dev": "dotenv -e .env -- npx nodemon -e .ts server.ts",
-    "test": "jest"
+    "test": "jest --ci --runInBand --detectOpenHandles --forceExit --silent=false --verbose"
   },
   "jest": {
     "preset": "ts-jest",
@@ -18,7 +18,9 @@
       "text",
       "lcov"
     ],
-    "coverageDirectory": "./coverage"
+    "coverageDirectory": "./coverage",
+    "detectOpenHandles": true,
+    "verbose": true
   },
   "keywords": [],
   "author": "",

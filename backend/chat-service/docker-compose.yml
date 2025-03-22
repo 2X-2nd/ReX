@@ -3,8 +3,6 @@ services:
     build:
       context: .
       dockerfile: dockerfile
-      args:
-        - PORT=${CHAT_PORT}
     container_name: chat_service
     environment:
       DB_HOST: ${DB_HOST}
@@ -38,7 +36,7 @@ services:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
       interval: 5s
       timeout: 10s
-      retries: 5
+      retries: 10
     ports:
       - "${DB_PORT}:${DB_PORT}"
     restart: always
