@@ -213,7 +213,7 @@ app.get('/listings/search', (req: Request, res: Response) => {
         GROUP BY l.id
     `;
 
-    db.query(searchSql, [`%${query}%`, `%${query}%`, `%${query}%`], (err: unknown, results: any) => {
+    db.query(searchSql, [query], (err: unknown, results: any) => {
         if (err) {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
@@ -239,7 +239,7 @@ app.get('/listings/category', (req: Request, res: Response) => {
         GROUP BY l.id
     `;
 
-    db.query(searchSql, [`%${query}%`, `%${query}%`, `%${query}%`], (err: unknown, results: any) => {
+    db.query(searchSql, [query], (err: unknown, results: any) => {
         if (err) {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
