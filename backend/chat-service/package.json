@@ -12,7 +12,10 @@
     "testEnvironment": "node",
     "collectCoverage": true,
     "collectCoverageFrom": [
-      "**/routes/chatRoutes.ts"
+      "**/routes/chatRoutes.ts",
+      "**/models/chat.ts",
+      "**/server.ts",
+      "**/db.ts"
     ],
     "coverageReporters": [
       "text",

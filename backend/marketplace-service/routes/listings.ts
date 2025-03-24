@@ -205,8 +205,8 @@ app.get('/listings/search', (req: Request, res: Response) => {
     }
 
     const searchSql = `
-        SELECT l.id, l.title, l.description, l.price, 
-               GROUP_CONCAT(li.image_url) AS images
+        SELECT l.id, l.title, l.description, l.price, l.seller_id,
+               JSON_ARRAYAGG(li.image_url) AS images
         FROM listings l
         LEFT JOIN listing_images li ON l.id = li.listing_id
         WHERE l.title LIKE ? OR l.description LIKE ? OR l.category LIKE ?
@@ -236,8 +236,8 @@ app.get('/listings/category', (req: Request, res: Response) => {
     }
 
     const searchSql = `
-        SELECT l.id, l.title, l.description, l.price, 
-               GROUP_CONCAT(li.image_url) AS images
+        SELECT l.id, l.title, l.description, l.price, l.seller_id,
+               JSON_ARRAYAGG(li.image_url) AS images
         FROM listings l
         LEFT JOIN listing_images li ON l.id = li.listing_id
         WHERE l.category LIKE ?
