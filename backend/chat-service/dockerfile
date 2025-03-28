@@ -10,6 +10,6 @@ COPY . .
 
 RUN chmod +x node_modules/.bin/ts-node
 
-EXPOSE 5000
+EXPOSE 5000 8001
 
 CMD ["npm", "start"]

@@ -119,6 +119,7 @@ jobs:
             DB_NAME=${{ secrets.PROD_CHAT_DB_NAME }}
             DB_PORT=${{ secrets.PROD_DB_PORT }}
             CHAT_PORT=${{ secrets.PROD_CHAT_PORT }}
+            WS_PORT=${{ secrets.PROD_WS_PORT }}
             EOF
             
             chmod 600 .env

@@ -13,6 +13,7 @@ services:
       PORT: ${CHAT_PORT}
     ports:
       - "${CHAT_PORT}:${CHAT_PORT}"
+      - "${WS_PORT}:${WS_PORT}"
     depends_on:
       db:
         condition: service_healthy
@@ -21,7 +22,7 @@ services:
     restart: always
   
   db:
-    image: mysql:8.0
+    image: mysql:8.0 
     container_name: chat_db
     environment:
       MYSQL_ROOT_PASSWORD: ReXrootDB

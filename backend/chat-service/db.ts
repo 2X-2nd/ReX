@@ -8,15 +8,6 @@ const db = mysql.createPool({
     waitForConnections: true,
     connectionLimit: 10,
     queueLimit: 0
-});
-
-db.getConnection((err: unknown, connection: any) => {
-    if (err) {
-        console.error('❌ Database connection failed:', err)
-        return
-    }
-    console.log('✅ Connected to MySQL')
-    connection.release();
-})
+}).promise();
 
 export default db;

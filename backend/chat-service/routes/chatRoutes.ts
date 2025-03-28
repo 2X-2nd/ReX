@@ -1,21 +1,41 @@
 import express from 'express';
-import { startChat, getChatHistory, getUserChats, sendMessage } from '../models/chat';
+import { startChat, findChat, getChatHistory, getUserChats, sendMessage } from '../models/chat';
+import wsServer from '../websocket';
+import { addUsersToChat } from '../websocket';
 
 const router = express.Router();
 
 // Start a new chat
 router.post('/chat/start', async (req, res) => {
-    const { buyerId, sellerId } = req.body;
-    if (!buyerId || !sellerId) {
-        return res.status(400).json({ error: "Buyer ID and Seller ID are required" });
-    }
-
     try {
-        const chatId = await startChat(buyerId, sellerId);
-        res.status(201).json({ chatId });
+        const { sellerId, buyerId } = req.body;
+
+        if (!sellerId || !buyerId) {
+            return res.status(400).json({ error: "Missing sellerId or buyerId" });
+        }
+
+        // Check if chat already exists
+        let chat = await findChat(sellerId, buyerId);
+
+        let chatId;
+        if (chat.length > 0) {
+            chatId = chat[0];
+        } else {
+            // Create new chat if it doesn't exist
+            const result = startChat(sellerId, buyerId);
+            chatId = result.insertId;
+        }
+
+        console.log(`Chat ${chatId} started between ${sellerId} and ${buyerId}`);
+
+        // Add users to WebSocket room
+        addUsersToChat(chatId, []);  // Clients will be added when they connect
+
+        res.status(200).json({ chatId });
+
     } catch (error) {
-        console.error(error);
-        res.status(500).json({ error: "Database error" });
+        console.error("Error starting chat:", error);
+        res.status(500).json({ error: "Internal server error" });
     }
 });
 
@@ -58,6 +78,16 @@ router.post('/chat/:chatId/message', async (req, res) => {
 
     try {
         await sendMessage(chatId, senderId, message);
+
+        // Notify WebSocket clients
+        if (wsServer.clients) {
+            wsServer.clients.forEach((client: { readyState: number; send: (arg0: string) => void; }) => {
+                if (client.readyState === 1) { // WebSocket.OPEN
+                    client.send(JSON.stringify({ chatId, senderId, message }));
+                }
+            });
+        }
+
         res.status(201).json({ success: "Message sent" });
     } catch (error) {
         console.error(error);

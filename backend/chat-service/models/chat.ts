@@ -6,6 +6,11 @@ export function startChat(buyerId: string, sellerId: string) {
     return (result as any).insertId; // Return new chat ID
 }
 
+export async function findChat(buyerId: string, sellerId: string) {
+    const chat = await db.query("SELECT chat_id FROM chats WHERE seller_id = ? AND buyer_id = ?", [sellerId, buyerId]);
+    return chat;
+}
+
 // Get chat history with chatId
 export function getChatHistory(chatId: number) {
     const messages = db.query("SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC", [chatId]);
