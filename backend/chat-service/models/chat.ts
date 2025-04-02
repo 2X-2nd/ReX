@@ -12,14 +12,14 @@ export async function findChat(buyerId: string, sellerId: string) {
 }
 
 // Get chat history with chatId
-export function getChatHistory(chatId: number) {
-    const messages = db.query("SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC", [chatId]);
+export async function getChatHistory(chatId: number) {
+    const messages = await db.query("SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC", [chatId]);
     return messages;
 }
 
 // Get chat history with userId
-export function getUserChats(userId: string) {
-    const chats = db.query(`
+export async function getUserChats(userId: string) {
+    const [chats] = await db.query(`
         SELECT c.id
         FROM chats c
         WHERE c.buyer_id = ? OR c.seller_id = ?
