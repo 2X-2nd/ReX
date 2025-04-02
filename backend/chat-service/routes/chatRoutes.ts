@@ -18,7 +18,7 @@ router.post('/chat/start', async (req, res) => {
         let chats = await findChat(sellerId, buyerId);
 
         let chatId;
-        if (chats.length > 0) {
+        if (Array.isArray(chats) && chats.length > 0) {
             chatId = chats[0];
             console.log("Chat already exists")
         } else {
