@@ -20,6 +20,7 @@ router.post('/chat/start', async (req, res) => {
         let chatId;
         if (chats.length > 0) {
             chatId = chats[0];
+            console.log("Chat already exists")
         } else {
             // Create new chat if it doesn't exist
             const result = startChat(sellerId, buyerId);
