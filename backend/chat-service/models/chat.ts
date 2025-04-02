@@ -7,7 +7,7 @@ export async function startChat(buyerId: string, sellerId: string) {
 }
 
 export async function findChat(buyerId: string, sellerId: string) {
-    const chats = await db.query("SELECT chat_id FROM chats WHERE seller_id = ? AND buyer_id = ?", [sellerId, buyerId]);
+    const chats = await db.query("SELECT id FROM chats WHERE seller_id = ? AND buyer_id = ?", [sellerId, buyerId]);
     return chats;
 }
 
