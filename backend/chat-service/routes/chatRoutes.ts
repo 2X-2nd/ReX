@@ -23,7 +23,7 @@ router.post('/chat/start', async (req, res) => {
             console.log("Chat already exists")
         } else {
             // Create new chat if it doesn't exist
-            const result = startChat(sellerId, buyerId);
+            const result = await startChat(sellerId, buyerId);
             chatId = result;
         }
 
