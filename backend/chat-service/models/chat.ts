@@ -1,19 +1,19 @@
 import db from '../db';
 
 // Start a new chat
-export function startChat(buyerId: string, sellerId: string) {
-    const result = db.query("INSERT INTO chats (buyer_id, seller_id) VALUES (?, ?)", [buyerId, sellerId]);
+export async function startChat(buyerId: string, sellerId: string) {
+    const result = await db.query("INSERT INTO chats (buyer_id, seller_id) VALUES (?, ?)", [buyerId, sellerId]);
     return (result as any).insertId; // Return new chat ID
 }
 
 export async function findChat(buyerId: string, sellerId: string) {
-    const chat = await db.query("SELECT chat_id FROM chats WHERE seller_id = ? AND buyer_id = ?", [sellerId, buyerId]);
-    return chat;
+    const chats = await db.query("SELECT chat_id FROM chats WHERE seller_id = ? AND buyer_id = ?", [sellerId, buyerId]);
+    return chats;
 }
 
 // Get chat history with chatId
 export async function getChatHistory(chatId: number) {
-    const messages = await db.query("SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC", [chatId]);
+    const [messages] = await db.query("SELECT * FROM messages WHERE chat_id = ? ORDER BY timestamp ASC", [chatId]);
     return messages;
 }
 
