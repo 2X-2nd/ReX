@@ -2,7 +2,7 @@ import db from '../db';
 
 // Start a new chat
 export async function startChat(buyerId: string, sellerId: string) {
-    const result = await db.query("INSERT INTO chats (buyer_id, seller_id) VALUES (?, ?)", [buyerId, sellerId]);
+    const [result] = await db.query("INSERT INTO chats (buyer_id, seller_id) VALUES (?, ?)", [buyerId, sellerId]);
     return (result as any).insertId; // Return new chat ID
 }
 
