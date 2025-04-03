@@ -1,7 +1,7 @@
 # M3 - Requirements and Design
 
 ## 1. Change History
-Removed administrator and storage use cases.
+Removed administrator and storage use cases, since they are not needed.
 Change requirement specification to correct format.
 Reworded backend example's explanation for better understanding
 
