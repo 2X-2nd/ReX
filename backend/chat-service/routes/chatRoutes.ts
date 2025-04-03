@@ -18,8 +18,8 @@ router.post('/chat/start', async (req, res) => {
         let chats = await findChat(sellerId, buyerId);
 
         let chatId;
-        if (Array.isArray(chats) && chats.length > 0) {
-            chatId = chats[0];
+        if (chats !== null) {
+            chatId = chats;
             console.log("Chat already exists")
         } else {
             // Create new chat if it doesn't exist
@@ -30,7 +30,7 @@ router.post('/chat/start', async (req, res) => {
         console.log(`Chat ${chatId} started between ${sellerId} and ${buyerId}`);
 
         // Add users to WebSocket room
-        addUsersToChat(chatId.toString(), []);  // Clients will be added when they connect
+        addUsersToChat(chatId, []);  // Clients will be added when they connect
 
         res.status(200).json({ chatId });
 

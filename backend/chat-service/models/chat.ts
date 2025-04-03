@@ -1,3 +1,4 @@
+import { RowDataPacket } from 'mysql2';
 import db from '../db';
 
 // Start a new chat
@@ -7,8 +8,8 @@ export async function startChat(buyerId: string, sellerId: string) {
 }
 
 export async function findChat(buyerId: string, sellerId: string) {
-    const [chats] = await db.query("SELECT id FROM chats WHERE seller_id = ? AND buyer_id = ?", [sellerId, buyerId]);
-    return chats;
+    const [chats] = await db.query<RowDataPacket[]>("SELECT id FROM chats WHERE seller_id = ? AND buyer_id = ?", [sellerId, buyerId]);
+    return chats.length > 0 ? chats[0].id : null;  // Return only the ID
 }
 
 // Get chat history with chatId
