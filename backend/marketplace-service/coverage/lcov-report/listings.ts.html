@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">95.8% </span>
+                <span class="strong">95.68% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>137/143</span>
+                <span class='fraction'>133/139</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">80% </span>
+                <span class="strong">82.6% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>40/50</span>
+                <span class='fraction'>38/46</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">96.15% </span>
+                <span class="strong">95.83% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>25/26</span>
+                <span class='fraction'>23/24</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">97.05% </span>
+                <span class="strong">96.96% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>132/136</span>
+                <span class='fraction'>128/132</span>
             </div>
         
             
@@ -321,17 +321,7 @@
 <a name='L256'></a><a href='#L256'>256</a>
 <a name='L257'></a><a href='#L257'>257</a>
 <a name='L258'></a><a href='#L258'>258</a>
-<a name='L259'></a><a href='#L259'>259</a>
-<a name='L260'></a><a href='#L260'>260</a>
-<a name='L261'></a><a href='#L261'>261</a>
-<a name='L262'></a><a href='#L262'>262</a>
-<a name='L263'></a><a href='#L263'>263</a>
-<a name='L264'></a><a href='#L264'>264</a>
-<a name='L265'></a><a href='#L265'>265</a>
-<a name='L266'></a><a href='#L266'>266</a>
-<a name='L267'></a><a href='#L267'>267</a>
-<a name='L268'></a><a href='#L268'>268</a>
-<a name='L269'></a><a href='#L269'>269</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L259'></a><a href='#L259'>259</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
@@ -552,11 +542,6 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -579,11 +564,6 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -806,8 +786,8 @@ app.get('/listings/search', (req: Request, res: Response) =&gt; {
     }
 &nbsp;
     const searchSql = `
-        SELECT l.id, l.title, l.description, l.price, 
-               GROUP_CONCAT(li.image_url) AS images
+        SELECT l.id, l.title, l.description, l.price, l.seller_id,
+               JSON_ARRAYAGG(li.image_url) AS images
         FROM listings l
         LEFT JOIN listing_images li ON l.id = li.listing_id
         WHERE l.title LIKE ? OR l.description LIKE ? OR l.category LIKE ?
@@ -819,11 +799,6 @@ app.get('/listings/search', (req: Request, res: Response) =&gt; {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
         }
-&nbsp;
-        // Convert images from CSV string to an array
-        results.forEach((row: any) =&gt; {
-            row.images = row.images ? row.images.split(',') : <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
-        });
 &nbsp;
         res.status(200).json({ results });
     });
@@ -837,8 +812,8 @@ app.get('/listings/category', (req: Request, res: Response) =&gt; {
     }
 &nbsp;
     const searchSql = `
-        SELECT l.id, l.title, l.description, l.price, 
-               GROUP_CONCAT(li.image_url) AS images
+        SELECT l.id, l.title, l.description, l.price, l.seller_id,
+               JSON_ARRAYAGG(li.image_url) AS images
         FROM listings l
         LEFT JOIN listing_images li ON l.id = li.listing_id
         WHERE l.category LIKE ?
@@ -850,11 +825,6 @@ app.get('/listings/category', (req: Request, res: Response) =&gt; {
             console.error("Error searching listings:", err);
             return res.status(500).json({ error: "Database error" });
         }
-&nbsp;
-        // Convert images from CSV string to an array
-        results.forEach((row: any) =&gt; {
-            row.images = row.images ? row.images.split(',') : <span class="branch-1 cbranch-no" title="branch not covered" >[];</span>
-        });
 &nbsp;
         res.status(200).json({ results });
     });
@@ -874,7 +844,7 @@ export default app;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at 2025-03-22T03:10:47.758Z
+                at 2025-04-03T18:37:14.107Z
             </div>
         <script src="prettify.js"></script>
         <script>

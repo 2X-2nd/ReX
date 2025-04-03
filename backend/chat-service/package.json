@@ -5,7 +5,7 @@
   "scripts": {
     "start": "ts-node server.ts",
     "dev": "dotenv -e .env -- npx nodemon -e .ts server.ts",
-    "test": "jest --ci --runInBand --detectOpenHandles --forceExit --silent=false --verbose"
+    "test": "jest --no-cache --runInBand --verbose"
   },
   "jest": {
     "preset": "ts-jest",

@@ -14,21 +14,11 @@ jest.mock("mysql2", () => {
     };
 });
 
-// ✅ Access `mockDb` through `mysql2.__mockDb`
 const mockDb = (mysql as any).__mockDb;
 
 beforeEach(() => {
     jest.clearAllMocks();
     (mysql.createPool as jest.Mock).mockReturnValue(mockDb);
-});
-const db = mysql.createPool({
-    host: process.env.DB_HOST,
-    user: process.env.DB_USER,
-    password: process.env.DB_PASSWORD,
-    database: process.env.DB_NAME,
-    waitForConnections: true,
-    connectionLimit: 10,
-    queueLimit: 0
 });
 
 /**
@@ -279,8 +269,8 @@ describe("Mocked: GET /listings/search", () => {
     // Expected status code: 200
     // Expected behavior: Return search results with images converted to an array
     test("Successful listing search", async () => {
-        mockDb.query.mockImplementation((sql: any, values: any, callback: (arg0: null, arg1: { id: number; title: string; images: string; }[]) => void) => {
-            callback(null, [{ id: 1, title: "Test Listing", images: "img1.jpg,img2.jpg" }]);
+        mockDb.query.mockImplementation((sql: any, values: any, callback: (arg0: null, arg1: { id: number; title: string; images: any; }[]) => void) => {
+            callback(null, [{ id: 1, title: "Test Listing", images: ["img1.jpg", "img2.jpg"] }]);
         });
         const res = await request(app).get("/listings/search").query({ query: "test" });
         expect(res.status).toBe(200);
@@ -318,8 +308,8 @@ describe("Mocked: GET /listings/category", () => {
         // Input: query=electronics
         // Expected status code: 200
         // Expected behavior: Return search results with images converted to an array
-        mockDb.query.mockImplementation((sql: any, values: any, callback: (arg0: null, arg1: { id: number; title: string; images: string; }[]) => void) => {
-            callback(null, [{ id: 1, title: "Test Listing", images: "img1.jpg,img2.jpg" }]);
+        mockDb.query.mockImplementation((sql: any, values: any, callback: (arg0: null, arg1: { id: number; title: string; images: any; }[]) => void) => {
+            callback(null, [{ id: 1, title: "Test Listing", images: ["img1.jpg", "img2.jpg"] }]);
         });
         const res = await request(app).get("/listings/category").query({ query: "electronics" });
         expect(res.status).toBe(200);

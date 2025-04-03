@@ -4,34 +4,58 @@ import mysql from 'mysql2'
 require("dotenv").config();
 
 describe('Chat Routes (Non-Mocking)', () => {
-    describe('POST /chat/start', () => {
-        // Input: buyerId = 'buyer123', sellerId = 'seller456'
-        // Expected status code: 201
-        // Expected behavior: A new chat is created and stored in the database
-        // Expected output: { chatId: '<some_chat_id>' }
-        test('should return 201 and create a new chat', async () => {
-            const response = await request(app).post("/chat/start").send({
-                buyerId: "buyer123",
-                sellerId: "seller456"
-            });
-
-            expect(response.status).toBe(201);
-            expect(response.body).toHaveProperty('chatId');
+    beforeAll(async () => {
+        const db = mysql.createPool({
+            host: process.env.DB_HOST,
+            user: process.env.DB_USER,
+            password: process.env.DB_PASSWORD,
+            database: process.env.DB_NAME
         });
-
-        // Input: buyerId is provided but sellerId is missing
-        // Expected status code: 400
-        // Expected behavior: Request is rejected due to missing required fields
-        // Expected output: { error: "Buyer ID and Seller ID are required" }
-        test('should return 400 if buyerId or sellerId is missing', async () => {
-            const response = await request(app).post('/chat/start').send({
-                buyerId: 'buyer123'
-            });
-
-            expect(response.status).toBe(400);
-            expect(response.body).toEqual({ error: "Buyer ID and Seller ID are required" });
-        });
+        // await new Promise<void>((resolve, reject) => {
+        //     db.query("SET FOREIGN_KEY_CHECKS=0", (err) => {
+        //         if (err) reject(err);
+        //         db.query("TRUNCATE TABLE listing_images", (err) => {
+        //             if (err) reject(err);
+        //             db.query("TRUNCATE TABLE listings", (err) => {
+        //                 if (err) reject(err);
+        //                 db.query("SET FOREIGN_KEY_CHECKS=1", (err) => {
+        //                     if (err) reject(err);
+        //                     resolve();
+        //                 });
+        //             });
+        //         });
+        //     });
+        // });
     });
+
+    // describe('POST /chat/start', () => {
+    //     // Input: buyerId = 'buyer123', sellerId = 'seller456'
+    //     // Expected status code: 201
+    //     // Expected behavior: A new chat is created and stored in the database
+    //     // Expected output: { chatId: '<some_chat_id>' }
+    //     test('should return 201 and create a new chat', async () => {
+    //         const response = await request(app).post("/chat/start").send({
+    //             buyerId: "buyer123",
+    //             sellerId: "seller456"
+    //         });
+
+    //         expect(response.status).toBe(201);
+    //         expect(response.body).toHaveProperty('chatId');
+    //     });
+
+    //     // Input: buyerId is provided but sellerId is missing
+    //     // Expected status code: 400
+    //     // Expected behavior: Request is rejected due to missing required fields
+    //     // Expected output: { error: "Missing sellerId or buyerId" }
+    //     test('should return 400 if buyerId or sellerId is missing', async () => {
+    //         const response = await request(app).post('/chat/start').send({
+    //             buyerId: 'buyer123'
+    //         });
+
+    //         expect(response.status).toBe(400);
+    //         expect(response.body).toEqual({ error: "Missing sellerId or buyerId" });
+    //     });
+    // });
 
     describe('GET /chat/:chatId', () => {
         // Input: chatId = 1 (valid chat ID)

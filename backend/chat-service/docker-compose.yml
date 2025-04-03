@@ -27,6 +27,7 @@ services:
     environment:
       MYSQL_ROOT_PASSWORD: ReXrootDB
       MYSQL_DATABASE: chatdb
+      MYSQL_USER: root
       MYSQL_PASSWORD: ReXrootDB
     volumes:
       - mysql_data:/var/lib/mysql

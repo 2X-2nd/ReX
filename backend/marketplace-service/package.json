@@ -5,7 +5,7 @@
   "scripts": {
     "start": "ts-node routes/listings.ts",
     "dev": "dotenv -e .env -- npx nodemon -e .ts routes/listings.ts",
-    "test": "jest --ci --runInBand --detectOpenHandles --forceExit --silent=false --verbose"
+    "test": "jest --ci --runInBand --forceExit --silent=false --verbose"
   },
   "jest": {
     "preset": "ts-jest",

@@ -1,46 +1,65 @@
+jest.mock('../models/chat');
 import request from 'supertest';
 import express from 'express';
 import chatRoutes from '../routes/chatRoutes';
-import { startChat, getChatHistory, getUserChats, sendMessage } from '../models/chat';
+import { startChat, findChat, getChatHistory, getUserChats, sendMessage } from '../models/chat';
 
-jest.mock('../models/chat'); // Mock the database functions
+jest.mock('ws', () => {
+    return {
+        Server: jest.fn().mockImplementation(() => ({
+            on: jest.fn(),
+            emit: jest.fn(),
+            to: jest.fn().mockReturnThis(),
+        })),
+    };
+});
+
+jest.mock('../db', () => ({
+    query: jest.fn().mockResolvedValue([{}]),
+    end: jest.fn().mockResolvedValue(null),
+}));
 
 const app = express();
 app.use(express.json());
 app.use('/api', chatRoutes);
 
+afterEach(() => {
+    jest.clearAllMocks();
+});
+
 // Tests with mocking
 describe('POST /api/chat/start (With Mock)', () => {
     // Mocked behavior: Successfully start a chat
     // Input: { buyerId: 'buyer123', sellerId: 'seller456' }
-    // Expected status code: 201
+    // Expected status code: 200
     // Expected output: { chatId: 'mockChatId' }
-    test('should return 201 and mock chatId', async () => {
+    test('should return 200 and mock chatId', async () => {
         (startChat as jest.Mock).mockResolvedValue('mockChatId');
+        (findChat as jest.Mock).mockResolvedValue(null);
 
         const response = await request(app).post('/api/chat/start').send({
             buyerId: 'buyer123',
             sellerId: 'seller456'
         });
 
-        expect(response.status).toBe(201);
+        expect(response.status).toBe(200);
         expect(response.body).toEqual({ chatId: 'mockChatId' });
     });
 
     // Mocked behavior: Start a chat with database failure
     // Input: { buyerId: '123', sellerId: '456' }
     // Expected status code: 500
-    // Expected output: { error: 'Database error' }
+    // Expected output: { error: 'Internal server error' }
     test('should return 500 if database error occurs', async () => {
         (startChat as jest.Mock).mockRejectedValue(new Error('Database error'));
 
         const response = await request(app).post('/api/chat/start').send({
-            buyerId: '123',
-            sellerId: '456'
+            buyerId: "123",
+            sellerId: "456"
         });
 
         expect(response.status).toBe(500);
-        expect(response.body).toEqual({ error: 'Database error' });
+        expect(response.body).toEqual({ error: 'Internal server error' });
     });
 });
 
